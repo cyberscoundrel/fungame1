@@ -5,7 +5,7 @@ using UnityEngine;
 public class TestSphereGenerator : MonoBehaviour
 {
     // Start is called before the first frame update
-	public static List<Vector3> v;
+	/*public static List<Vector3> v;
 	public static List<List<int>> p;
 
 	public static List<ProceduralSphere> l = new List<ProceduralSphere>();
@@ -14,11 +14,21 @@ public class TestSphereGenerator : MonoBehaviour
 	public static List<MeshCollider> cookedMeshColliders = new List<MeshCollider>();
 	public static List<Material> materialPool = new List<Material>();
 	public static List<MeshRenderer> mrPool = new List<MeshRenderer>();
-	public static List<MeshFilter> mfPool = new List<MeshFilter>();
+	public static List<MeshFilter> mfPool = new List<MeshFilter>();*/
+	public List<Vector3> v;
+	public List<List<int>> p;
+
+	public List<ProceduralSphere> l = new List<ProceduralSphere>();
+	public Material m;
+	public List<Mesh> prebuiltMeshes = new List<Mesh>();
+	public List<MeshCollider> cookedMeshColliders = new List<MeshCollider>();
+	public List<Material> materialPool = new List<Material>();
+	public List<MeshRenderer> mrPool = new List<MeshRenderer>();
+	public List<MeshFilter> mfPool = new List<MeshFilter>();
 
 	public void Start()
 	{
-		Debug.Log("TestSphereGenerator start");
+		//Debug.Log("TestSphereGenerator start");
 		//v = new List<Vector3>();
 		//p = new List<List<int>>();
 		//generateIcosahedraMeshes(5);
@@ -29,7 +39,8 @@ public class TestSphereGenerator : MonoBehaviour
 		//generateSphere(3);
 	}
 
-	public TestSphereGenerator()
+	//public TestSphereGenerator()
+	public void Awake()
 	{
 		Debug.Log("here");
 		v = new List<Vector3>();
@@ -44,7 +55,7 @@ public class TestSphereGenerator : MonoBehaviour
 
 	}
 
-	public static void generateIcosahedraMeshes(int n)
+	public void generateIcosahedraMeshes(int n)
 	{
 		if(prebuiltMeshes.Count == 0)
 		{
@@ -83,7 +94,7 @@ public class TestSphereGenerator : MonoBehaviour
 
 	}
 
-	public static Mesh generateMeshFromPolys()
+	public Mesh generateMeshFromPolys()
 	{
 
         prebuiltMeshes.Add(new Mesh());
@@ -94,11 +105,13 @@ public class TestSphereGenerator : MonoBehaviour
 
         Vector3[] vertices = new Vector3[vertexCount];
         Vector3[] normals  = new Vector3[vertexCount];
-        Color32[] colors   = new Color32[vertexCount];
+        //Color32[] colors   = new Color32[vertexCount];
 
-        Color32 green = new Color32(20,  255, 30, 255);
-        Color32 brown = new Color32(220, 150, 70, 255);
+        //Color32 green = new Color32(20,  255, 30, 255);
+        //Color32 brown = new Color32(220, 150, 70, 255);
 
+
+        //icosahedra polygon divider, splits triangle faces into 3 triangles
         for (int i = 0; i < p.Count; i++)
         {
             var poly = p[i];
@@ -111,11 +124,11 @@ public class TestSphereGenerator : MonoBehaviour
             vertices[i * 3 + 1] = v[poly[1]];
             vertices[i * 3 + 2] = v[poly[2]];
 
-            Color32 polyColor = Color32.Lerp(green, brown, Random.Range(0.0f, 1.0f)); 
+            //Color32 polyColor = Color32.Lerp(green, brown, Random.Range(0.0f, 1.0f)); 
 
-            colors[i * 3 + 0] = polyColor;
-            colors[i * 3 + 1] = polyColor;
-            colors[i * 3 + 2] = polyColor;
+            //colors[i * 3 + 0] = polyColor;
+            //colors[i * 3 + 1] = polyColor;
+            //colors[i * 3 + 2] = polyColor;
 
             normals[i * 3 + 0] = v[poly[0]];
             normals[i * 3 + 1] = v[poly[1]];
@@ -124,7 +137,7 @@ public class TestSphereGenerator : MonoBehaviour
 
         prebuiltMeshes[prebuiltMeshes.Count - 1].vertices = vertices;
         prebuiltMeshes[prebuiltMeshes.Count - 1].normals  = normals;
-        prebuiltMeshes[prebuiltMeshes.Count - 1].colors32 = colors;
+        //prebuiltMeshes[prebuiltMeshes.Count - 1].colors32 = colors;
 
         prebuiltMeshes[prebuiltMeshes.Count - 1].SetTriangles(indices, 0);
 
@@ -136,7 +149,8 @@ public class TestSphereGenerator : MonoBehaviour
 	}
 
 
-	public static void generateIcosahedron()
+	//TODO: eliminate this function replace with prebuilt icosahedron mesh for cleaner code
+	public void generateIcosahedron()
 	{
 		float t = (1.0f + Mathf.Sqrt(5.0f)) / 2.0f;
 
@@ -183,7 +197,7 @@ public class TestSphereGenerator : MonoBehaviour
 
 	}
 
-	public static int getMidPointIndex(Dictionary<int, int> cache, int indexA, int indexB)
+	public int getMidPointIndex(Dictionary<int, int> cache, int indexA, int indexB)
 	{
 		int smallerIndex = Mathf.Min(indexA, indexB);
 		int greaterIndex = Mathf.Max(indexA, indexB);
@@ -209,10 +223,11 @@ public class TestSphereGenerator : MonoBehaviour
 		return ret;
 	}
 
-	public static ProceduralSphere generateSphere(int interations, GameObject newGameObject)
+	public ProceduralSphere generateSphere(int interations, GameObject newGameObject)
 	{
 
 		generateIcosahedraMeshes(interations + 1);
+		//TODO: impliment procedural mesh noise into icosahedra meshes on fetch
 
 
 		//var midPointCache = new Dictionary<int, int>();

@@ -14,8 +14,10 @@ public class GamePlanet
     public long planetSeed;
 
     public GameObject gameObject;
+
+    public TestSphereGenerator testSphereGenerator;
     
-    public GamePlanet(long newSeed)
+    public GamePlanet(long newSeed, TestSphereGenerator sphereGenerator)
     {
     	this.planetSeed = newSeed;
     	gravityObjects = new List<Rigidbody>();
@@ -23,7 +25,8 @@ public class GamePlanet
     	gameObject.AddComponent<MeshRenderer>();
     	gameObject.AddComponent<MeshFilter>();
     	gameObject.AddComponent<MeshCollider>();
-    	proceduralSphere = TestSphereGenerator.generateSphere(3, this.gameObject);
+    	testSphereGenerator = sphereGenerator;
+    	proceduralSphere = testSphereGenerator.generateSphere(3, this.gameObject);
 
 
     	
@@ -38,7 +41,7 @@ public class GamePlanet
     {
     	this.planetSeed = newSeed;
     	gravityObjects = new List<Rigidbody>();
-    	proceduralSphere = TestSphereGenerator.generateSphere(3, this.gameObject);
+    	proceduralSphere = testSphereGenerator.generateSphere(3, this.gameObject);
 
     }
 }

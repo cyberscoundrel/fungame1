@@ -22,6 +22,8 @@ public class ControlledObject : MonoBehaviour
 
     public Vector3 camDirection;
 
+    public bool topDown = false;
+
 
 
 
@@ -37,30 +39,30 @@ public class ControlledObject : MonoBehaviour
     void Update()
     {
 
-    	if(false)
+    	if(true)
     	{
 
 
     		if(Input.GetKeyDown("w"))
     		{
-    			Debug.Log("w");
+    			//Debug.Log("w");
     			controlledObject.GetComponent<Rigidbody>().AddForce(rb.transform.forward * 1f, ForceMode.Impulse);
 
 
     		}
     		if(Input.GetKeyDown("a"))
     		{
-    			Debug.Log("a");
+    			//Debug.Log("a");
     			controlledObject.GetComponent<Rigidbody>().AddForce(rb.transform.right * -1f, ForceMode.Impulse);
     		}
     		if(Input.GetKeyDown("s"))
     		{
-    			Debug.Log("s");
+    			//Debug.Log("s");
     			controlledObject.GetComponent<Rigidbody>().AddForce(rb.transform.forward * -1f, ForceMode.Impulse);
     		}
     		if(Input.GetKeyDown("d"))
     		{
-    			Debug.Log("d");
+    			//Debug.Log("d");
     			controlledObject.GetComponent<Rigidbody>().AddForce(rb.transform.right * 1f, ForceMode.Impulse);
     		}
     		Quaternion r = Quaternion.FromToRotation(controlledObject.GetComponent<Rigidbody>().transform.up * 1000f, GalaxyManager.getGravityVector(controlledObject.GetComponent<Rigidbody>()));
@@ -95,44 +97,27 @@ public class ControlledObject : MonoBehaviour
 
     void LateUpdate()
     {
+    	if(topDown)
+    	{
+    		controlledCamera.transform.position = controlledObject.transform.position + (controlledObject.transform.up * 1f);
+    		controlledCamera.transform.LookAt(controlledObject.transform.position);
+    	}
+    	else
+    	{
+    		controlledCamera.transform.position = controlledObject.transform.position - (controlledObject.transform.forward * 1f);
 
-    	if(Input.GetKeyDown("w"))
-		{
-			Debug.Log("w");
-			controlledObject.GetComponent<Rigidbody>().AddForce(rb.transform.forward * 1f, ForceMode.Impulse);
+    		controlledCamera.transform.LookAt(controlledObject.transform.position);
+			controlledCamera.transform.rotation = Quaternion.Slerp(controlledCamera.transform.rotation, controlledObject.transform.rotation, 1f);
+    	}
 
+		//Debug.Log(controlledObject.transform.forward * 20f);
+		//Debug.Log( "object " + controlledObject.transform.position + " camera " + controlledCamera.transform.position);
 
-		}
-		if(Input.GetKeyDown("a"))
-		{
-			Debug.Log("a");
-			controlledObject.GetComponent<Rigidbody>().AddForce(rb.transform.right * -1f, ForceMode.Impulse);
-		}
-		if(Input.GetKeyDown("s"))
-		{
-			Debug.Log("s");
-			controlledObject.GetComponent<Rigidbody>().AddForce(rb.transform.forward * -1f, ForceMode.Impulse);
-		}
-		if(Input.GetKeyDown("d"))
-		{
-			Debug.Log("d");
-			controlledObject.GetComponent<Rigidbody>().AddForce(rb.transform.right * 1f, ForceMode.Impulse);
-		}
-		Quaternion r = Quaternion.FromToRotation(controlledObject.GetComponent<Rigidbody>().transform.up * 1000f, GalaxyManager.getGravityVector(controlledObject.GetComponent<Rigidbody>()));
-		Vector3 vr = new Vector3(r.x, r.y, r.z);
+		//controlledCamera.transform.LookAt(controlledObject.transform.position);
+		//controlledCamera.transform.rotation = Quaternion.Slerp(controlledCamera.transform.rotation, controlledObject.transform.rotation, 1f);
 
-		rb.AddTorque(vr * (10f* vr.magnitude));
-
-		rb.constraints = RigidbodyConstraints.FreezeRotationY;
-    	controlledCamera.transform.position = controlledObject.transform.position - (controlledObject.transform.forward * 1f);
-
-		Debug.Log(controlledObject.transform.forward * 20f);
-		Debug.Log( "object " + controlledObject.transform.position + " camera " + controlledCamera.transform.position);
-
-		controlledCamera.transform.LookAt(controlledObject.transform.position);
-
-		Debug.Log(controlledObject.transform.forward * 20f);
-		Debug.Log( "lookat object " + controlledObject.transform.position + " camera " + controlledCamera.transform.position);
+		//Debug.Log(controlledObject.transform.forward * 20f);
+		//Debug.Log( "lookat object " + controlledObject.transform.position + " camera " + controlledCamera.transform.position);
 
 		//controlledCamera.transform.position = new Vector3(controlledCamera.transform.position.x, controlledCamera.transform.position.y, controlledCamera.transform.position.z);
     }

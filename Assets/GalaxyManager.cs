@@ -10,7 +10,13 @@ public class GalaxyManager : MonoBehaviour
 
 	public List<GamePlanet> planetPool;
 
+	public uint numPlanets;
+
+	public float planetFixedScale = 0.01f;
+
 	public static GamePlanet gravityCenter;
+
+	public TestSphereGenerator tsg;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,10 +25,11 @@ public class GalaxyManager : MonoBehaviour
     	//planetPool.Add(new GamePlanet(0));
     	//planetPool.Add(new GamePlanet(0));
     	//planetPool[1].gameObject.transform.Translate(2,2,2);
-    	for(int index0 = 0; index0 < 5; ++index0)
+    	for(int index0 = 0; index0 < numPlanets; ++index0)
     	{
-    		planetPool.Add(new GamePlanet(0));
+    		planetPool.Add(new GamePlanet(0, tsg));
     		planetPool[index0].gameObject.transform.Translate(Random.Range(-4f, 4f), Random.Range(-4f, 4f), Random.Range(-4f, 4f));
+    		planetPool[index0].gameObject.transform.localScale += new Vector3(planetFixedScale, planetFixedScale, planetFixedScale);
     	}
     	setGravityCenter(0);
         
@@ -62,7 +69,7 @@ public class GalaxyManager : MonoBehaviour
     	rb.AddForce(d.normalized * (-9.81f)/2 * (rb.mass));*/
     	for(int index0 = 0; index0 < rbs.Count; ++index0)
     	{
-    		Debug.Log("rbs count" + rbs.Count);
+    		//Debug.Log("rbs count" + rbs.Count);
     		Vector3 d = rbs[index0].transform.position - gravityCenter.gameObject.transform.position;
     		rbs[index0].AddForce(d.normalized * (-9.81f)/2 * (rbs[index0].mass));
     	}
@@ -79,7 +86,7 @@ public class GalaxyManager : MonoBehaviour
     {
         if(Input.GetKeyDown("space"))
         {
-        	Debug.Log("gravityCenter");
+        	//Debug.Log("gravityCenter");
         	setGravityCenter(Random.Range(0, planetPool.Count));
         	//setGravityCenter(1);
         }
