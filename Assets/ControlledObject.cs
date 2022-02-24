@@ -65,6 +65,10 @@ public class ControlledObject : MonoBehaviour
     			//Debug.Log("d");
     			controlledObject.GetComponent<Rigidbody>().AddForce(rb.transform.right * 1f, ForceMode.Impulse);
     		}
+			if(Input.GetKeyDown("c"))
+			{
+				topDown = !topDown;
+			}
     		Quaternion r = Quaternion.FromToRotation(controlledObject.GetComponent<Rigidbody>().transform.up * 1000f, GalaxyManager.getGravityVector(controlledObject.GetComponent<Rigidbody>()));
     		Vector3 vr = new Vector3(r.x, r.y, r.z);
 
