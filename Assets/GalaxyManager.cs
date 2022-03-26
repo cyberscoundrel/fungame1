@@ -17,6 +17,8 @@ public class GalaxyManager : MonoBehaviour
 	public static GamePlanet gravityCenter;
 
 	public TestSphereGenerator tsg;
+
+    public float g;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +46,10 @@ public class GalaxyManager : MonoBehaviour
 
     public void setGravityCenter(int id)
     {
+        if(gravityCenter != null)
+        {
+            gravityCenter.gameObject.name = "planet0";
+        }
     	if(rb)
     	{
     		Debug.Log("Rigidbody");
@@ -58,6 +64,8 @@ public class GalaxyManager : MonoBehaviour
 
     	}
     	gravityCenter = planetPool[id];
+        gravityCenter.gameObject.name = "gravityCenter";
+
 
 
     }
@@ -71,7 +79,7 @@ public class GalaxyManager : MonoBehaviour
     	{
     		//Debug.Log("rbs count" + rbs.Count);
     		Vector3 d = rbs[index0].transform.position - gravityCenter.gameObject.transform.position;
-    		rbs[index0].AddForce(d.normalized * (-9.81f)/2 * (rbs[index0].mass));
+    		rbs[index0].AddForce(d.normalized * (-g)/2 * (rbs[index0].mass));
     	}
 
     }
@@ -80,6 +88,12 @@ public class GalaxyManager : MonoBehaviour
     {
     	return r.transform.position - gravityCenter.gameObject.transform.position;
     }
+    public static Vector3 getGravityVector(Transform pos)
+    {
+        return pos.transform.position - gravityCenter.gameObject.transform.position;
+    }
+
+
 
     // Update is called once per frame
     void Update()

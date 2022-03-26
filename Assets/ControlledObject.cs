@@ -24,6 +24,25 @@ public class ControlledObject : MonoBehaviour
 
     public bool topDown = false;
 
+    public GameObject puppetStrings;
+
+    public bool puppetteering = false;
+
+    public bool puppetReady = false;
+
+    public float movef = 25f;
+
+    public float sen = 0.5f;
+
+    public Quaternion cameraRotation;
+
+    public float cx = 0f, cy = 0f;
+
+    public GalaxyManager gm;
+
+    public bool locked;
+
+
 
 
 
@@ -31,6 +50,11 @@ public class ControlledObject : MonoBehaviour
 
     void Start()
     {
+    	Cursor.lockState = CursorLockMode.Locked;
+    	cameraRotation = new Quaternion(0f, 0f, 0f, 0f);
+    	//controlledCamera.transform.position = controlledObject.transform.position;
+    	//controlledCamera.transform.rotation = Quaternion.Slerp(controlledCamera.transform.rotation, controlledObject.transform.rotation, 1f);
+
 
         
     }
@@ -41,40 +65,91 @@ public class ControlledObject : MonoBehaviour
 
     	if(true)
     	{
+    		if (Input.GetKeyDown("o")) 
+    		{
+	            Cursor.lockState = CursorLockMode.None;
+	            locked = false;
+        	}
+
+	        if (!locked && Input.GetMouseButtonDown(0)) 
+	        {
+	            Cursor.lockState = CursorLockMode.Locked;
+	            locked = true;
+	        }
 
 
-    		if(Input.GetKeyDown("w"))
-    		{
-    			//Debug.Log("w");
-    			controlledObject.GetComponent<Rigidbody>().AddForce(rb.transform.forward * 1f, ForceMode.Impulse);
-
-
-    		}
-    		if(Input.GetKeyDown("a"))
-    		{
-    			//Debug.Log("a");
-    			controlledObject.GetComponent<Rigidbody>().AddForce(rb.transform.right * -1f, ForceMode.Impulse);
-    		}
-    		if(Input.GetKeyDown("s"))
-    		{
-    			//Debug.Log("s");
-    			controlledObject.GetComponent<Rigidbody>().AddForce(rb.transform.forward * -1f, ForceMode.Impulse);
-    		}
-    		if(Input.GetKeyDown("d"))
-    		{
-    			//Debug.Log("d");
-    			controlledObject.GetComponent<Rigidbody>().AddForce(rb.transform.right * 1f, ForceMode.Impulse);
-    		}
-			if(Input.GetKeyDown("c"))
+			/*if(puppetStrings && puppetStrings.activeSelf)
 			{
-				topDown = !topDown;
-			}
-    		Quaternion r = Quaternion.FromToRotation(controlledObject.GetComponent<Rigidbody>().transform.up * 1000f, GalaxyManager.getGravityVector(controlledObject.GetComponent<Rigidbody>()));
-    		Vector3 vr = new Vector3(r.x, r.y, r.z);
+				//puppetStrings.SetActive(true);
+				if(Input.GetKeyDown("w"))
+	    		{
+	    			puppetStrings.transform.RotateAround(GalaxyManager.gravityCenter.gameObject.transform.position, Vector3.up, 2f * Time.deltaTime);
+	    			//Debug.Log("w");
 
-    		rb.AddTorque(vr * (10f* vr.magnitude));
 
-    		rb.constraints = RigidbodyConstraints.FreezeRotationY;
+
+	    		}
+	    		if(Input.GetKeyDown("a"))
+	    		{
+	    			//Debug.Log("a");
+
+	    		}
+	    		if(Input.GetKeyDown("s"))
+	    		{
+	    			//Debug.Log("s");
+
+	    		}
+	    		if(Input.GetKeyDown("d"))
+	    		{
+	    			//Debug.Log("d");
+
+	    		}
+				if(Input.GetKeyDown("c"))
+				{
+					topDown = !topDown;
+				}
+
+
+
+			}*/
+			//else
+			//bUpdate();
+			{
+				if(Input.GetKeyDown("w"))
+	    		{
+	    			Debug.Log("w");
+	    			//controlledObject.GetComponent<Rigidbody>().AddForce(rb.transform.forward * 5f, ForceMode.Impulse);
+	    			controlledObject.GetComponent<Rigidbody>().AddForce(rb.transform.forward * Time.deltaTime * movef);
+
+
+
+	    		}
+	    		if(Input.GetKeyDown("a"))
+	    		{
+	    			//Debug.Log("a");
+	    			controlledObject.GetComponent<Rigidbody>().AddForce(rb.transform.right * -5f, ForceMode.Impulse);
+	    		}
+	    		if(Input.GetKeyDown("s"))
+	    		{
+	    			//Debug.Log("s");
+	    			controlledObject.GetComponent<Rigidbody>().AddForce(rb.transform.forward * -5f, ForceMode.Impulse);
+	    		}
+	    		if(Input.GetKeyDown("d"))
+	    		{
+	    			//Debug.Log("d");
+	    			controlledObject.GetComponent<Rigidbody>().AddForce(rb.transform.right * 5f, ForceMode.Impulse);
+	    		}
+				if(Input.GetKeyDown("c"))
+				{
+					topDown = !topDown;
+				}
+	    		//Quaternion r = Quaternion.FromToRotation(controlledObject.GetComponent<Rigidbody>().transform.up * 1000f, GalaxyManager.getGravityVector(controlledObject.GetComponent<Rigidbody>()));
+	    		//Vector3 vr = new Vector3(r.x, r.y, r.z);
+
+	    		//rb.AddTorque(vr * (10f* vr.magnitude));
+
+	    		//rb.constraints = RigidbodyConstraints.FreezeRotationY;
+	    	}
 
     		/*controlledCamera.transform.position = controlledObject.transform.position - (controlledObject.transform.forward * 2000f);
 
@@ -108,10 +183,59 @@ public class ControlledObject : MonoBehaviour
     	}
     	else
     	{
-    		controlledCamera.transform.position = controlledObject.transform.position - (controlledObject.transform.forward * 1f);
+    		float xmouse = Input.GetAxis("Mouse X"), ymouse = Input.GetAxis("Mouse Y");
+    		//cx += xmouse;
+    		//cy += ymouse;
+    		//cx = 0.01f;
 
+    		//Vector3 objectEulerAngles = controlledObject.transform.eulerAngles;
+
+    		//cy = Mathf.Clamp(cy, -90f, 90f);
+
+    		//Vector3 objectEulerAngles = controlledObject.transform.eulerAngles;
+
+    		//controlledCamera.transform.rotation = Quaternion.FromToRotation(controlledCamera.transform.up, GalaxyManager.getGravityVector(controlledObject.transform));
+    		//controlledCamera.transform.eulerAngles = objectEulerAngles;
+    		//controlledCamera.transform.eulerAngles += new Vector3(cy, cx, 0);
+    		//controlledCamera.transform.position = controlledObject.transform.position - (controlledCamera.transform.forward * 1f);
+
+    		controlledCamera.transform.position = controlledObject.transform.position;
+    		//controlledCamera.transform.rotation = Quaternion.FromToRotation(controlledCamera.transform.up, GalaxyManager.getGravityVector(controlledObject.transform));
+    		//controlledCamera.transform.eulerAngles += new Vector3(cx, cy, 0);
+    		controlledCamera.transform.Rotate(Quaternion.FromToRotation(controlledCamera.transform.up, GalaxyManager.getGravityVector(controlledObject.transform)).eulerAngles);
+    		//controlledCamera.transform.RotateAround(controlledCamera.transform.position, controlledCamera.transform.up, cx * Time.deltaTime);
+    		//controlledCamera.transform.RotateAround(controlledCamera.transform.position, controlledCamera.transform.right, cy * Time.deltaTime);
+
+    		//controlledCamera.transform.eulerAngles += new Vector3(0, cx, 0);
+    		controlledCamera.transform.position -= controlledCamera.transform.forward;
+
+
+    		Debug.DrawRay(controlledCamera.transform.position, controlledCamera.transform.up, Color.green);
+    		Debug.DrawRay(controlledObject.transform.position, GalaxyManager.getGravityVector(controlledObject.transform));
+
+
+    		//controlledCamera.transform.RotateAround(controlledObject.transform.position, );
+
+    		//controlledCamera.transform.LookAt(controlledObject.transform);
+    		//controlledCamera.transform.rotation = Quaternion.LookRotation(controlledObject.transform.position, GalaxyManager.getGravityVector(controlledObject.transform));
+
+    		//controlledCamera.transform.rotation = 
+    		/*controlledCamera.transform.position = controlledObject.transform.position - (controlledObject.transform.forward * 1f);
     		controlledCamera.transform.LookAt(controlledObject.transform.position);
-			controlledCamera.transform.rotation = Quaternion.Slerp(controlledCamera.transform.rotation, controlledObject.transform.rotation, 1f);
+    		Quaternion rot = Quaternion.FromToRotation(controlledCamera.transform.up * 1000f, GalaxyManager.getGravityVector(controlledCamera.transform) * -1f);
+    		controlledCamera.transform.rotation = Quaternion.Slerp(controlledCamera.transform.rotation, rot, 1f);*/
+
+
+    		//controlledCamera.transform.position = controlledObject.transform.position - (controlledObject.transform.forward * 1f);
+    		//Vector3 lr = controlledObject.transform.localEulerAngles;
+    		//lr.y += xmouse * sen;
+
+    		//controlledCamera.transform.position = 
+
+    		//controlledCamera.transform.LookAt(controlledObject.transform.position);
+			//controlledCamera.transform.rotation = Quaternion.Slerp(controlledCamera.transform.rotation, controlledObject.transform.rotation, 1f);
+
+
     	}
 
 		//Debug.Log(controlledObject.transform.forward * 20f);
