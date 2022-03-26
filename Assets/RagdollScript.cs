@@ -113,12 +113,12 @@ public class RagdollScript : MonoBehaviour
     		Vector3 p2 = r2.GetPoint(Mathf.Cos(angle * Mathf.Deg2Rad) * 50f);
     		Vector3 p3 = p1 - p2;
     		Debug.DrawRay(head2.transform.position, p3, Color.cyan);
-    		Debug.Log(angle);
-    		Debug.Log(Mathf.Cos(angle * Mathf.Deg2Rad) * 50f);
+    		//Debug.Log(angle);
+    		//Debug.Log(Mathf.Cos(angle * Mathf.Deg2Rad) * 50f);
 
     		//transform.LookAt(p3);
 
-    		GetComponent<Rigidbody>().AddForce(p3.normalized * speed * Time.fixedDeltaTime);
+    		//GetComponent<Rigidbody>().AddForce(p3.normalized * speed * Time.fixedDeltaTime);
     		//head.AddForce(p3.normalized * speed);
     		/*Ray r3 = Camera.current.ScreenPointToRay(Input.mousePosition);
     		head.transform.LookAt(r3.GetPoint(1000f));*/
@@ -128,6 +128,16 @@ public class RagdollScript : MonoBehaviour
 
     		head2.transform.LookAt(r3.GetPoint(50f));
     		head2.transform.rotation = Quaternion.LookRotation(r3.GetPoint(50f), GalaxyManager.getGravityVector(head.transform));
+
+    		if(Input.GetKey("w"))
+    		{
+    			Debug.Log("w");
+    			//controlledObject.GetComponent<Rigidbody>().AddForce(rb.transform.forward * 5f, ForceMode.Impulse);
+    			head.AddForce(p3.normalized * ((Time.fixedDeltaTime * 40f) / Mathf.Pow((Vector3.Distance(gameObject.transform.position, GalaxyManager.gravityCenter.gameObject.transform.position)), 2)));
+
+
+
+    		}
 
 
 

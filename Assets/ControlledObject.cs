@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -51,7 +52,7 @@ public class ControlledObject : MonoBehaviour
     void Start()
     {
     	Cursor.lockState = CursorLockMode.Locked;
-    	cameraRotation = new Quaternion(0f, 0f, 0f, 0f);
+    	//cameraRotation = new Quaternion(0f, 0f, 0f, 0f);
     	//controlledCamera.transform.position = controlledObject.transform.position;
     	//controlledCamera.transform.rotation = Quaternion.Slerp(controlledCamera.transform.rotation, controlledObject.transform.rotation, 1f);
 
@@ -115,7 +116,7 @@ public class ControlledObject : MonoBehaviour
 			//else
 			//bUpdate();
 			{
-				if(Input.GetKeyDown("w"))
+				/*if(Input.GetKeyDown("w"))
 	    		{
 	    			Debug.Log("w");
 	    			//controlledObject.GetComponent<Rigidbody>().AddForce(rb.transform.forward * 5f, ForceMode.Impulse);
@@ -123,7 +124,7 @@ public class ControlledObject : MonoBehaviour
 
 
 
-	    		}
+	    		}*/
 	    		if(Input.GetKeyDown("a"))
 	    		{
 	    			//Debug.Log("a");
@@ -184,13 +185,13 @@ public class ControlledObject : MonoBehaviour
     	else
     	{
     		float xmouse = Input.GetAxis("Mouse X"), ymouse = Input.GetAxis("Mouse Y");
-    		//cx += xmouse;
-    		//cy += ymouse;
+    		cx = xmouse;
+    		cy += ymouse;
     		//cx = 0.01f;
 
     		//Vector3 objectEulerAngles = controlledObject.transform.eulerAngles;
 
-    		//cy = Mathf.Clamp(cy, -90f, 90f);
+    		cy = Mathf.Clamp(cy, 0f, 90f);
 
     		//Vector3 objectEulerAngles = controlledObject.transform.eulerAngles;
 
@@ -202,7 +203,19 @@ public class ControlledObject : MonoBehaviour
     		controlledCamera.transform.position = controlledObject.transform.position;
     		//controlledCamera.transform.rotation = Quaternion.FromToRotation(controlledCamera.transform.up, GalaxyManager.getGravityVector(controlledObject.transform));
     		//controlledCamera.transform.eulerAngles += new Vector3(cx, cy, 0);
-    		controlledCamera.transform.Rotate(Quaternion.FromToRotation(controlledCamera.transform.up, GalaxyManager.getGravityVector(controlledObject.transform)).eulerAngles);
+    		//controlledCamera.transform.Rotate(Quaternion.FromToRotation(controlledCamera.transform.up, GalaxyManager.getGravityVector(controlledObject.transform)).eulerAngles);
+    		Debug.Log("cam up b4" + controlledCamera.transform.up);
+    		Debug.Log("obj up b4" + GalaxyManager.getGravityVector(controlledObject.transform));
+    		Quaternion newq = Quaternion.FromToRotation(controlledCamera.transform.up.normalized, GalaxyManager.getGravityVector(controlledObject.transform).normalized);
+    		Quaternion old = controlledCamera.transform.rotation;
+    		controlledCamera.transform.rotation = Quaternion.FromToRotation(controlledCamera.transform.up.normalized, GalaxyManager.getGravityVector(controlledObject.transform).normalized) * controlledCamera.transform.rotation;
+    		controlledCamera.transform.rotation *= Quaternion.Euler(cy, cx, 0);
+    		Debug.Log("cx" + cx);
+    		Debug.Log("cy" + cy);
+    		Debug.Log("proposed output" + (old * newq) * Vector3.up);
+    		Debug.Log("cam up" + controlledCamera.transform.up);
+    		Debug.Log("obj up" + GalaxyManager.getGravityVector(controlledObject.transform));
+    		Debug.Log("cam rot" + newq);
     		//controlledCamera.transform.RotateAround(controlledCamera.transform.position, controlledCamera.transform.up, cx * Time.deltaTime);
     		//controlledCamera.transform.RotateAround(controlledCamera.transform.position, controlledCamera.transform.right, cy * Time.deltaTime);
 
@@ -210,8 +223,8 @@ public class ControlledObject : MonoBehaviour
     		controlledCamera.transform.position -= controlledCamera.transform.forward;
 
 
-    		Debug.DrawRay(controlledCamera.transform.position, controlledCamera.transform.up, Color.green);
-    		Debug.DrawRay(controlledObject.transform.position, GalaxyManager.getGravityVector(controlledObject.transform));
+    		Debug.DrawRay(controlledCamera.transform.position, controlledCamera.transform.up.normalized, Color.green);
+    		Debug.DrawRay(controlledObject.transform.position, GalaxyManager.getGravityVector(controlledObject.transform).normalized);
 
 
     		//controlledCamera.transform.RotateAround(controlledObject.transform.position, );
