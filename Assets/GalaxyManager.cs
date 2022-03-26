@@ -32,6 +32,7 @@ public class GalaxyManager : MonoBehaviour
     		planetPool.Add(new GamePlanet(0, tsg));
     		planetPool[index0].gameObject.transform.Translate(Random.Range(-4f, 4f), Random.Range(-4f, 4f), Random.Range(-4f, 4f));
     		planetPool[index0].gameObject.transform.localScale += new Vector3(planetFixedScale, planetFixedScale, planetFixedScale);
+            planetPool[index0].gameObject.tag = "planet_object";
     	}
     	setGravityCenter(0);
         
@@ -49,6 +50,7 @@ public class GalaxyManager : MonoBehaviour
         if(gravityCenter != null)
         {
             gravityCenter.gameObject.name = "planet0";
+
         }
     	if(rb)
     	{

@@ -191,7 +191,7 @@ public class ControlledObject : MonoBehaviour
 
     		//Vector3 objectEulerAngles = controlledObject.transform.eulerAngles;
 
-    		cy = Mathf.Clamp(cy, 0f, 90f);
+    		cy = Mathf.Clamp(cy, -45f, 85f);
 
     		//Vector3 objectEulerAngles = controlledObject.transform.eulerAngles;
 
@@ -220,7 +220,42 @@ public class ControlledObject : MonoBehaviour
     		//controlledCamera.transform.RotateAround(controlledCamera.transform.position, controlledCamera.transform.right, cy * Time.deltaTime);
 
     		//controlledCamera.transform.eulerAngles += new Vector3(0, cx, 0);
-    		controlledCamera.transform.position -= controlledCamera.transform.forward;
+    		if(cy < 0f)
+    		{
+    			Debug.DrawRay(controlledCamera.transform.position, -controlledCamera.transform.forward, Color.magenta);
+    			RaycastHit[] hit = Physics.RaycastAll(controlledCamera.transform.position, -controlledCamera.transform.forward, controlledCamera.transform.forward.magnitude);
+    			//Debug.Log(hit.collider.gameObject.tag);
+    			//if(Physics.Raycast(controlledCamera.transform.position, -controlledCamera.transform.forward, out hit, controlledCamera.transform.forward.magnitude))
+    			if(hit.Length > 0)
+    			{
+    				//Debug.Log("camray hit");
+
+    				//Debug.Log(hit.collider.gameObject.tag);
+    				//Debug.Log(hit.collider.gameObject.name);
+    				foreach(RaycastHit h in hit)
+    				{
+	    				if(h.collider.gameObject.tag == "planet_object")
+	    				{
+	    					Debug.Log(h.collider.gameObject.tag);
+    						Debug.Log(h.collider.gameObject.name);
+	    					controlledCamera.transform.position -= 0.9f * (controlledCamera.transform.position - h.point);
+	    					break;
+	    				}
+	    				else
+	    				{
+	    					controlledCamera.transform.position -= 0.9f * controlledCamera.transform.forward;
+	    				}
+    				}
+    			}
+    			else
+    			{
+    				controlledCamera.transform.position -= 0.9f * controlledCamera.transform.forward;
+    			}
+    		}
+    		else
+    		{
+    			controlledCamera.transform.position -= 0.9f * controlledCamera.transform.forward;
+    		}
 
 
     		Debug.DrawRay(controlledCamera.transform.position, controlledCamera.transform.up.normalized, Color.green);
