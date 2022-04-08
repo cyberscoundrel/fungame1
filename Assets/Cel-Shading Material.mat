@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Cel-Shading Material
-  m_Shader: {fileID: -6465566751694194690, guid: 9f1b071bf437ae54ba73a0532aa5ab10, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: a2b7eacffe5296245920690d93c9f1fc, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -32,6 +32,14 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_41563372539343df94115efb9ed0a238:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_4b3c9d7f9a8c42f2b283f6d6ec694c62:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -56,6 +64,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _MAT_TEXTURE:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -65,6 +77,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _PBRTEXTURE:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -89,13 +105,17 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_052ec1ccb06e42a9bd1a0321184ff384: 0.25
     - Vector1_1df498bc67a04f66b42c3b2615026787: 0
     - Vector1_1f6298e56a644b0f86a76a1110c21729: 0.1
-    - Vector1_21e9c5a544d34040a534eeaeeb690b42: 0.2
-    - Vector1_4ee2d6ac6ede4bf6bc4441aa34c2fced: 0.4
-    - Vector1_779a8172a6524cde8761b7e8c45f4b77: 0.02
-    - Vector1_7870d7b1bc534aae828b5d2cedc01eda: 0.5
+    - Vector1_21e9c5a544d34040a534eeaeeb690b42: 0.25
+    - Vector1_4ee2d6ac6ede4bf6bc4441aa34c2fced: -0.039
+    - Vector1_779a8172a6524cde8761b7e8c45f4b77: 0.089
+    - Vector1_7870d7b1bc534aae828b5d2cedc01eda: 0.25
+    - Vector1_cccb279c320d402aad8164ae9afe5d6c: 0
+    - _AMB_STRENGTH: 0.125
     - _AlphaClip: 0
+    - _BRIGHTNESS: 0.583
     - _Blend: 0
     - _BumpScale: 1
     - _ClearCoatMask: 0
@@ -106,14 +126,18 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EnvironmentReflections: 1
+    - _FRESNEL_SIZE: 0.125
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
+    - _INDEX: 0
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueOffset: 0
     - _ReceiveShadows: 1
+    - _SHADOW_SMOOTH: 0.048
+    - _SHADOW_THRESHOLD: 0.519
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -122,11 +146,16 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_11e3ac580c974defb52fbe1192f49de5: {r: 0.13375728, g: 0.8207547, b: 0.08052685, a: 0}
-    - Color_b101e0aef8f7458fb628286454b535c6: {r: 0.91219985, g: 1, b: 0.88113207, a: 0}
+    - Color_11e3ac580c974defb52fbe1192f49de5: {r: 0.22830653, g: 0.81960785, b: 0.08235294, a: 0}
+    - Color_b101e0aef8f7458fb628286454b535c6: {r: 1, g: 0.8878234, b: 0.88235295, a: 0}
+    - Color_bff84760c6f14e11b7e1c426f9837771: {r: 0.21698111, g: 0.21698111, b: 0.21698111, a: 0}
+    - Color_c96b3d8f787847238551db08250e6ab5: {r: 1, g: 1, b: 1, a: 0}
     - Vector3_0eb8f76381cb4b0e93e5718502eb2f2b: {r: 0, g: 0, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _FRESNEL_COLOR: {r: 0, g: 0.4893282, b: 0.9056604, a: 0}
+    - _SHADOW_COLOR: {r: 0.16037738, g: 0.16037738, b: 0.16037738, a: 0}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    - _WORLD_POSITION: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
