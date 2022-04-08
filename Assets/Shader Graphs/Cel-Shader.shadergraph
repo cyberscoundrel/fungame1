@@ -1995,7 +1995,7 @@
         {
             "m_OutputSlot": {
                 "m_Node": {
-                    "m_Id": "c14bf40f0db04486a45983c5902ce840"
+                    "m_Id": "cad5fc4f00be41fcb337be8f5c75dbb7"
                 },
                 "m_SlotId": 2
             },
@@ -5839,7 +5839,7 @@
     },
     "m_Name": "MainLight (Custom Function)",
     "m_DrawState": {
-        "m_Expanded": true,
+        "m_Expanded": false,
         "m_Position": {
             "serializedVersion": "2",
             "x": -3116.800048828125,
