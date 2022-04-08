@@ -6,6 +6,9 @@ TagManager:
   tags:
   - testcollisioncube
   - planet_object
+  - collectible
+  - item
+  - weapon
   layers:
   - Default
   - TransparentFX
@@ -13,9 +16,9 @@ TagManager:
   - ragdoll
   - Water
   - UI
-  - 
-  - 
-  - 
+  - collectible
+  - weapon
+  - item
   - 
   - 
   - 

@@ -19,8 +19,11 @@ public class GalaxyManager : MonoBehaviour
 	public TestSphereGenerator tsg;
 
     public float g;
+
+    public static GalaxyManager instance;
     // Start is called before the first frame update
-    void Start()
+    //void Start()
+    void Awake()
     {
     	//planetPool = new List<GamePlanet>();
     	Debug.Log("GalaxyManager");
@@ -35,6 +38,8 @@ public class GalaxyManager : MonoBehaviour
             planetPool[index0].gameObject.tag = "planet_object";
     	}
     	setGravityCenter(0);
+
+        instance = this;
         
     }
 
@@ -93,6 +98,17 @@ public class GalaxyManager : MonoBehaviour
     public static Vector3 getGravityVector(Transform pos)
     {
         return pos.transform.position - gravityCenter.gameObject.transform.position;
+    }
+
+    public static void AddRb(Rigidbody r)
+    {
+        instance.rbs.Add(r);
+
+    }
+
+    public static void RemoveRb(Rigidbody r)
+    {
+        instance.rbs.Remove(r);
     }
 
 
