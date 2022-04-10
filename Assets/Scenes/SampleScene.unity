@@ -6267,7 +6267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caa6632ca6d65aa44b1928bc2f8ae37a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  guy: {fileID: 3938449403394483979, guid: 2174c4c4837ffce44a44588b7829fca6, type: 3}
+  guy: {fileID: 8017002073445687435, guid: d159942f68542334c8205228840c7aa4, type: 3}
   localguy: {fileID: 7614477326044533229, guid: eff718998f0c5f94bae7c989f98320bd, type: 3}
   remoteguy: {fileID: 1336115494487055659, guid: 59a43c3b027fd774abf1ba516a98f78e, type: 3}
   playerOneScript: {fileID: 0}
@@ -8004,6 +8004,10 @@ PrefabInstance:
     - target: {fileID: 3938449403394483979, guid: 2174c4c4837ffce44a44588b7829fca6, type: 3}
       propertyPath: m_Name
       value: guy3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3938449403394483979, guid: 2174c4c4837ffce44a44588b7829fca6, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 3938449403843852250, guid: 2174c4c4837ffce44a44588b7829fca6, type: 3}
       propertyPath: c
