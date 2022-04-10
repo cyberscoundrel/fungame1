@@ -40,7 +40,7 @@ public class GuiTest : MonoBehaviour
     		Debug.DrawRay(ray.origin, ray.origin + new Vector3(130, 110, 120), Color.magenta);
     		if(Physics.Raycast(ray, out hit, 1000f))
     		{
-    			Debug.Log("ray");
+    			//Debug.Log("ray");
     			if(hit.transform != null)
     			{
 

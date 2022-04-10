@@ -92,7 +92,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   limbs: []
   a: {fileID: 8805507705110252461}
+  fireRate: 0.1
+  clipSize: 30
+  reservedAmmo: 270
   count: 0
+  temp: {fileID: 558884870800925424}
 --- !u!54 &7816481069734000872
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -291,6 +295,11 @@ Transform:
 --- !u!111 &8805507705110252461 stripped
 Animation:
   m_CorrespondingSourceObject: {fileID: 2223639932434330405, guid: a7b4e85d432f0f54ba4637b0a6efdbdc, type: 3}
+  m_PrefabInstance: {fileID: 7271209096543533192}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &558884870800925424 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7145252119904066168, guid: a7b4e85d432f0f54ba4637b0a6efdbdc, type: 3}
   m_PrefabInstance: {fileID: 7271209096543533192}
   m_PrefabAsset: {fileID: 0}
 --- !u!65 &3005008494890862550
