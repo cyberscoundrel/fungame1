@@ -5,6 +5,8 @@ using UnityEngine;
 public class gungus : ItemController
 {
 
+	Player p;
+
 
     // Start is called before the first frame update
     void Start()
@@ -18,11 +20,11 @@ public class gungus : ItemController
         
     }
 
-    override public float behavior(Player p)
+    override public void behavior()
     {
-    	p.health += 1;
-    	p.health %= p.baseHealth;
-    	return 1f;
+    	p.setHealth(p.getHealth() + 1);
+    	p.setHealth(p.getHealth() % p.baseHealth);
+    	//return 1f;
 
     }
 }

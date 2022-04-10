@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,12 +7,14 @@ public class PlayerManager : MonoBehaviour
 {
 
 	public GameObject guy;
+	public GameObject localguy;
+	public GameObject remoteguy;
 
 	public List<Player> playerPool;
 
-	public Player player1;
+	public LocalPlayer player1;
 
-	public PlayerController playerOneScript;
+	public LocalPlayerController playerOneScript;
 	public RagdollScript playerOneRDS;
 
 	public static PlayerManager instance;
@@ -26,9 +29,10 @@ public class PlayerManager : MonoBehaviour
     		instance = this;
     	}
     	Debug.Log("start playercontroller");
-        createNewPlayer();
-        createNewPlayer();
-        createNewPlayer();
+        createNewPlayer<LocalPlayer>(localguy);
+        setPlayerOne(0);
+        createNewPlayer<Player>(guy);
+        createNewPlayer<Player>(guy);
     }
 
     // Update is called once per frame
@@ -41,7 +45,7 @@ public class PlayerManager : MonoBehaviour
     		Collectible c = null;
     		if(g != null)
     		{
-	    		if(g.tag == "weapon")
+	    		/*if(g.tag == "weapon")
 	    		{
 	    			Debug.Log("g is null" + (g == null));
 	    			Debug.Log("WeaponController is null" + (g.GetComponent<WeaponController>() == null));
@@ -60,11 +64,13 @@ public class PlayerManager : MonoBehaviour
 	    		{
 	    			Debug.Log("item item");
 	    			c = g.GetComponent<ItemController>().itemObject.DeactivatePhysicalInstance();
-	    		}
+	    		}*/
+	    		c = g.GetComponent<CollectibleController>().getManager().DeactivatePhysicalInstance();
 	    		if(c != null)
 	    		{
 
 	    			player1.AddCollectible(c);
+	    			c.PickUp(player1);
 	    		}
 
 	    	}
@@ -87,22 +93,25 @@ public class PlayerManager : MonoBehaviour
     	{
     		//if(player1.transform.Find())
     		playerOneRDS.HeadMouseFollow();
+    		//Debug.Log("chest transform" + playerOneRDS.head.transform.position);
+    		//Debug.Log("weapon point transform" + playerOneScript.calculateWeaponPoint());
     		Debug.DrawLine(playerOneRDS.head.transform.position, playerOneScript.calculateWeaponPoint(), Color.gray);
     	}
 
     }
 
-    public Player createNewPlayer()
+    public P createNewPlayer<P>(GameObject prefab) where P : Player
 	{
 		Debug.Log("create newplayer");
-		Player p = new Player(2, -1, guy);
+		P p = (P)Activator.CreateInstance(typeof(P), new object[] {2, -1, prefab});
+		//P p = new P(2, -1, guy);
 
 		playerPool.Add(p);
-		if(player1 == null)
+		/*if(player1 == null)
 		{
 			//player1 = p;
 			setPlayerOne(0);
-		}
+		}*/
 		return p;
 	}
 
@@ -112,8 +121,16 @@ public class PlayerManager : MonoBehaviour
 		if(index < playerPool.Count)
 		{
 			Debug.Log("setting playerone");
-			player1 = playerPool[index];
-			playerOneScript = player1.gameObject.GetComponent<PlayerController>();
+			try
+			{
+				player1 = playerPool[index] as LocalPlayer;
+			}
+			catch(InvalidCastException e)
+			{
+				Debug.Log("index " + index + " is not a LocalPlayer");
+				return;
+			}
+			playerOneScript = player1.gameObject.GetComponent<PlayerController>() as LocalPlayerController;
 			playerOneRDS = player1.gameObject.GetComponent<RagdollScript>();
 			if(playerOneRDS == null)
 			{

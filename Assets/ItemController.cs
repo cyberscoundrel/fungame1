@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class ItemController : MonoBehaviour
+public abstract class ItemController : CollectibleController
 {
     // Start is called before the first frame update
 
-    public Item itemObject;
+    //public Item itemObject;
 
-    public int typeFlag;
+    //public int typeFlag;
+
+    //public int uFlag;
 
 
     void Start()
@@ -22,7 +24,7 @@ public abstract class ItemController : MonoBehaviour
         
     }
 
-    public abstract float behavior(Player p);
+    //public abstract float behavior(Player p);
 
     //public abstract void affect()
 }

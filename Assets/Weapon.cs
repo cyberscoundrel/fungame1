@@ -42,9 +42,11 @@ public class Weapon : Collectible
 
 	public Weapon(int baselvl, GameObject prefab) : base(baselvl, prefab)
 	{
-		gameObject.GetComponent<WeaponController>().weaponObject = this;
+		gameObject.GetComponent<WeaponController>().setManager(this);
     	
     	InitializePhysics();
+
+    	typeFlag = 0x02;
 		//gameObject = new GameObject();
 		/*if(weaponMeshMap == null)
 		{

@@ -15,9 +15,11 @@ public class Item : Collectible
     public Item(int baselvl, GameObject prefab) : base(baselvl, prefab)
     {
 
-    	gameObject.GetComponent<ItemController>().itemObject = this;
+    	gameObject.GetComponent<ItemController>().setManager(this);
 
     	InitializePhysics();
+
+    	typeFlag = 0x01;
     	
     }
 

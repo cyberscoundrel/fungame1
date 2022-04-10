@@ -21,6 +21,8 @@ public class RagdollScript : MonoBehaviour
 	public Camera c;
 
 	public float slow = 0.001f;
+
+	public LimbIK IKInstance;
     // Start is called before the first frame update
     void Start()
     {
@@ -87,7 +89,8 @@ public class RagdollScript : MonoBehaviour
 		GetComponent<LineRenderer>().SetPosition(1, r3.GetPoint(100f));
 
 		head2.transform.LookAt(r3.GetPoint(50f));
-		head2.transform.rotation = Quaternion.LookRotation(r3.GetPoint(50f), GalaxyManager.getGravityVector(head.transform));
+		head2.transform.rotation = Quaternion.Slerp(head2.transform.rotation, Quaternion.LookRotation(r3.GetPoint(50f), GalaxyManager.getGravityVector(head.transform)), 0.1f);
+		//head2.transform.rotation = Quaternion.LookRotation(r3.GetPoint(50f), GalaxyManager.getGravityVector(head.transform));
 
 		if(Input.GetKey("w"))
 		{
@@ -97,6 +100,13 @@ public class RagdollScript : MonoBehaviour
 
 
 		}
+    }
+
+    public void LegIK()
+    {
+
+    	//walking ik
+
     }
 
     public Vector3 getMouseVector()

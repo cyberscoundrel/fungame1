@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponController : MonoBehaviour
+public class WeaponController : CollectibleController
 {
 
-	public Weapon weaponObject;
+	//public Weapon weaponObject;
 
 	public List<Rigidbody> limbs;
     // Start is called before the first frame update
@@ -23,5 +23,10 @@ public class WeaponController : MonoBehaviour
     public virtual void onFire()
     {
     	Debug.Log("default behaviour");
+    }
+
+    public virtual void Fire()
+    {
+    	onFire();
     }
 }

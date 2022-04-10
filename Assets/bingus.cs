@@ -16,12 +16,12 @@ public class bingus : ItemController
         
     }
 
-    override public float behavior(Player p)
+    override public void behavior()
     {
 
     	//TODO: noise for randomized damage modifier
 
-    	return 2f;
+    	//return 2f;
 
     }
 }

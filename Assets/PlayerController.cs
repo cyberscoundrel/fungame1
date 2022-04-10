@@ -34,20 +34,18 @@ public class PlayerController : MonoBehaviour
 
     void LateUpdate()
     {
-    	if(selectedWeaponNum >= 0)
+    	/*if(selectedWeaponNum >= 0)
     	{
-    		Debug.Log("selecwep");
+    		//Debug.Log("selecwep");
     	    Vector3 x = calculateWeaponPoint();
-    	    Gizmos.color = Color.yellow;
-    	    Gizmos.DrawSphere(x, 10f);
-    	    Gizmos.color = Color.green;
-    	    Gizmos.DrawSphere(rds.head.transform.position, 10f);
-    	    Debug.Log("calculated point" + (x));
+    	    //Debug.Log("calculated point" + (x));
     	    selectedWeapon.gameObject.transform.position = x;
-    	    Debug.Log("set point" + selectedWeapon.gameObject.transform.position);
+    	    selectedWeapon.gameObject.transform.rotation = Quaternion.LookRotation(rds.getMouseVector(), GalaxyManager.getGravityVector(selectedWeapon.gameObject.transform));
+
+    	    //Debug.Log("set point" + selectedWeapon.gameObject.transform.position);
 
 
-    	}
+    	}*/
 
 
     }
@@ -65,7 +63,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    public Vector3 calculateWeaponPoint(int wepDist)
+    /*public Vector3 calculateWeaponPoint(int wepDist)
     {
 
     	Ray r = new Ray(rds.head.transform.position, rds.getMouseVector());
@@ -116,8 +114,8 @@ public class PlayerController : MonoBehaviour
 
     		selectedWeapon = null;
     	}*/
-    	Debug.Log("select weapoon " + index);
-    	if(index < playerObject.weaponCount)
+    	/*Debug.Log("select weapoon " + index);
+    	if(index < playerObject.getWeaponCount())
     	{
     		Debug.Log("index less than wep count");
     		if(selectedWeapon != null)
@@ -129,9 +127,11 @@ public class PlayerController : MonoBehaviour
     		selectedWeaponNum = index;
     		if(index >= 0)
     		{
-    			selectedWeapon = playerObject.weapons[index];
+    			selectedWeapon = playerObject.getWeapon(index);
     			selectedWeapon.InitializePhysics();
+    			selectedWeapon.disableBigCollider();
+    			//selectedWeapon.gameObject.transform.Find("bigcollider").gameObject.SetActive(false);
     		}
     	}
-    }
+    }*/
 }
