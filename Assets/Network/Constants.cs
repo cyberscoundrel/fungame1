@@ -19,6 +19,12 @@ public class Constants
 	public static readonly short CMSG_INTERACT = 106;
 	public static readonly short SMSG_INTERACT = 206;
 	public static readonly short CMSG_HEARTBEAT = 111;
+	public static readonly short CMSG_CHANGEPOSITION = 107;
+	public static readonly short SMSG_CHANGEPOSITION = 207;
+	public static readonly short CMSG_PICKUP_ITEM = 108;
+	public static readonly short SMSG_PICKUP_ITEM = 208;
+	public static readonly short CMSG_CHANGEITEMPOSITION = 111;
+	public static readonly short SMSG_CHANGEITEMPOSITION = 211;
 
 	public static int USER_ID = -1;
 	public static int OP_ID = -1;

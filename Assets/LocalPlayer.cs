@@ -26,7 +26,7 @@ public class LocalPlayer : Player
 
     public virtual void tickProc()
     {
-    	Debug.Log("local player tick 2");
+    	//Debug.Log("local player tick 2");
     	Thread.Sleep(1000);//set tick rate of 1 second
     }
 

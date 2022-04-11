@@ -27,6 +27,7 @@ public class GalaxyManager : MonoBehaviour
     {
     	//planetPool = new List<GamePlanet>();
     	Debug.Log("GalaxyManager");
+        Random.seed = 69;
     	//planetPool.Add(new GamePlanet(0));
     	//planetPool.Add(new GamePlanet(0));
     	//planetPool[1].gameObject.transform.Translate(2,2,2);

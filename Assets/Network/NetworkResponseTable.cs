@@ -15,6 +15,8 @@ public class NetworkResponseTable {
 		add(Constants.SMSG_READY, "ResponseReady");
 		add(Constants.SMSG_MOVE, "ResponseMove");
 		add(Constants.SMSG_INTERACT, "ResponseInteract");
+		add(Constants.SMSG_CHANGEPOSITION, "ResponseChangePosition");
+		//add(Constants.SMSG_PICKUP_ITEM, "ResponsePickUpItem");
 	}
 	
 	public static void add(short response_id, string name) {

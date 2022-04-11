@@ -53,7 +53,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3938449403394483979, guid: 2174c4c4837ffce44a44588b7829fca6, type: 3}
       propertyPath: m_Name
-      value: localguy
+      value: localguy Variant
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8287977359047613335, guid: 2174c4c4837ffce44a44588b7829fca6, type: 3}
@@ -75,3 +75,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b911699b8304c4c4db32102958a7cb7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rds: {fileID: 0}
+  selectedWeaponNum: -1
+  weaponDistance: 0.1

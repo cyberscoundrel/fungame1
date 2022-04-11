@@ -12,24 +12,27 @@ public class PlaceholderPistol : PistolController
     void Start()
     {
     	Debug.Log("pistol controller is here");
+
         
     }
 
     // Update is called once per frame
     void Update()
     {
-    	/*Debug.Log("shoot update");
+    	//Debug.Log("shoot update");
     	if(Input.GetKeyDown("p"))
     	{
     		Debug.Log("play shoot");
     		count++;
-    		a.Play("discharge");
-    	}*/
+    		onFire();
+    		//a.Play("discharge");
+    	}
         
     }
 
     public override void onFire()
     {
+    	a["discharge"].speed = 10f;
     	a.Play("discharge");
     }
 }

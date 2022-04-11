@@ -16,7 +16,7 @@ public class Collectible
 
 	public int baseTick;
 
-	public int uFlag;
+	public int uTag;
 
 	public int typeFlag = 0x0;
 

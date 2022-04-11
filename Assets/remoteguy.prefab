@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 413368839940862935, guid: 2174c4c4837ffce44a44588b7829fca6, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3938449403394483978, guid: 2174c4c4837ffce44a44588b7829fca6, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -53,7 +57,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3938449403394483979, guid: 2174c4c4837ffce44a44588b7829fca6, type: 3}
       propertyPath: m_Name
-      value: guy3 (1)
+      value: remoteguy
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8287977359047613335, guid: 2174c4c4837ffce44a44588b7829fca6, type: 3}
@@ -61,6 +65,11 @@ PrefabInstance:
 --- !u!1 &1336115494487055659 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3938449403394483979, guid: 2174c4c4837ffce44a44588b7829fca6, type: 3}
+  m_PrefabInstance: {fileID: 2603919696757963296}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2183045321023380623 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4208973444639614639, guid: 2174c4c4837ffce44a44588b7829fca6, type: 3}
   m_PrefabInstance: {fileID: 2603919696757963296}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &5215004467187171632
@@ -78,3 +87,4 @@ MonoBehaviour:
   rds: {fileID: 0}
   selectedWeaponNum: -1
   weaponDistance: 0.1
+  tempParentObject: {fileID: 2183045321023380623}

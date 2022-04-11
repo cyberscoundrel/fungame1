@@ -31,8 +31,8 @@ public class PlayerManager : MonoBehaviour
     	Debug.Log("start playercontroller");
         createNewPlayer<LocalPlayer>(localguy);
         setPlayerOne(0);
-        createNewPlayer<Player>(guy);
-        createNewPlayer<Player>(guy);
+        //createNewPlayer<Player>(guy);
+        //createNewPlayer<Player>(guy);
     }
 
     // Update is called once per frame
@@ -113,6 +113,18 @@ public class PlayerManager : MonoBehaviour
 			setPlayerOne(0);
 		}*/
 		return p;
+	}
+
+	public Player getPlayerByUTag(int uTag)
+	{
+		foreach(Player p in playerPool)
+		{
+			if(p.uTag == uTag)
+			{
+				return p;
+			}
+		}
+		return null;
 	}
 
 	public void setPlayerOne(int index)

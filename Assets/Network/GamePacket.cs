@@ -32,6 +32,7 @@ public class GamePacket {
 	}
 	
 	public void addFloat32(float val) {
+		buffer.add(val);
 	}
 	
 	public int size() {
