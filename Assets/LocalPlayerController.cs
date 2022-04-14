@@ -18,6 +18,9 @@ public class LocalPlayerController : PlayerController
     	    //Debug.Log("calculated point" + (x));
     	    selectedWeapon.gameObject.transform.position = x;
     	    selectedWeapon.gameObject.transform.rotation = Quaternion.LookRotation(rds.getMouseVector(), GalaxyManager.getGravityVector(selectedWeapon.gameObject.transform));
+    	    selectedWeapon.gameObject.transform.position += selectedWeapon.gameObject.transform.up * 0.05f;
+    	    selectedWeapon.gameObject.transform.rotation = Quaternion.LookRotation(rds.getMouseVector(), GalaxyManager.getGravityVector(selectedWeapon.gameObject.transform));
+
 
     	    //Debug.Log("set point" + selectedWeapon.gameObject.transform.position);
 

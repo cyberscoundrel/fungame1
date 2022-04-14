@@ -89,8 +89,12 @@ public class RagdollScript : MonoBehaviour
 		GetComponent<LineRenderer>().SetPosition(1, r3.GetPoint(100f));
 
 		head2.transform.LookAt(r3.GetPoint(50f));
-		//head2.transform.rotation = head2.transform.rotation * Quaternion.Slerp(head2.transform.rotation, Quaternion.LookRotation(r3.GetPoint(50f), GalaxyManager.getGravityVector(head.transform)), 0.1f);
-		//head2.transform.rotation = Quaternion.LookRotation(r3.GetPoint(50f), GalaxyManager.getGravityVector(head.transform));
+        //head.transform.LookAt(r3.GetPoint(50f));
+		//head2.transform.rotation = head2.transform.rotation * Quaternion.Slerp(head2.transform.rotation, Quaternion.LookRotation(r3.GetPoint(50f), GalaxyManager.getGravityVector(head.transform)), 3f * Time.fixedDeltaTime);
+        //head.transform.rotation = head2.transform.rotation * Quaternion.Slerp(head2.transform.rotation, Quaternion.LookRotation(r3.GetPoint(50f), GalaxyManager.getGravityVector(head.transform)), 3f * Time.fixedDeltaTime);
+
+		head2.transform.rotation = Quaternion.LookRotation(r3.GetPoint(50f), GalaxyManager.getGravityVector(head.transform));
+        head.transform.rotation = Quaternion.LookRotation(r3.GetPoint(50f), GalaxyManager.getGravityVector(head.transform));
 
 		if(Input.GetKey("w"))
 		{

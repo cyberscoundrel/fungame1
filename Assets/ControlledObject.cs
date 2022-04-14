@@ -35,7 +35,7 @@ public class ControlledObject : MonoBehaviour
 
     public GalaxyManager gm;
 
-    public bool locked;
+    public bool locked, firstPerson;
 
 
 
@@ -55,6 +55,7 @@ public class ControlledObject : MonoBehaviour
 
     void start()
     {
+    	firstPerson = false;
     	//controlledCamera.enabled = true;
     	//Camera.main.enabled = false;
     }
@@ -69,6 +70,11 @@ public class ControlledObject : MonoBehaviour
     		{
 	            Cursor.lockState = CursorLockMode.None;
 	            locked = false;
+        	}
+        	if(Input.GetKeyDown("f"))
+        	{
+        		firstPerson = !firstPerson;
+
         	}
 
 	        if (!locked && Input.GetMouseButtonDown(0)) 
@@ -94,6 +100,27 @@ public class ControlledObject : MonoBehaviour
     		controlledCamera.transform.position = controlledObject.transform.position + (controlledObject.transform.up * 1f);
     		controlledCamera.transform.LookAt(controlledObject.transform.position);
     	}
+    	else if(firstPerson)
+    	{
+    		float xmouse = Input.GetAxis("Mouse X"), ymouse = Input.GetAxis("Mouse Y");
+    		cx = xmouse;
+    		cy += ymouse;
+
+
+    		cy = Mathf.Clamp(cy, -45f, 85f);
+
+
+    		controlledCamera.transform.position = controlledObject.transform.position;
+
+    		/*Debug.Log("cam up b4" + controlledCamera.transform.up);
+    		Debug.Log("obj up b4" + GalaxyManager.getGravityVector(controlledObject.transform));
+    		Debug.Log("obj pos" + controlledObject.transform.position);*/
+    		Quaternion newq = Quaternion.FromToRotation(controlledCamera.transform.up.normalized, GalaxyManager.getGravityVector(controlledObject.transform).normalized);
+    		Quaternion old = controlledCamera.transform.rotation;
+    		controlledCamera.transform.rotation = Quaternion.FromToRotation(controlledCamera.transform.up.normalized, GalaxyManager.getGravityVector(controlledObject.transform).normalized) * controlledCamera.transform.rotation;
+    		controlledCamera.transform.rotation *= Quaternion.Euler(-cy, cx, 0);
+    		controlledCamera.transform.position += controlledCamera.transform.forward * 0.03f;
+    	}
     	else
     	{
     		if(controlledObject != null)
@@ -116,6 +143,8 @@ public class ControlledObject : MonoBehaviour
 	    		Quaternion old = controlledCamera.transform.rotation;
 	    		controlledCamera.transform.rotation = Quaternion.FromToRotation(controlledCamera.transform.up.normalized, GalaxyManager.getGravityVector(controlledObject.transform).normalized) * controlledCamera.transform.rotation;
 	    		controlledCamera.transform.rotation *= Quaternion.Euler(cy, cx, 0);
+	    		controlledCamera.transform.position += Vector3.Scale(GalaxyManager.getGravityVector(controlledObject.transform).normalized, new Vector3(0.2f,0.2f,0.2f));
+	    		controlledCamera.transform.position += Vector3.Scale(-controlledCamera.transform.right, new Vector3(0.1f,0.1f,0.1f));
 	    		/*Debug.Log("cx" + cx);
 	    		Debug.Log("cy" + cy);
 	    		Debug.Log("proposed output" + (old * newq) * Vector3.up);

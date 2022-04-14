@@ -100,6 +100,10 @@ public class GalaxyManager : MonoBehaviour
     {
         return pos.transform.position - gravityCenter.gameObject.transform.position;
     }
+    public static Vector3 getGravityVector(Vector3 vec)
+    {
+        return vec - gravityCenter.gameObject.transform.position;
+    }
 
     public static void AddRb(Rigidbody r)
     {
