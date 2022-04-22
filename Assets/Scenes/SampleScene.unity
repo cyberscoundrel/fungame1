@@ -181,6 +181,7 @@ MonoBehaviour:
   fdown: 0
   c: {fileID: 1771144930}
   slow: 0.001
+  IK: []
 --- !u!120 &845759
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -810,7 +811,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &349040696
 Transform:
   m_ObjectHideFlags: 0
@@ -928,7 +929,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &573601719
 Transform:
   m_ObjectHideFlags: 0
@@ -6313,7 +6314,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   guy: {fileID: 3938449403394483979, guid: 2174c4c4837ffce44a44588b7829fca6, type: 3}
-  localguy: {fileID: 7614477326044533229, guid: eff718998f0c5f94bae7c989f98320bd, type: 3}
+  localguy: {fileID: 4966752725328641481, guid: 08ae8499bc57fab4ca37c90cd70667df, type: 3}
   remoteguy: {fileID: 1336115494487055659, guid: 59a43c3b027fd774abf1ba516a98f78e, type: 3}
   playerOneScript: {fileID: 0}
   playerOneRDS: {fileID: 0}
@@ -7516,6 +7517,7 @@ MonoBehaviour:
   cy: 0
   gm: {fileID: 0}
   locked: 0
+  firstPerson: 0
 --- !u!4 &1894497157
 Transform:
   m_ObjectHideFlags: 0

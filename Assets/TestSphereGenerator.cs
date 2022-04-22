@@ -99,12 +99,12 @@ public class TestSphereGenerator : MonoBehaviour
 
         prebuiltMeshes.Add(new Mesh());
 
-        int vertexCount = p.Count * 3;
+        //int vertexCount = p.Count;
 
-        int[] indices = new int[vertexCount];
+        int[] indices = new int[p.Count * 3];
 
-        Vector3[] vertices = new Vector3[vertexCount];
-        Vector3[] normals  = new Vector3[vertexCount];
+        //Vector3[] vertices = new Vector3[v.Count];
+        //Vector3[] normals  = new Vector3[vertexCount];
         //Color32[] colors   = new Color32[vertexCount];
 
         //Color32 green = new Color32(20,  255, 30, 255);
@@ -116,13 +116,17 @@ public class TestSphereGenerator : MonoBehaviour
         {
             var poly = p[i];
 
-            indices[i * 3 + 0] = i * 3 + 0;
-            indices[i * 3 + 1] = i * 3 + 1;
-            indices[i * 3 + 2] = i * 3 + 2;
+            indices[i * 3 + 0] = poly[0];
+            indices[i * 3 + 1] = poly[1];
+            indices[i * 3 + 2] = poly[2];
 
-            vertices[i * 3 + 0] = v[poly[0]];
+
+
+            //vertices[i] = v[i];
+
+            /*vertices[i * 3 + 0] = v[poly[0]];
             vertices[i * 3 + 1] = v[poly[1]];
-            vertices[i * 3 + 2] = v[poly[2]];
+            vertices[i * 3 + 2] = v[poly[2]];*/
 
             //Color32 polyColor = Color32.Lerp(green, brown, Random.Range(0.0f, 1.0f)); 
 
@@ -130,13 +134,19 @@ public class TestSphereGenerator : MonoBehaviour
             //colors[i * 3 + 1] = polyColor;
             //colors[i * 3 + 2] = polyColor;
 
-            normals[i * 3 + 0] = v[poly[0]];
+            /*normals[i * 3 + 0] = v[poly[0]];
             normals[i * 3 + 1] = v[poly[1]];
-            normals[i * 3 + 2] = v[poly[2]];
+            normals[i * 3 + 2] = v[poly[2]];*/
         }
 
-        prebuiltMeshes[prebuiltMeshes.Count - 1].vertices = vertices;
-        prebuiltMeshes[prebuiltMeshes.Count - 1].normals  = normals;
+        meshNoise(v);
+
+
+
+
+
+        prebuiltMeshes[prebuiltMeshes.Count - 1].vertices = v.ToArray();
+        prebuiltMeshes[prebuiltMeshes.Count - 1].normals  = v.ToArray();
         //prebuiltMeshes[prebuiltMeshes.Count - 1].colors32 = colors;
 
         prebuiltMeshes[prebuiltMeshes.Count - 1].SetTriangles(indices, 0);
@@ -221,6 +231,16 @@ public class TestSphereGenerator : MonoBehaviour
 		cache.Add(key, ret);
 
 		return ret;
+	}
+
+	public void meshNoise(List<Vector3> mv)
+	{
+		for(int index0 = 0; index0 < mv.Count; ++index0)
+		{
+			mv[index0] *= Random.Range(1f, 1.05f);
+		}
+		//return mv;
+
 	}
 
 	public ProceduralSphere generateSphere(int interations, GameObject newGameObject)

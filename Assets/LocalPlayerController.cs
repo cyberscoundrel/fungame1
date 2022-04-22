@@ -13,6 +13,8 @@ public class LocalPlayerController : PlayerController
     {
     	if(selectedWeaponNum >= 0)
     	{
+
+    		rds.IK[0].GetComponent<DitzelGames.FastIK.FastIKFabric>().enabled = true;
     		//Debug.Log("selecwep");
     	    Vector3 x = calculateWeaponPoint();
     	    //Debug.Log("calculated point" + (x));
@@ -20,11 +22,17 @@ public class LocalPlayerController : PlayerController
     	    selectedWeapon.gameObject.transform.rotation = Quaternion.LookRotation(rds.getMouseVector(), GalaxyManager.getGravityVector(selectedWeapon.gameObject.transform));
     	    selectedWeapon.gameObject.transform.position += selectedWeapon.gameObject.transform.up * 0.05f;
     	    selectedWeapon.gameObject.transform.rotation = Quaternion.LookRotation(rds.getMouseVector(), GalaxyManager.getGravityVector(selectedWeapon.gameObject.transform));
+    	    rds.IK[0].GetComponent<DitzelGames.FastIK.FastIKFabric>().Target.position = calculateWeaponPoint();
 
 
     	    //Debug.Log("set point" + selectedWeapon.gameObject.transform.position);
 
 
+    	}
+    	else
+    	{
+    		rds.IK[0].GetComponent<DitzelGames.FastIK.FastIKFabric>().enabled = false;
+    		rds.IK[1].GetComponent<DitzelGames.FastIK.FastIKFabric>().enabled = false;
     	}
 
 
