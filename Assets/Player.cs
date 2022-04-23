@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : Entity
 {
 
-	public GameObject gameObject;
+	//public GameObject gameObject;
 
 	//TODO: all game time chaning fields to protected/private
 
@@ -17,7 +17,7 @@ public class Player : Entity
 
 	//TODO: all game time chaning fields to protected/private
 
-	protected List<Collectible> collectibles;
+	//protected List<Collectible> collectibles;
 
 
 
@@ -31,21 +31,21 @@ public class Player : Entity
 
 	//public static Player player1;
 
-	public float baseSpd;
+	//public float baseSpd;
 
-	public float baseDmg;
+	//public float baseDmg;
 
-	public float baseTick;
+	//public float baseTick;
 
 	//protected bool tickActive = true;
 
-	public float baseRegen;
+	//public float baseRegen;
 
-	protected int level;
+	//protected int level;
 
-	public int baseHealth;
+	//public int baseHealth;
 
-	protected int health;
+	//protected int health;
 
 	//public Thread tThread;
 
@@ -86,8 +86,9 @@ public class Player : Entity
 
 	public virtual void AddCollectible(Collectible c)
 	{
-		collectibles.Add(c);
-		c.PickUp(this);
+		//collectibles.Add(c);
+		//c.PickUp(this);
+		base.AddCollectible(c);
 		if(c.typeFlag == 0x02)
 		{
 			AddWeapon(c as Weapon);
@@ -99,7 +100,7 @@ public class Player : Entity
 		}*/
 	}
 
-	public virtual void RemoveCollectible(Collectible c)
+	/*public virtual void RemoveCollectible(Collectible c)
 	{
 		collectibles.Remove(c);
 		c.Discard();
@@ -117,9 +118,9 @@ public class Player : Entity
 				//coount++;
 			}
 		}*/
-	}
+	//}
 
-	public virtual void RemoveCollectible(int index)
+	/*public virtual void RemoveCollectible(int index)
 	{
 		collectibles.RemoveAt(index);
 		//TODO:check item tFlag to see if it must be removed from weapons
@@ -143,7 +144,7 @@ public class Player : Entity
 	public virtual int getHealth()
 	{
 		return health;
-	}
+	}*/
 
 	public virtual int AddWeapon(Weapon w)
 	{

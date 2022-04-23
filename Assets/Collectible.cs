@@ -20,7 +20,8 @@ public class Collectible
 
 	public int typeFlag = 0x0;
 
-	public Player holder;
+	//public Player holder;
+	public Entity holder;
 
 	public bool pickupEffect = true;
 
@@ -107,7 +108,7 @@ public class Collectible
 
     }
 
-    public virtual void PickUp(Player p)
+    public virtual void PickUp(Entity p)
     {
     	//Debug.Log("picked up");
     	holder = p;

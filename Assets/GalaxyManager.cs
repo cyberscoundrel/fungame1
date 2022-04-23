@@ -23,6 +23,8 @@ public class GalaxyManager : MonoBehaviour
     public static GalaxyManager instance;
 
     public Octant parentOctant;
+
+    public Vector3 globalPlanetOffset;
     // Start is called before the first frame update
     //void Start()
     void Awake()
@@ -37,7 +39,7 @@ public class GalaxyManager : MonoBehaviour
         planetPool[0].gameObject.tag = "planet_object";
         planetPool[0].gameObject.layer = LayerMask.NameToLayer("planet_object");
 
-        initGalaxyTest();
+        initGalaxyTest(planetPool[0].gameObject.transform.position);
     	//planetPool.Add(new GamePlanet(0));
     	//planetPool.Add(new GamePlanet(0));
     	//planetPool[1].gameObject.transform.Translate(2,2,2);
@@ -139,12 +141,51 @@ public class GalaxyManager : MonoBehaviour
                 for(int index2 = 0; index2 < 8; ++index2)
                 {
                     Octant thisOctant = parentOctant.getSector(index0).getSector(index1).getSector(index2);
-                    planetPool.Add(new GamePlanet(0, tsg));
-                    planetPool[planetPool.Count - 1].gameObject.transform.Translate(thisOctant.position + new Vector3(thisOctant.sizeFactor/2, thisOctant.sizeFactor/2, thisOctant.sizeFactor/2));
-                    planetPool[planetPool.Count - 1].gameObject.transform.Translate(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f));
-                    planetPool[planetPool.Count - 1].gameObject.transform.localScale += new Vector3(planetFixedScale, planetFixedScale, planetFixedScale);
-                    planetPool[planetPool.Count - 1].gameObject.tag = "planet_object";
-                    planetPool[planetPool.Count - 1].gameObject.layer = LayerMask.NameToLayer("planet_object");
+                    if(Random.Range(0,8) == 0)
+                    {
+                        planetPool.Add(new GamePlanet(0, tsg));
+                        planetPool[planetPool.Count - 1].gameObject.transform.Translate(thisOctant.position + new Vector3(thisOctant.sizeFactor/2, thisOctant.sizeFactor/2, thisOctant.sizeFactor/2));
+                        planetPool[planetPool.Count - 1].gameObject.transform.Translate(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+                        planetPool[planetPool.Count - 1].gameObject.transform.localScale += new Vector3(planetFixedScale, planetFixedScale, planetFixedScale);
+                        planetPool[planetPool.Count - 1].gameObject.tag = "planet_object";
+                        planetPool[planetPool.Count - 1].gameObject.layer = LayerMask.NameToLayer("planet_object");
+                    }
+                    
+
+                }
+            }
+
+        }
+    }
+
+    public void initGalaxyTest(Vector3 initPosition)
+    {
+        globalPlanetOffset = new Vector3(parentOctant.sizeFactor / 2 + 1, parentOctant.sizeFactor / 2 + 1, parentOctant.sizeFactor / 2 + 1);
+        parentOctant.Subdivide();
+        for(int index0 = 0; index0 < 8; ++index0)
+        {
+            parentOctant.getSector(index0).Subdivide();
+            for(int index1 = 0; index1 < 8; ++index1)
+            {
+                parentOctant.getSector(index0).getSector(index1).Subdivide();
+                for(int index2 = 0; index2 < 8; ++index2)
+                {
+                    Octant thisOctant = parentOctant.getSector(index0).getSector(index1).getSector(index2);
+                    if(!(index0 == 2 && index1 == 0 && index2 == 0))
+                    {
+                        if(Random.Range(0,8) == 0)
+                        {
+
+                            planetPool.Add(new GamePlanet(0, tsg));
+                            planetPool[planetPool.Count - 1].gameObject.transform.Translate(thisOctant.position + new Vector3(thisOctant.sizeFactor/2, thisOctant.sizeFactor/2, thisOctant.sizeFactor/2));
+                            planetPool[planetPool.Count - 1].gameObject.transform.Translate(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+                            planetPool[planetPool.Count - 1].gameObject.transform.Translate(-globalPlanetOffset);
+                            float planetRandomScale = Random.Range(1f, 50f) * planetFixedScale;
+                            planetPool[planetPool.Count - 1].gameObject.transform.localScale += new Vector3(planetRandomScale, planetRandomScale, planetRandomScale);
+                            planetPool[planetPool.Count - 1].gameObject.tag = "planet_object";
+                            planetPool[planetPool.Count - 1].gameObject.layer = LayerMask.NameToLayer("planet_object");
+                        }
+                    }
                     
 
                 }
