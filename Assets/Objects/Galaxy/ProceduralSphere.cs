@@ -13,6 +13,18 @@ public class ProceduralSphere
 
 	Mesh m;
 
+    public List<Vector3> randOffsets;
+
+    public float intensity;
+
+    public List<int> nucleationSites;
+
+    public List<int> nucleationIndices;
+
+    public List<Vector3> nucleationNormals;
+
+    public List<Vector3> nucleationOffsets;
+
 	MeshRenderer mr;
 
 	MeshFilter mf;
@@ -31,6 +43,18 @@ public class ProceduralSphere
 		this.m = newMesh;
 
 		this.mat = newMaterial;
+
+        intensity = 1f;
+
+        randOffsets = new List<Vector3>();
+
+        nucleationSites = new List<int>();
+
+        nucleationIndices = new List<int>();
+
+        nucleationNormals = new List<Vector3>();
+
+        nucleationOffsets = new List<Vector3>();
 
 		//g = new GameObject("Planet Mesh");
 
@@ -100,6 +124,11 @@ public class ProceduralSphere
         	mc.sharedMesh = m;
         }
 	}
+
+    public void generateNucleationSites(int seed)
+    {
+        
+    }
 
 
 
