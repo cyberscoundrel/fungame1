@@ -13,7 +13,10 @@ public class GLObject
 
     public Vector3 gridOffset;
 
-    public float radius;
+    //public float radius;
+    public float maxRadius;
+
+    //public float radiusF
 
     public List<GLObject> connections;
 
@@ -26,6 +29,8 @@ public class GLObject
     public GLObject(Vector3 newPosition)
     {
         position = newPosition;
+        maxRadius = 0f;
+        connections = new List<GLObject>();
     }
 
     public Vector3 getAdjusted()
@@ -60,11 +65,13 @@ public class GalaxyManager : MonoBehaviour
 
     public Vector3 globalPlanetOffset;
 
-    public Vector3 globalGridOffset;
+    public Vector3 globalGridOffset = new Vector3(0f,0f,0f);
 
     public int seed;
 
     public float mDist = 1f;
+
+    public float gridFactor = 256f;
 
     //public static int prime = 12289;
 
@@ -81,6 +88,8 @@ public class GalaxyManager : MonoBehaviour
     public Vector3 generationGridOffset;
 
     public SHA256 hasher;
+
+    GamePlanet startPlanet;
     // Start is called before the first frame update
     //void Start()
     void Awake()
@@ -88,18 +97,30 @@ public class GalaxyManager : MonoBehaviour
         seed = 69;
         hasher = SHA256.Create();
         generationGridOffset = new Vector3(0f,0f,0f);
+        globalGridOffset = new Vector3(0f,0f,0f);
         parentOctant = new Octant(16, new Vector3(0f, 0f, 0f));
+
+        gridFactor = 16f;
     	//planetPool = new List<GamePlanet>();
     	Debug.Log("GalaxyManager");
         UnityEngine.Random.seed = 69;
-        planetPool.Add(new GamePlanet(0, tsg));
-        planetPool[0].gameObject.transform.Translate(UnityEngine.Random.Range(-4f, 4f), UnityEngine.Random.Range(-4f, 4f), UnityEngine.Random.Range(-4f, 4f));
-        planetPool[0].gameObject.transform.localScale += new Vector3(planetFixedScale, planetFixedScale, planetFixedScale);
-        planetPool[0].gameObject.tag = "planet_object";
-        planetPool[0].gameObject.layer = LayerMask.NameToLayer("planet_object");
+        startPlanet = new GamePlanet(0, tsg);
+        //planetPool.Add(new GamePlanet(0, tsg));
+        //planetPool[0].gameObject.transform.Translate(UnityEngine.Random.Range(-4f, 4f), UnityEngine.Random.Range(-4f, 4f), UnityEngine.Random.Range(-4f, 4f));
+        //planetPool[0].gameObject.transform.localScale += new Vector3(planetFixedScale, planetFixedScale, planetFixedScale);
+        //planetPool[0].gameObject.tag = "planet_object";
+        //planetPool[0].gameObject.layer = LayerMask.NameToLayer("planet_object");
+        startPlanet.gameObject.transform.Translate(UnityEngine.Random.Range(-4f, 4f), UnityEngine.Random.Range(-4f, 4f), UnityEngine.Random.Range(-4f, 4f));
+        startPlanet.gameObject.transform.localScale += new Vector3(planetFixedScale, planetFixedScale, planetFixedScale);
+        startPlanet.gameObject.tag = "planet_object";
+        startPlanet.gameObject.layer = LayerMask.NameToLayer("planet_object");
 
-        initGalaxyTest(planetPool[0].gameObject.transform.position);
-        initGalaxyTestGrid();
+
+        //initGalaxyTest(planetPool[0].gameObject.transform.position);
+        //initGalaxyTest(startPlanet.gameObject.transform.position);
+        //initGalaxyTestGrid();
+        initGalaxyTestGrid(startPlanet.gameObject.transform.position);
+        testGenPlanets();
     	//planetPool.Add(new GamePlanet(0));
     	//planetPool.Add(new GamePlanet(0));
     	//planetPool[1].gameObject.transform.Translate(2,2,2);
@@ -111,7 +132,9 @@ public class GalaxyManager : MonoBehaviour
             planetPool[index0].gameObject.tag = "planet_object";
             planetPool[index0].gameObject.layer = LayerMask.NameToLayer("planet_object");
     	}*/
-    	setGravityCenter(0);
+    	//setGravityCenter(0);
+
+        setGravityCenter(startPlanet);
 
         instance = this;
         
@@ -148,6 +171,26 @@ public class GalaxyManager : MonoBehaviour
         gravityCenter.gameObject.name = "gravityCenter";
 
 
+
+    }
+
+    public void setGravityCenter(GamePlanet g)
+    {
+        if(gravityCenter != null)
+        {
+            gravityCenter.gameObject.name = "planet0";
+
+        }
+        for(int index0 = 0; index0 < rbs.Count; ++index0)
+        {
+            if(rbs[index0].useGravity)
+            {
+                rbs[index0].useGravity = false;
+            }
+
+        }
+        gravityCenter = g;
+        gravityCenter.gameObject.name = "gravityCenter";
 
     }
 
@@ -218,11 +261,12 @@ public class GalaxyManager : MonoBehaviour
         }
     }
 
-    public void initGalaxyTestGrid()
+    public void initGalaxyTestGrid(Vector3 startPos)
     {
 
         //generationGrid = new Vector3[8,8,8,2];
         gGrid = new GLObject[8,8,8,2];
+        globalGridOffset = new Vector3(0f,0f,0f);
 
         //phase 0
         for(int index0 = 0; index0 < 8; ++index0)
@@ -252,10 +296,14 @@ public class GalaxyManager : MonoBehaviour
                     //gGrid[index0,index1,index2,0] = new GLObject(new Vector3((pseudoRandX0 * 2f) + ((index0 + globalGridOffset.x) * 2), (pseudoRandY0 * 2f) + ((index1 + globalGridOffset.y) * 2), (pseudoRandZ0 * 2f) + ((index2 + globalGridOffset.z) * 2)));
                     //gGrid[index0,index1,index2,1] = new GLObject(new Vector3((pseudoRandX1 * 2f) + ((index0 + globalGridOffset.x) * 2), (pseudoRandY1 * 2f) + ((index1 + globalGridOffset.y) * 2), (pseudoRandZ1 * 2f) + ((index2 + globalGridOffset.z) * 2)));
                     //gGrid[index0,index1,index2,0].gridOffset = new Vector3(index0, index1, index2);
-                    gGrid[index0,index1,index2,0] = new GLObject(new Vector3((pseudoRandX0 * 2f), (pseudoRandY0 * 2f), (pseudoRandZ0 * 2f)));
+                    /*gGrid[index0,index1,index2,0] = new GLObject(new Vector3((pseudoRandX0 * 2f), (pseudoRandY0 * 2f), (pseudoRandZ0 * 2f)));
                     gGrid[index0,index1,index2,1] = new GLObject(new Vector3((pseudoRandX1 * 2f), (pseudoRandY1 * 2f), (pseudoRandZ1 * 2f)));
                     gGrid[index0,index1,index2,0].gridOffset = new Vector3(index0 * 2, index1 * 2, index2 * 2);
-                    gGrid[index0,index1,index2,1].gridOffset = new Vector3(index0 * 2, index1 * 2, index2 * 2);
+                    gGrid[index0,index1,index2,1].gridOffset = new Vector3(index0 * 2, index1 * 2, index2 * 2);*/
+                    gGrid[index0,index1,index2,0] = new GLObject(new Vector3((pseudoRandX0 * gridFactor), (pseudoRandY0 * gridFactor), (pseudoRandZ0 * gridFactor)));
+                    gGrid[index0,index1,index2,1] = new GLObject(new Vector3((pseudoRandX1 * gridFactor), (pseudoRandY1 * gridFactor), (pseudoRandZ1 * gridFactor)));
+                    gGrid[index0,index1,index2,0].gridOffset = new Vector3(index0 * gridFactor, index1 * gridFactor, index2 * gridFactor);
+                    gGrid[index0,index1,index2,1].gridOffset = new Vector3(index0 * gridFactor, index1 * gridFactor, index2 * gridFactor);
                     //generationGrid[index0][index1][index2].Add(new List<Vector3>());
                     //List<Vector3
                 }
@@ -273,6 +321,13 @@ public class GalaxyManager : MonoBehaviour
                 for(int index2 = 1; index2 < 7; ++index2)
                 {
 
+                    Vector3 tempVec;
+                    tempVec = (gGrid[index0,index1,index2,0].position - gGrid[index0,index1,index2,1].position);
+                    gGrid[index0,index1,index2,0].adjustment += tempVec.normalized * (1f - Mathf.Clamp(tempVec.magnitude, 0, 1));
+                    tempVec = (gGrid[index0,index1,index2,1].position - gGrid[index0,index1,index2,0].position);
+                    gGrid[index0,index1,index2,1].adjustment += tempVec.normalized * (1f - Mathf.Clamp(tempVec.magnitude, 0, 1));
+
+
                     for(int index3 = -1; index3 < 2; ++index3)
                     {
 
@@ -281,6 +336,24 @@ public class GalaxyManager : MonoBehaviour
 
                             for(int index5 = -1; index5 < 2; ++index5)
                             {
+                                if(index3 + index4 + index5 != 0)
+                                {
+                                    Vector3 gridTempVec = new Vector3(index3 * gridFactor, index4 * gridFactor, index5 * gridFactor);
+                                    tempVec = ((gGrid[index0,index1,index2,0].position + gridTempVec) - (gGrid[index0 + index3,index1 + index4,index2 + index5,0].position + gridTempVec));
+                                    gGrid[index0,index1,index2,0].adjustment += (tempVec.normalized * gridFactor * 0.5f) * (1f - Mathf.Clamp(tempVec.magnitude, 0, 1));
+                                    //gGrid[index0,index1,index2,0].position = gGrid[index0,index1,index2,0].position.normalized;
+                                    tempVec = ((gGrid[index0,index1,index2,0].position + gridTempVec) - (gGrid[index0 + index3,index1 + index4,index2 + index5,1].position + gridTempVec));
+                                    gGrid[index0,index1,index2,0].adjustment += (tempVec.normalized * gridFactor * 0.5f) * (1f - Mathf.Clamp(tempVec.magnitude, 0, 1));
+                                    //gGrid[index0,index1,index2,0].position = gGrid[index0,index1,index2,0].position.normalized;
+
+                                    tempVec = ((gGrid[index0,index1,index2,1].position + gridTempVec) - (gGrid[index0 + index3,index1 + index4,index2 + index5,0].position + gridTempVec));
+                                    gGrid[index0,index1,index2,1].adjustment += (tempVec.normalized * gridFactor * 0.5f) * (1f - Mathf.Clamp(tempVec.magnitude, 0, 1));
+                                    //gGrid[index0,index1,index2,1].position = gGrid[index0,index1,index2,1].position.normalized;
+                                    tempVec = ((gGrid[index0,index1,index2,1].position + gridTempVec) - (gGrid[index0 + index3,index1 + index4,index2 + index5,1].position + gridTempVec));
+                                    gGrid[index0,index1,index2,1].adjustment += (tempVec.normalized * gridFactor * 0.5f) * (1f - Mathf.Clamp(tempVec.magnitude, 0, 1));
+                                    //gGrid[index0,index1,index2,1].position = gGrid[index0,index1,index2,1].position.normalized;
+                                }
+                                //tempVec = (gGrid[index0,index1,index2,0])
                                 //gGrid[index0,index1,index2,0].adjustment += 
 
                             }
@@ -297,7 +370,28 @@ public class GalaxyManager : MonoBehaviour
                 }
             }
         }
+
+        globalGridOffset = (gGrid[3,3,3,0].getAdjusted() + gGrid[3,3,3,0].gridOffset) - startPos;
         //phase 2 radius calculation
+        /*float tempFactor;
+        for(int index0 = 2; index0 < 6; ++index0)
+        {
+
+            for(int index1 = 2; index1 < 6; ++ index1)
+            {
+
+                for(int index2 = 2; index2 < 6; ++index2)
+                {
+                    tempFactor = BitConverter.ToInt32(hasher.ComputeHash(BitConverter.GetBytes((((index0 + globalGridOffset.x) * 100) + ((index1 + globalGridOffset.y) * 10) + (index2 + globalGridOffset.z)) + index0 + seed)), 0) / 4294967296f;
+                    tempFactor = Mathf.Clamp(1f,0.3f,tempFactor);
+
+                    (gGrid[index0,index1,index2,0].maxRadius = Vector3.Distance(gGrid[index0,index1,index2,0].getAdjusted(),gGrid[index0,index1,index2,1].getAdjusted())/tempFactor);
+                    gGrid[index0,index1,index2,1].maxRadius = Vector3.Distance(gGrid[index0,index1,index2,0].getAdjusted(),gGrid[index0,index1,index2,1].getAdjusted())/(1f - tempFactor));
+                }
+            }
+        }*/
+
+
         for(int index0 = 2; index0 < 6; ++index0)
         {
 
@@ -307,6 +401,12 @@ public class GalaxyManager : MonoBehaviour
                 for(int index2 = 2; index2 < 6; ++index2)
                 {
 
+                    gGrid[index0,index1,index2,1].maxRadius = (gGrid[index0,index1,index2,0].maxRadius = Vector3.Distance(gGrid[index0,index1,index2,0].getAdjusted(),gGrid[index0,index1,index2,1].getAdjusted())/2f);
+
+
+
+
+
                     for(int index3 = -1; index3 < 2; ++index3)
                     {
 
@@ -315,6 +415,32 @@ public class GalaxyManager : MonoBehaviour
 
                             for(int index5 = -1; index5 < 2; ++index5)
                             {
+                                if(index3 + index4 + index5 != 0)
+                                {
+                                    Vector3 tempVec = new Vector3(gridFactor * index3, gridFactor * index4, gridFactor * index5);
+                                    float tempRadius = Vector3.Distance(gGrid[index0,index1,index2,0].getAdjusted(),gGrid[index0 + index3,index1 + index4,index2 + index5,0].getAdjusted() + tempVec) / 2f;
+                                    //float tempCellDistnace = Vector3.Distance(gGrid)
+                                    //float tempRadius = Vector3.Distance(gGrid[index0,index1,index2,0].getAdjusted(),gGrid[index0 + index3,index1 + index4,index2 + index5,0])
+                                    if(gGrid[index0,index1,index2,0].maxRadius > tempRadius)
+                                    {
+                                        gGrid[index0,index1,index2,0].maxRadius = tempRadius;
+                                    }
+                                    tempRadius = Vector3.Distance(gGrid[index0,index1,index2,0].getAdjusted(),gGrid[index0 + index3,index1 + index4,index2 + index5,1].getAdjusted() + tempVec) / 2f;
+                                    if(gGrid[index0,index1,index2,0].maxRadius > tempRadius)
+                                    {
+                                        gGrid[index0,index1,index2,0].maxRadius = tempRadius;
+                                    }
+                                    tempRadius = Vector3.Distance(gGrid[index0,index1,index2,1].getAdjusted(),gGrid[index0 + index3,index1 + index4,index2 + index5,0].getAdjusted() + tempVec) / 2f;
+                                    if(gGrid[index0,index1,index2,1].maxRadius > tempRadius)
+                                    {
+                                        gGrid[index0,index1,index2,1].maxRadius = tempRadius;
+                                    }
+                                    tempRadius = Vector3.Distance(gGrid[index0,index1,index2,1].getAdjusted(),gGrid[index0 + index3,index1 + index4,index2 + index5,1].getAdjusted() + tempVec) / 2f;
+                                    if(gGrid[index0,index1,index2,1].maxRadius > tempRadius)
+                                    {
+                                        gGrid[index0,index1,index2,1].maxRadius = tempRadius;
+                                    }
+                                }
                                 //gGrid[index0,index1,index2,0].adjustment += (gGrid[index0,index1,index2,1])
                                 //gGrid[index0,index1,index2,0].adjustment += 
 
@@ -333,6 +459,58 @@ public class GalaxyManager : MonoBehaviour
 
                 for(int index2 = 2; index2 < 6; ++index2)
                 {
+                    gGrid[index0,index1,index2,0].connections.Add(gGrid[index0,index1,index2,1]);
+                    gGrid[index0,index1,index2,1].connections.Add(gGrid[index0,index1,index2,0]);
+
+                    //GLObject firstShortest0 = gGrid[index0,index1,index2 + 1,0];
+                    //GLObject secondShortest0 = firstShortest;
+                    //GLObject thirdShortest0 = secondShortest;
+                    //GLObject firstShortest1 = gGrid[index0,index1,index2 + 1,0];
+                    //GLObject secondShortest1 = firstShortest;
+                    //GLObject thirdShortest1 = secondShortest;
+
+                    GLObject longestFrom0 = gGrid[index0,index1,index2 + 1,0];
+                    GLObject longestFrom1 = gGrid[index0,index1,index2 + 1,0];
+                    for(int index3 = -1; index3 < 2; ++index3)
+                    {
+
+                        for(int index4 = -1; index4 < 2; ++index4)
+                        {
+
+                            for(int index5 = -1; index5 < 2; ++index5)
+                            {
+                                if(index3 + index4 + index5 != 0)
+                                {
+                                    if(Vector3.Distance(gGrid[index0,index1,index2,0].getAdjusted(), longestFrom0.getAdjusted()) < Vector3.Distance(gGrid[index0,index1,index2,0].getAdjusted(),gGrid[index0 + index3,index1 + index4,index2 + index5,0].getAdjusted()))
+                                    {
+                                        longestFrom0 = gGrid[index0 + index3,index1 + index4,index2 + index5,0];
+                                    }
+                                    if(Vector3.Distance(gGrid[index0,index1,index2,0].getAdjusted(), longestFrom0.getAdjusted()) < Vector3.Distance(gGrid[index0,index1,index2,0].getAdjusted(),gGrid[index0 + index3,index1 + index4,index2 + index5,1].getAdjusted()))
+                                    {
+                                        longestFrom0 = gGrid[index0 + index3,index1 + index4,index2 + index5,1];
+                                    }
+                                    if(Vector3.Distance(gGrid[index0,index1,index2,1].getAdjusted(), longestFrom0.getAdjusted()) < Vector3.Distance(gGrid[index0,index1,index2,1].getAdjusted(),gGrid[index0 + index3,index1 + index4,index2 + index5,0].getAdjusted()))
+                                    {
+                                        longestFrom0 = gGrid[index0 + index3,index1 + index4,index2 + index5,0];
+                                    }
+                                    if(Vector3.Distance(gGrid[index0,index1,index2,1].getAdjusted(), longestFrom0.getAdjusted()) < Vector3.Distance(gGrid[index0,index1,index2,1].getAdjusted(),gGrid[index0 + index3,index1 + index4,index2 + index5,1].getAdjusted()))
+                                    {
+                                        longestFrom0 = gGrid[index0 + index3,index1 + index4,index2 + index5,1];
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    GLObject firstShortest0 = longestFrom0;
+                    GLObject secondShortest0 = firstShortest0;
+                    GLObject thirdShortest0 = secondShortest0;
+                    GLObject firstShortest1 = longestFrom1;
+                    GLObject secondShortest1 = firstShortest1;
+                    GLObject thirdShortest1 = secondShortest1;
+
+
+
 
                     for(int index3 = -1; index3 < 2; ++index3)
                     {
@@ -342,11 +520,54 @@ public class GalaxyManager : MonoBehaviour
 
                             for(int index5 = -1; index5 < 2; ++index5)
                             {
-                                //gGrid[index0,index1,index2,0].adjustment += 
+                                if(index3 + index4 + index5 != 0)
+                                {
+                                    if(Vector3.Distance(gGrid[index0,index1,index2,0].getAdjusted(), firstShortest0.getAdjusted()) > Vector3.Distance(gGrid[index0,index1,index2,0].getAdjusted(), gGrid[index0 + index3,index1 + index4,index2 + index5,0].getAdjusted()))
+                                    {
+                                        thirdShortest0 = secondShortest0;
+                                        secondShortest0 = firstShortest0;
+                                        firstShortest0 = gGrid[index0 + index3,index1 + index4,index2 + index5,0];
+                                    }
+                                    if(Vector3.Distance(gGrid[index0,index1,index2,0].getAdjusted(), firstShortest0.getAdjusted()) > Vector3.Distance(gGrid[index0,index1,index2,0].getAdjusted(), gGrid[index0 + index3,index1 + index4,index2 + index5,1].getAdjusted()))
+                                    {
+                                        thirdShortest0 = secondShortest0;
+                                        secondShortest0 = firstShortest0;
+                                        firstShortest0 = gGrid[index0 + index3,index1 + index4,index2 + index5,1];
+                                    }
+                                    if(Vector3.Distance(gGrid[index0,index1,index2,1].getAdjusted(), firstShortest1.getAdjusted()) > Vector3.Distance(gGrid[index0,index1,index2,1].getAdjusted(), gGrid[index0 + index3,index1 + index4,index2 + index5,0].getAdjusted()))
+                                    {
+                                        thirdShortest1 = secondShortest1;
+                                        secondShortest1 = firstShortest1;
+                                        firstShortest1 = gGrid[index0 + index3,index1 + index4,index2 + index5,0];
+                                    }
+                                    if(Vector3.Distance(gGrid[index0,index1,index2,1].getAdjusted(), firstShortest1.getAdjusted()) > Vector3.Distance(gGrid[index0,index1,index2,1].getAdjusted(), gGrid[index0 + index3,index1 + index4,index2 + index5,1].getAdjusted()))
+                                    {
+                                        thirdShortest1 = secondShortest1;
+                                        secondShortest1 = firstShortest1;
+                                        firstShortest1 = gGrid[index0 + index3,index1 + index4,index2 + index5,1];
+                                    }
+                                }
+
+
+
+
+
+                                /*Vector3 tempVec;
+                                tempVec = (gGrid[index0,index1,index2,0] - gGrid[index0,index1,index2,1]);
+                                gGrid[index0,index1,index2,0].adjustment += tempVec.normalized * (1f - Mathf.Clamp(tempVec.magnitude, 0, 1));
+                                tempVec = (gGrid[index0,index1,index2,1] - gGrid[index0,index1,index2,0]);
+                                gGrid[index0,index1,index2,1].adjustment += tempVec.normalized * (1f - Mathf.Clamp(tempVec.magnitude, 0, 1));*/
 
                             }
                         }
                     }
+
+                    gGrid[index0,index1,index2,0].connections.Add(firstShortest0);
+                    gGrid[index0,index1,index2,0].connections.Add(secondShortest0);
+                    gGrid[index0,index1,index2,0].connections.Add(thirdShortest0);
+                    gGrid[index0,index1,index2,1].connections.Add(firstShortest1);
+                    gGrid[index0,index1,index2,1].connections.Add(secondShortest1);
+                    gGrid[index0,index1,index2,1].connections.Add(thirdShortest1);
                 }
             }
         }
@@ -375,11 +596,21 @@ public class GalaxyManager : MonoBehaviour
                 for(int index2 = 0; index2 < 8; ++index2)
                 {
                     Gizmos.color = Color.green;
-                    Gizmos.DrawWireCube(new Vector3(index0 * 2, index1 * 2, index2 * 2), new Vector3(2, 2, 2));
+                    Gizmos.DrawWireCube(new Vector3(index0 * gridFactor, index1 * gridFactor, index2 * gridFactor) - globalGridOffset, new Vector3(gridFactor, gridFactor, gridFactor));
                     Gizmos.color = Color.white;
-                    Gizmos.DrawSphere(gGrid[index0,index1,index2,0].position + gGrid[index0,index1,index2,0].gridOffset, 0.1f);
+                    Gizmos.DrawSphere((gGrid[index0,index1,index2,0].position + gGrid[index0,index1,index2,0].gridOffset) - globalGridOffset, 0.1f);
                     Gizmos.color = Color.red;
-                    Gizmos.DrawSphere(gGrid[index0,index1,index2,1].position + gGrid[index0,index1,index2,1].gridOffset, 0.1f);
+                    Gizmos.DrawSphere((gGrid[index0,index1,index2,1].position + gGrid[index0,index1,index2,1].gridOffset) - globalGridOffset, 0.1f);
+                    Gizmos.color = Color.cyan;
+                    Gizmos.DrawWireSphere((gGrid[index0,index1,index2,0].getAdjusted() + gGrid[index0,index1,index2,0].gridOffset) - globalGridOffset, 0.1f);
+                    Gizmos.DrawWireSphere((gGrid[index0,index1,index2,1].getAdjusted() + gGrid[index0,index1,index2,1].gridOffset) - globalGridOffset, 0.1f);
+                    Gizmos.color = Color.yellow;
+                    Gizmos.DrawLine((gGrid[index0,index1,index2,0].position + gGrid[index0,index1,index2,0].gridOffset) - globalGridOffset,(gGrid[index0,index1,index2,0].getAdjusted() + gGrid[index0,index1,index2,0].gridOffset) - globalGridOffset);
+                    Gizmos.DrawLine((gGrid[index0,index1,index2,1].position + gGrid[index0,index1,index2,1].gridOffset) - globalGridOffset,(gGrid[index0,index1,index2,1].getAdjusted() + gGrid[index0,index1,index2,1].gridOffset) - globalGridOffset);
+                    Gizmos.color = Color.blue;
+                    Gizmos.DrawWireSphere((gGrid[index0,index1,index2,0].getAdjusted() + gGrid[index0,index1,index2,0].gridOffset) - globalGridOffset, gGrid[index0,index1,index2,0].maxRadius);
+                    Gizmos.DrawWireSphere((gGrid[index0,index1,index2,1].getAdjusted() + gGrid[index0,index1,index2,1].gridOffset) - globalGridOffset, gGrid[index0,index1,index2,1].maxRadius);
+
 
 
 
@@ -392,7 +623,47 @@ public class GalaxyManager : MonoBehaviour
                 }
             }
         }
+        for(int index0 = 2; index0 < 6; ++index0)
+        {
+            for(int index1 = 2; index1 < 6; ++index1)
+            {
+                for(int index2 = 2; index2 < 6; ++index2)
+                {
+                    Gizmos.color = Color.magenta;
+                    for(int index4 = 0; index4 < 3; ++index4)
+                    {
+                        Gizmos.DrawLine((gGrid[index0,index1,index2,0].getAdjusted() + gGrid[index0,index1,index2,0].gridOffset) - globalGridOffset,(gGrid[index0,index1,index2,0].connections[index4].getAdjusted() + gGrid[index0,index1,index2,0].connections[index4].gridOffset) - globalGridOffset);
+                        Gizmos.DrawLine((gGrid[index0,index1,index2,1].getAdjusted() + gGrid[index0,index1,index2,1].gridOffset) - globalGridOffset,(gGrid[index0,index1,index2,1].connections[index4].getAdjusted() + gGrid[index0,index1,index2,1].connections[index4].gridOffset) - globalGridOffset);
+                    }
+                }
+            }
+        }
         //draw gizmos for grid galaxy generation
+    }
+
+    void testGenPlanets()
+    {
+        for(int index0 = 2; index0 < 6; ++index0)
+        {
+            for(int index1 = 2; index1 < 6; ++index1)
+            {
+
+                for(int index2 = 2; index2 < 6; ++index2)
+                {
+                    planetPool.Add(new GamePlanet(0, tsg));
+                    planetPool[planetPool.Count - 1].gameObject.transform.Translate((gGrid[index0,index1,index2,0].getAdjusted() + gGrid[index0,index1,index2,0].gridOffset) - globalGridOffset);
+                    planetPool[planetPool.Count - 1].gameObject.transform.localScale += new Vector3(0.1f, 0.1f, 0.1f) * (gGrid[index0,index1,index2,0].maxRadius * 0.7f);
+                    planetPool[planetPool.Count - 1].gameObject.tag = "planet_object";
+                    planetPool[planetPool.Count - 1].gameObject.layer = LayerMask.NameToLayer("planet_object");
+                    planetPool.Add(new GamePlanet(0, tsg));
+                    planetPool[planetPool.Count - 1].gameObject.transform.Translate((gGrid[index0,index1,index2,1].getAdjusted() + gGrid[index0,index1,index2,1].gridOffset) - globalGridOffset);
+                    planetPool[planetPool.Count - 1].gameObject.transform.localScale += new Vector3(1f, 1f, 1f) * (gGrid[index0,index1,index2,1].maxRadius * 0.7f);
+                    planetPool[planetPool.Count - 1].gameObject.tag = "planet_object";
+                    planetPool[planetPool.Count - 1].gameObject.layer = LayerMask.NameToLayer("planet_object");
+                }
+            }
+        }
+
     }
 
 
