@@ -19,6 +19,8 @@ public class RemotePlayerController : PlayerController
     // Start is called before the first frame update
     void Start()
     {
+        rds.IK[0].GetComponent<DitzelGames.FastIK.FastIKFabric>().enabled = false;
+        rds.IK[1].GetComponent<DitzelGames.FastIK.FastIKFabric>().enabled = false;
 
         
     }

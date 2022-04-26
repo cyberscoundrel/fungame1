@@ -137,7 +137,7 @@ public class RagdollScript : MonoBehaviour
 		{
 			Debug.Log("w");
 			head.AddForce(p3.normalized * ((Time.fixedDeltaTime * 40f) / Mathf.Pow((Vector3.Distance(head.transform.position, GalaxyManager.gravityCenter.gameObject.transform.position)), 2)));
-            if(CliManager.instance != null)
+            /*if(CliManager.instance != null)
             {
                 //Debug.DrawLine(head.transform.position, PlayerManager.instance.playerOneScript.calculateWeaponPoint(), Color.gray);
                 Message m = Message.Create(MessageSendMode.unreliable, (ushort)ClientToServerId.move);
@@ -145,7 +145,7 @@ public class RagdollScript : MonoBehaviour
                 m.AddVector3(head.transform.position);
                 m.AddQuaternion(head.transform.rotation);
                 CliManager.client.Send(m);
-            }
+            }*/
 
 
 
