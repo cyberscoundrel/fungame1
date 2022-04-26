@@ -1,3 +1,4 @@
+using RiptideNetworking;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -115,6 +116,46 @@ public class PlayerManager : MonoBehaviour
 		return p;
 	}
 
+	[MessageHandler((ushort)NetManager.ClientToServerId.name)]
+
+	public static void serverNewPlayer(ushort clientId, Message message)
+	{
+		Player newPlayer = instance.createNewPlayer<RemotePlayer>(instance.remoteguy);
+
+		newPlayer.uTag = clientId;
+		Message m = Message.Create(MessageSendMode.reliable, (ushort)NetManager.ServerToClientId.playerSpawned);
+		m.AddUShort(clientId);
+		NetManager.instance.server.SendToAll(m);
+		//return clientId;
+
+	}
+
+	[MessageHandler((ushort)NetManager.ServerToClientId.playerSpawned)]
+
+	public static void clientNewPlayer(ushort clientId, Message message)
+	{
+		Player newPlayer;
+		if(clientId == CliManager.client.Id)
+		{
+			newPlayer = instance.createNewPlayer<LocalPlayer>(instance.localguy);
+			newPlayer.uTag = clientId;
+			instance.setPlayerOne(newPlayer);
+			Player newPlayerHost = instance.createNewPlayer<RemotePlayer>(instance.remoteguy);
+			newPlayerHost.uTag = 0;
+
+		}
+		else
+		{
+			newPlayer = instance.createNewPlayer<RemotePlayer>(instance.remoteguy);
+
+			newPlayer.uTag = clientId;
+			//serverNewPlayer(clientId, message);
+		}
+		//Player newPlayer = instance.createNewPlayer<RemotePlayer>(remoteguy)
+	}
+
+	
+
 	public Player getPlayerByUTag(int uTag)
 	{
 		foreach(Player p in playerPool)
@@ -166,5 +207,44 @@ public class PlayerManager : MonoBehaviour
 			ControlledObject.setControlledObject(playerOneRDS.getHead());
 			playerOneRDS.c = ControlledObject.instance.controlledCamera;
 		}
+	}
+
+	public void setPlayerOne(Player p)
+	{
+		Debug.Log("set playerone");
+		Debug.Log("setting playerone");
+		try
+		{
+			player1 = p as LocalPlayer;
+		}
+		catch(InvalidCastException e)
+		{
+			Debug.Log("index " + p + " is not a LocalPlayer");
+			return;
+		}
+		playerOneScript = player1.gameObject.GetComponent<PlayerController>() as LocalPlayerController;
+		playerOneRDS = player1.gameObject.GetComponent<RagdollScript>();
+		if(playerOneRDS == null)
+		{
+			Debug.Log("no rds");
+		}
+		if(playerOneRDS.getHead() == null)
+		{
+			Debug.Log("no get head");
+		}
+		player1.test();
+		playerOneRDS.getHead();
+		if(ControlledObject.instance == null)
+		{
+			Debug.Log("instance null");
+		}
+		if(ControlledObject.instance.controlledObject = null)
+		{
+			Debug.Log("no object");
+		}
+		//ControlledObject.instance.controlledObject = playerOneRDS.getHead();
+		ControlledObject.setControlledObject(playerOneRDS.getHead());
+		playerOneRDS.c = ControlledObject.instance.controlledCamera;
+		
 	}
 }
