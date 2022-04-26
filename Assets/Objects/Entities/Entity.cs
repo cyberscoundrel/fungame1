@@ -8,7 +8,9 @@ public class Entity
     // Start is called before the first frame update
     public GameObject gameObject;
 
-    public int uTag = -1;
+    //public int uTag = -1;
+
+    public ushort uTag = unchecked((ushort)-1);
 
     protected List<Collectible> collectibles;
 
@@ -33,7 +35,8 @@ public class Entity
     	return uTag;
     }
 
-    public virtual void setUTag(int uTag)
+    //public virtual void setUTag(int uTag)
+    public virtual void setUTag(ushort uTag)
     {
     	this.uTag = uTag;
     }

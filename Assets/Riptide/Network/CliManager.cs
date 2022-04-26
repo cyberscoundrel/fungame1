@@ -5,19 +5,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*public enum ServerToClientId : ushort
+{
+	playerSpawned = 2
+}
+
+public enum ClientToServerId : ushort
+{
+	name = 1
+}*/
+
+
 public class CliManager : MonoBehaviour
 {
-
-	public enum ServerToClientId : ushort
-	{
-		playerConnect = 1
-	}
-
-	public enum ClientToServerId : ushort
-	{
-		name = 1
-	}
-
 	public static Client client;
 
 	[SerializeField] public String ip;
@@ -31,7 +31,9 @@ public class CliManager : MonoBehaviour
     	instance = this;
     	RiptideLogger.Initialize(Debug.Log, Debug.Log, Debug.LogWarning, Debug.LogError, false);
     	client = new Client();
+    	client.Connected += DidConnect;
     	client.Connect($"{ip}:{port}");
+    	//client.ClientConnected += DidConnect;
         
     }
 
@@ -51,6 +53,7 @@ public class CliManager : MonoBehaviour
 
     public void DidConnect(object sender, EventArgs e)
     {
+    	Debug.Log("oober doober");
     	Message m = Message.Create(MessageSendMode.reliable, (ushort)ClientToServerId.name);
     	m.AddString("oober doober");
     	client.Send(m);

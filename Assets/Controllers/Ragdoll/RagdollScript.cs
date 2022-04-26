@@ -52,12 +52,12 @@ public class RagdollScript : MonoBehaviour
             RaycastHit rch;
             if(Physics.Raycast(head.transform.position, -GalaxyManager.getGravityVector(head), out rch, 1f, LayerMask.GetMask("planet_object")))
             {
-            	Debug.Log("rch hit");
+            	//Debug.Log("rch hit");
                 IK[2].GetComponent<DitzelGames.FastIK.FastIKFabric>().enabled = true;
                 IK[3].GetComponent<DitzelGames.FastIK.FastIKFabric>().enabled = true;
                 if(Vector3.Distance(rch.point, IK[2].GetComponent<DitzelGames.FastIK.FastIKFabric>().Target.position) > 0.08f)
                 {
-                	Debug.Log("step r");
+                	//Debug.Log("step r");
                     if(Physics.Raycast(pr, -GalaxyManager.getGravityVector(pr), out rch, 1f, LayerMask.GetMask("planet_object")))
                     {
                         IK[2].GetComponent<DitzelGames.FastIK.FastIKFabric>().Target.position = rch.point;
@@ -65,7 +65,7 @@ public class RagdollScript : MonoBehaviour
                 }
                 else if(Vector3.Distance(rch.point, IK[3].GetComponent<DitzelGames.FastIK.FastIKFabric>().Target.position) > 0.08f)
                 {
-                	Debug.Log("step l");
+                	//Debug.Log("step l");
                 	if(Physics.Raycast(pl, -GalaxyManager.getGravityVector(pl), out rch, 1f, LayerMask.GetMask("planet_object")))
                     {
                         IK[3].GetComponent<DitzelGames.FastIK.FastIKFabric>().Target.position = rch.point;

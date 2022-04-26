@@ -21,17 +21,27 @@ public class PlayerManager : MonoBehaviour
 	public static PlayerManager instance;
 
 	public bool follow = true;
-    // Start is called before the first frame update
-    void Start()
-    {
-    	playerPool = new List<Player>();
+
+	void Awake()
+	{
+		playerPool = new List<Player>();
     	if(instance == null)
     	{
     		instance = this;
     	}
     	Debug.Log("start playercontroller");
-        createNewPlayer<LocalPlayer>(localguy);
-        setPlayerOne(0);
+	}
+    // Start is called before the first frame update
+    void Start()
+    {
+    	/*playerPool = new List<Player>();
+    	if(instance == null)
+    	{
+    		instance = this;
+    	}
+    	Debug.Log("start playercontroller");*/
+        //createNewPlayer<LocalPlayer>(localguy);
+        //setPlayerOne(0);
         //createNewPlayer<Player>(guy);
         //createNewPlayer<Player>(guy);
     }
@@ -96,7 +106,16 @@ public class PlayerManager : MonoBehaviour
     		playerOneRDS.HeadMouseFollow();
     		//Debug.Log("chest transform" + playerOneRDS.head.transform.position);
     		//Debug.Log("weapon point transform" + playerOneScript.calculateWeaponPoint());
-    		Debug.DrawLine(playerOneRDS.head.transform.position, playerOneScript.calculateWeaponPoint(), Color.gray);
+    		if(CliManager.instance != null)
+    		{
+	    		Debug.DrawLine(playerOneRDS.head.transform.position, playerOneScript.calculateWeaponPoint(), Color.gray);
+	    		Message m = Message.Create(MessageSendMode.unreliable, (ushort)ClientToServerId.move);
+	    		//m.AddUShort(player1.uTag);
+	    		m.AddVector3(playerOneRDS.head.transform.position);
+	    		m.AddQuaternion(playerOneRDS.head.transform.rotation);
+	    		CliManager.client.Send(m);
+    		}
+
     	}
 
     }
@@ -116,25 +135,27 @@ public class PlayerManager : MonoBehaviour
 		return p;
 	}
 
-	[MessageHandler((ushort)NetManager.ClientToServerId.name)]
+	[MessageHandler((ushort)ClientToServerId.name)]
 
 	public static void serverNewPlayer(ushort clientId, Message message)
 	{
+		Debug.Log("server name");
 		Player newPlayer = instance.createNewPlayer<RemotePlayer>(instance.remoteguy);
 
 		newPlayer.uTag = clientId;
-		Message m = Message.Create(MessageSendMode.reliable, (ushort)NetManager.ServerToClientId.playerSpawned);
+		Message m = Message.Create(MessageSendMode.reliable, (ushort)ServerToClientId.playerSpawned);
 		m.AddUShort(clientId);
 		NetManager.instance.server.SendToAll(m);
 		//return clientId;
 
 	}
 
-	[MessageHandler((ushort)NetManager.ServerToClientId.playerSpawned)]
+	[MessageHandler((ushort)ServerToClientId.playerSpawned)]
 
-	public static void clientNewPlayer(ushort clientId, Message message)
+	public static void clientNewPlayer(Message message)
 	{
 		Player newPlayer;
+		ushort clientId = message.GetUShort();
 		if(clientId == CliManager.client.Id)
 		{
 			newPlayer = instance.createNewPlayer<LocalPlayer>(instance.localguy);
@@ -154,9 +175,51 @@ public class PlayerManager : MonoBehaviour
 		//Player newPlayer = instance.createNewPlayer<RemotePlayer>(remoteguy)
 	}
 
+	[MessageHandler((ushort)ServerToClientId.playerMovement)]
+
+	public static void clientPlayerMove(Message message)
+	{
+		Player movePlayer = instance.getPlayerByUTag(message.GetUShort());
+		if(movePlayer != null)
+		{
+			movePlayer.gameObject.GetComponent<PlayerController>().rds.head.transform.position = message.GetVector3();
+			movePlayer.gameObject.GetComponent<PlayerController>().rds.head.transform.rotation = message.GetQuaternion();
+		}
+	}
+
+	[MessageHandler((ushort)ClientToServerId.move)]
+
+	public static void serverPlayerMove(ushort clientId, Message message)
+	{
+		Player movePlayer = instance.getPlayerByUTag(clientId);
+		if(movePlayer != null)
+		{
+			Vector3 newPos = message.GetVector3();
+			Quaternion newRot = message.GetQuaternion();
+			movePlayer.gameObject.GetComponent<PlayerController>().rds.head.transform.position = newPos;
+			movePlayer.gameObject.GetComponent<PlayerController>().rds.head.transform.rotation = newRot;
+			Message m = Message.Create(MessageSendMode.unreliable, (ushort)ServerToClientId.playerMovement);
+			m.AddUShort(clientId);
+			m.AddVector3(newPos);
+			m.AddQuaternion(newRot);
+		}
+	}
+
 	
 
 	public Player getPlayerByUTag(int uTag)
+	{
+		foreach(Player p in playerPool)
+		{
+			if(p.uTag == uTag)
+			{
+				return p;
+			}
+		}
+		return null;
+	}
+
+	public Player getPlayerByUTag(ushort uTag)
 	{
 		foreach(Player p in playerPool)
 		{

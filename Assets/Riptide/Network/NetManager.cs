@@ -4,18 +4,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ServerToClientId : ushort
+{
+	playerSpawned = 2,
+	playerMovement = 5,
+}
+
+public enum ClientToServerId : ushort
+{
+	name = 1,
+	move = 3,
+}
+
 public class NetManager : MonoBehaviour
 {
-
-	public enum ServerToClientId : ushort
-	{
-		playerSpawned = 1
-	}
-
-	public enum ClientToServerId : ushort
-	{
-		name = 1
-	}
 
 	public Server server;
 
@@ -32,6 +34,9 @@ public class NetManager : MonoBehaviour
     	server = new Server();
     	server.Start(port, maxClientCount);
     	server.ClientDisconnected += PlayerLeft;
+
+    	PlayerManager.instance.createNewPlayer<LocalPlayer>(PlayerManager.instance.localguy);
+    	PlayerManager.instance.setPlayerOne(0);
 
     	instance = this;
         
