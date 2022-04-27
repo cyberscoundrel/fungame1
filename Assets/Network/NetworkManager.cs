@@ -233,14 +233,14 @@ public class NetworkManager : MonoBehaviour
 
 
 			}*/
-			if(PlayerManager.instance.player1.getUTag() == -1)
+			if(PlayerManager.instance.player1.getUTag() == unchecked((ushort)-1))
 			{
-				PlayerManager.instance.player1.setUTag(args.user_id);
+				PlayerManager.instance.player1.setUTag(unchecked((ushort)args.user_id));
 				Debug.Log("i am now " + args.user_id);
 				if(args.op_id > 0)
 				{
 					Player newPlayer = PlayerManager.instance.createNewPlayer<RemotePlayer>(PlayerManager.instance.remoteguy);
-					newPlayer.setUTag(args.op_id);
+					newPlayer.setUTag(unchecked((ushort)args.op_id));
 				}
 				else
 				{
@@ -253,7 +253,7 @@ public class NetworkManager : MonoBehaviour
 				{
 					Debug.Log("theres a new player " + args.user_id);
 					Player newPlayer = PlayerManager.instance.createNewPlayer<RemotePlayer>(PlayerManager.instance.remoteguy);
-					newPlayer.setUTag(args.user_id);
+					newPlayer.setUTag(unchecked((ushort)args.user_id));
 				}
 			}
 			if(args.user_id > 2)
