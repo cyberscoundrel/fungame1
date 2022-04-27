@@ -180,11 +180,25 @@ public class PlayerManager : MonoBehaviour
 
 	public static void clientPlayerMove(Message message)
 	{
+		ushort from = message.GetUShort();
+		Debug.Log("from " + from);
 		Player movePlayer = instance.getPlayerByUTag(message.GetUShort());
 		if(movePlayer != null)
 		{
-			movePlayer.gameObject.GetComponent<PlayerController>().rds.hips.transform.position = message.GetVector3();
-			movePlayer.gameObject.GetComponent<PlayerController>().rds.hips.transform.rotation = message.GetQuaternion();
+			if(movePlayer.uTag == instance.player1.uTag)
+			{
+				Debug.Log("thats us");
+				return;
+			}
+			Debug.Log("move from " + movePlayer.uTag);
+			Vector3 newPos = message.GetVector3();
+			Quaternion newRot = message.GetQuaternion();
+			Debug.Log("newPos " + newPos);
+			Debug.Log("newRot " + newRot);
+
+			movePlayer.gameObject.GetComponent<PlayerController>().rds.hips.transform.position = newPos;
+			movePlayer.gameObject.GetComponent<PlayerController>().rds.hips.transform.rotation = newRot;
+
 			//movePlayer.gameObject.transform.position = message.GetVector3();
 			//movePlayer.gameObject.transform.rotation = message.GetQuaternion();
 		}
@@ -214,6 +228,7 @@ public class PlayerManager : MonoBehaviour
 			m.AddUShort(clientId);
 			m.AddVector3(newPos);
 			m.AddQuaternion(newRot);
+			NetManager.instance.server.SendToAll(m);
 		}
 	}
 

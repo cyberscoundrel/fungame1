@@ -1,3 +1,5 @@
+using RiptideNetworking;
+using RiptideNetworking.Utils;
 using System;
 using System.Reflection;
 using System.Collections;
@@ -6,6 +8,12 @@ using UnityEngine;
 
 public class CollectibleManager : MonoBehaviour
 {
+
+    public enum CollectibleId : ushort
+    {
+        weapon = 1,
+        item = 2,
+    }
 
 	public Queue<Collectible> collectibleQueue;
 	public Dictionary<int, Collectible> collectibleDict;
@@ -53,6 +61,11 @@ public class CollectibleManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void FixedUpdate()
+    {
+        //collectibleMovementRefresh
     }
 
 
@@ -109,6 +122,41 @@ public class CollectibleManager : MonoBehaviour
     public static void GenerateObject(int baselvl, int tFlag, int seed, GameObject prefab)
     {
 
+
+    }
+    public static void GenerateObject(int baselvl, int seed, ushort newUTag, ushort collectibleType)
+    {
+
+    }
+
+    [MessageHandler((ushort)ServerToClientId.collectibleSpawned)]
+
+    public static void clientAddObject(Message message)
+    {
+        /*ushort collectibleType = message.GetUShort();
+        int newBaseLvl = message.GetInt();
+        int newSeed = message.GetInt();
+        //ushort prefabIndex = message.GetUShort();
+        Vector3 newPos = message.GetVector3;
+        Quaternion newRot = message.GetQuaterion();
+        ushort collectibleUTag = message.GetUShort();
+        GenerateObject(newBaseLvl, newSeed, collectibleUTag, collectibleType);*/
+
+
+
+
+    }
+
+    [MessageHandler((ushort)ClientToServerId.pickup)]
+
+    public static void collectiblePickedUp(ushort clientId, Message message)
+    {
+
+        //Message m = Message.Create(MessageSendMode.reliable, (ushort)ServerToClientId.playerPickUp);
+        //m.AddUShort(clientId);
+
+
+
     }
 
     //TODO: create stat objects
@@ -125,6 +173,11 @@ public class CollectibleManager : MonoBehaviour
     	instance.collectibleDict.Clear();
     	instance.collectibleQueue.Clear();
 
+    }
+
+    public Collectible getCollectibleByUTag(ushort uTag)
+    {
+        return null;
     }
 
 

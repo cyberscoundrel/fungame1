@@ -146,7 +146,20 @@ public class RagdollScript : MonoBehaviour
                 //m.AddUShort(player1.uTag);
                 m.AddVector3(hips.transform.position);
                 m.AddQuaternion(hips.transform.rotation);
+                Debug.Log("sending pos " + hips.transform.position);
+                Debug.Log("sending rot " + hips.transform.rotation);
                 CliManager.client.Send(m);
+            }
+            else if(NetManager.instance != null)
+            {
+                Message m = Message.Create(MessageSendMode.unreliable, (ushort)ServerToClientId.playerMovement);
+                m.AddUShort(PlayerManager.instance.player1.uTag);
+                m.AddVector3(hips.transform.position);
+                m.AddQuaternion(hips.transform.rotation);
+                Debug.Log("sending pos " + hips.transform.position);
+                Debug.Log("sending rot " + hips.transform.rotation);
+                NetManager.instance.server.SendToAll(m);
+
             }
 
 
