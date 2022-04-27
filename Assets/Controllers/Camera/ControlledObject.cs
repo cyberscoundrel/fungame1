@@ -31,11 +31,15 @@ public class ControlledObject : MonoBehaviour
 
     public Quaternion cameraRotation;
 
+    public Quaternion initCameraRotation;
+
     public float cx = 0f, cy = 0f;
 
     public GalaxyManager gm;
 
     public bool locked, firstPerson;
+
+    public bool planetWatch;
 
 
 
@@ -48,6 +52,7 @@ public class ControlledObject : MonoBehaviour
     	Debug.Log("controlled object start");
     	Cursor.lockState = CursorLockMode.Locked;
     	instance = this;
+        //initCameraRotation = null;
 
 
         
@@ -56,6 +61,7 @@ public class ControlledObject : MonoBehaviour
     void start()
     {
     	firstPerson = false;
+        initCameraRotation = controlledCamera.transform.rotation;
     	//controlledCamera.enabled = true;
     	//Camera.main.enabled = false;
     }
@@ -63,6 +69,14 @@ public class ControlledObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(locked == false && Cursor.lockState == CursorLockMode.Locked)
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+        if(locked == true && Cursor.lockState == CursorLockMode.None)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
 
     	if(true)
     	{
@@ -79,8 +93,11 @@ public class ControlledObject : MonoBehaviour
 
 	        if (!locked && Input.GetMouseButtonDown(0)) 
 	        {
-	            Cursor.lockState = CursorLockMode.Locked;
-	            locked = true;
+                if(planetWatch != true)
+                {
+    	            Cursor.lockState = CursorLockMode.Locked;
+    	            locked = true;
+                }
 	        }
 
 
@@ -121,6 +138,20 @@ public class ControlledObject : MonoBehaviour
     		controlledCamera.transform.rotation *= Quaternion.Euler(-cy, cx, 0);
     		controlledCamera.transform.position += controlledCamera.transform.forward * 0.03f;
     	}
+        else if(planetWatch)
+        {
+
+            float xmouse = Input.GetAxis("Mouse X"), ymouse = Input.GetAxis("Mouse Y");
+            cx = xmouse;
+            cy = ymouse;
+            Debug.Log("cx " + cx + "cy " + cy);
+            //Debug.Log("planetWatch");
+
+            controlledCamera.transform.position = controlledObject.transform.position;
+            controlledCamera.transform.rotation *= (Quaternion.Euler(-cy, cx, 0));
+            controlledCamera.transform.position -= controlledCamera.transform.forward * 3f;
+            controlledCamera.transform.position += -controlledCamera.transform.right * 3f;
+        }
     	else
     	{
     		if(controlledObject != null)

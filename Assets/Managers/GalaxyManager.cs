@@ -89,7 +89,7 @@ public class GalaxyManager : MonoBehaviour
 
     public SHA256 hasher;
 
-    GamePlanet startPlanet;
+    public GamePlanet startPlanet;
     // Start is called before the first frame update
     //void Start()
     void Awake()
@@ -119,8 +119,8 @@ public class GalaxyManager : MonoBehaviour
         //initGalaxyTest(planetPool[0].gameObject.transform.position);
         //initGalaxyTest(startPlanet.gameObject.transform.position);
         //initGalaxyTestGrid();
-        initGalaxyTestGrid(startPlanet.gameObject.transform.position);
-        testGenPlanets();
+        //initGalaxyTestGrid(startPlanet.gameObject.transform.position);
+        //testGenPlanets();
     	//planetPool.Add(new GamePlanet(0));
     	//planetPool.Add(new GamePlanet(0));
     	//planetPool[1].gameObject.transform.Translate(2,2,2);

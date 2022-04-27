@@ -23,6 +23,13 @@ public class HomeUI : MonoBehaviour
         multiPanel.alpha = 0;
         multiPanel.interactable = false;
         multiPanel.blocksRaycasts = false;
+        ControlledObject.instance.locked = false;
+        ControlledObject.instance.firstPerson = false;
+        ControlledObject.instance.topDown = false;
+        ControlledObject.instance.planetWatch = true;
+        //ControlledObject.instance.topDown = true;
+        ControlledObject.setControlledObject(GalaxyManager.instance.startPlanet.gameObject);
+
     }
 
     public void Awake() {
