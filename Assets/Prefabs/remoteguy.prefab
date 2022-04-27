@@ -60,6 +60,10 @@ PrefabInstance:
       value: remoteguy
       objectReference: {fileID: 0}
     - target: {fileID: 3938449403843852250, guid: 2174c4c4837ffce44a44588b7829fca6, type: 3}
+      propertyPath: bodyParent
+      value: 
+      objectReference: {fileID: 4695390009992628674}
+    - target: {fileID: 3938449403843852250, guid: 2174c4c4837ffce44a44588b7829fca6, type: 3}
       propertyPath: IK.Array.size
       value: 4
       objectReference: {fileID: 0}
@@ -105,6 +109,11 @@ MonoBehaviour:
 --- !u!1 &2183045321023380623 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4208973444639614639, guid: 2174c4c4837ffce44a44588b7829fca6, type: 3}
+  m_PrefabInstance: {fileID: 2603919696757963296}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4695390009992628674 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7281084184811140066, guid: 2174c4c4837ffce44a44588b7829fca6, type: 3}
   m_PrefabInstance: {fileID: 2603919696757963296}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &3909399276206580775 stripped

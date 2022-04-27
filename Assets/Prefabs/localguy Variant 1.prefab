@@ -292,6 +292,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1116058299018072516, guid: 2174c4c4837ffce44a44588b7829fca6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1116058299018072516, guid: 2174c4c4837ffce44a44588b7829fca6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.89
+      objectReference: {fileID: 0}
+    - target: {fileID: 1116058299018072516, guid: 2174c4c4837ffce44a44588b7829fca6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.17
+      objectReference: {fileID: 0}
     - target: {fileID: 3938449403394483978, guid: 2174c4c4837ffce44a44588b7829fca6, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -345,6 +357,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3938449403843852250, guid: 2174c4c4837ffce44a44588b7829fca6, type: 3}
+      propertyPath: bodyParent
+      value: 
+      objectReference: {fileID: 1679498416161696032}
+    - target: {fileID: 3938449403843852250, guid: 2174c4c4837ffce44a44588b7829fca6, type: 3}
       propertyPath: IK.Array.size
       value: 4
       objectReference: {fileID: 0}
@@ -375,6 +391,11 @@ GameObject:
 --- !u!4 &4966752725328641480 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3938449403394483978, guid: 2174c4c4837ffce44a44588b7829fca6, type: 3}
+  m_PrefabInstance: {fileID: 8234090386088778434}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1679498416161696032 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7281084184811140066, guid: 2174c4c4837ffce44a44588b7829fca6, type: 3}
   m_PrefabInstance: {fileID: 8234090386088778434}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &5168665196341855604 stripped

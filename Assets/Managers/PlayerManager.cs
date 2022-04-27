@@ -106,15 +106,15 @@ public class PlayerManager : MonoBehaviour
     		playerOneRDS.HeadMouseFollow();
     		//Debug.Log("chest transform" + playerOneRDS.head.transform.position);
     		//Debug.Log("weapon point transform" + playerOneScript.calculateWeaponPoint());
-    		if(CliManager.instance != null)
+    		/*if(CliManager.instance != null)
     		{
 	    		Debug.DrawLine(playerOneRDS.head.transform.position, playerOneScript.calculateWeaponPoint(), Color.gray);
 	    		Message m = Message.Create(MessageSendMode.unreliable, (ushort)ClientToServerId.move);
 	    		//m.AddUShort(player1.uTag);
-	    		m.AddVector3(playerOneRDS.head.transform.position);
-	    		m.AddQuaternion(playerOneRDS.head.transform.rotation);
+	    		m.AddVector3(playerOneRDS.bodyParent.transform.position);
+	    		m.AddQuaternion(playerOneRDS.bodyParent.transform.rotation);
 	    		CliManager.client.Send(m);
-    		}
+    		}*/
 
     	}
 
@@ -183,10 +183,10 @@ public class PlayerManager : MonoBehaviour
 		Player movePlayer = instance.getPlayerByUTag(message.GetUShort());
 		if(movePlayer != null)
 		{
-			//movePlayer.gameObject.GetComponent<PlayerController>().rds.head.transform.position = message.GetVector3();
-			//movePlayer.gameObject.GetComponent<PlayerController>().rds.head.transform.rotation = message.GetQuaternion();
-			movePlayer.gameObject.transform.position = message.GetVector3();
-			movePlayer.gameObject.transform.rotation = message.GetQuaternion();
+			movePlayer.gameObject.GetComponent<PlayerController>().rds.bodyParent.transform.position = message.GetVector3();
+			movePlayer.gameObject.GetComponent<PlayerController>().rds.bodyParent.transform.rotation = message.GetQuaternion();
+			//movePlayer.gameObject.transform.position = message.GetVector3();
+			//movePlayer.gameObject.transform.rotation = message.GetQuaternion();
 		}
 	}
 
@@ -205,11 +205,11 @@ public class PlayerManager : MonoBehaviour
 			Debug.Log("movePlayer rds" + movePlayer.gameObject.GetComponent<PlayerController>().rds);
 			Vector3 newPos = message.GetVector3();
 			Quaternion newRot = message.GetQuaternion();
-			movePlayer.gameObject.transform.position = newPos;
-			movePlayer.gameObject.transform.rotation = newRot;
+			//movePlayer.gameObject.transform.position = newPos;
+			//movePlayer.gameObject.transform.rotation = newRot;
 
-			//movePlayer.gameObject.GetComponent<PlayerController>().rds.head.transform.position = newPos;
-			//movePlayer.gameObject.GetComponent<PlayerController>().rds.head.transform.rotation = newRot;
+			movePlayer.gameObject.GetComponent<PlayerController>().rds.bodyParent.transform.position = newPos;
+			movePlayer.gameObject.GetComponent<PlayerController>().rds.bodyParent.transform.rotation = newRot;
 			Message m = Message.Create(MessageSendMode.unreliable, (ushort)ServerToClientId.playerMovement);
 			m.AddUShort(clientId);
 			m.AddVector3(newPos);
