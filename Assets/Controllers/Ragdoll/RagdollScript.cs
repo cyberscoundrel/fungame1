@@ -10,7 +10,7 @@ public class RagdollScript : MonoBehaviour
 
 	public Rigidbody head, feetl, feetr, head2;
 
-    public GameObject bodyParent;
+    public Rigidbody hips;
 
 	public GameObject headGameObject;
 
@@ -144,8 +144,8 @@ public class RagdollScript : MonoBehaviour
                 //Debug.DrawLine(head.transform.position, PlayerManager.instance.playerOneScript.calculateWeaponPoint(), Color.gray);
                 Message m = Message.Create(MessageSendMode.unreliable, (ushort)ClientToServerId.move);
                 //m.AddUShort(player1.uTag);
-                m.AddVector3(bodyParent.transform.position);
-                m.AddQuaternion(bodyParent.transform.rotation);
+                m.AddVector3(hips.transform.position);
+                m.AddQuaternion(hips.transform.rotation);
                 CliManager.client.Send(m);
             }
 

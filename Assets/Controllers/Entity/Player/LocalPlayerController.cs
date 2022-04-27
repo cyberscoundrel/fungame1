@@ -42,7 +42,7 @@ public class LocalPlayerController : PlayerController
 
     void FixedUpdate()
     {
-        if(CliManager.instance != null)
+        /*if(CliManager.instance != null)
         {
             //Debug.DrawLine(head.transform.position, PlayerManager.instance.playerOneScript.calculateWeaponPoint(), Color.gray);
             Message m = Message.Create(MessageSendMode.unreliable, (ushort)ClientToServerId.move);
@@ -50,7 +50,7 @@ public class LocalPlayerController : PlayerController
             m.AddVector3(gameObject.transform.position);
             m.AddQuaternion(gameObject.transform.rotation);
             CliManager.client.Send(m);
-        }
+        }*/
     }
 
     public Vector3 calculateWeaponPoint(int wepDist)

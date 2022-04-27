@@ -183,8 +183,8 @@ public class PlayerManager : MonoBehaviour
 		Player movePlayer = instance.getPlayerByUTag(message.GetUShort());
 		if(movePlayer != null)
 		{
-			movePlayer.gameObject.GetComponent<PlayerController>().rds.bodyParent.transform.position = message.GetVector3();
-			movePlayer.gameObject.GetComponent<PlayerController>().rds.bodyParent.transform.rotation = message.GetQuaternion();
+			movePlayer.gameObject.GetComponent<PlayerController>().rds.hips.transform.position = message.GetVector3();
+			movePlayer.gameObject.GetComponent<PlayerController>().rds.hips.transform.rotation = message.GetQuaternion();
 			//movePlayer.gameObject.transform.position = message.GetVector3();
 			//movePlayer.gameObject.transform.rotation = message.GetQuaternion();
 		}
@@ -208,8 +208,8 @@ public class PlayerManager : MonoBehaviour
 			//movePlayer.gameObject.transform.position = newPos;
 			//movePlayer.gameObject.transform.rotation = newRot;
 
-			movePlayer.gameObject.GetComponent<PlayerController>().rds.bodyParent.transform.position = newPos;
-			movePlayer.gameObject.GetComponent<PlayerController>().rds.bodyParent.transform.rotation = newRot;
+			movePlayer.gameObject.GetComponent<PlayerController>().rds.hips.transform.position = newPos;
+			movePlayer.gameObject.GetComponent<PlayerController>().rds.hips.transform.rotation = newRot;
 			Message m = Message.Create(MessageSendMode.unreliable, (ushort)ServerToClientId.playerMovement);
 			m.AddUShort(clientId);
 			m.AddVector3(newPos);
