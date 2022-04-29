@@ -89,6 +89,8 @@ public class GalaxyManager : MonoBehaviour
 
     public SHA256 hasher;
 
+    public static int gameLvl = 1;
+
     GamePlanet startPlanet;
     // Start is called before the first frame update
     //void Start()

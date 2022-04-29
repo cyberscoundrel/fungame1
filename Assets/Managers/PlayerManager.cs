@@ -82,6 +82,22 @@ public class PlayerManager : MonoBehaviour
 
 	    			player1.AddCollectible(c);
 	    			c.PickUp(player1);
+	    			if(NetManager.instance == null)
+	    			{
+	    				Message m = Message.Create(MessageSendMode.reliable, (ushort)ClientToServerId.pickup);
+	    				m.AddUShort(player1.uTag);
+	    				m.AddUShort(c.uTag);
+	    				CliManager.client.Send(m);
+
+	    			}
+	    			else
+	    			{
+	    				Message m = Message.Create(MessageSendMode.reliable, (ushort)ServerToClientId.playerPickedUp);
+	    				m.AddUShort(player1.uTag);
+	    				m.AddUShort(c.uTag);
+	    				NetManager.instance.server.SendToAll(m);
+
+	    			}
 	    		}
 
 	    	}
@@ -337,4 +353,24 @@ public class PlayerManager : MonoBehaviour
 		playerOneRDS.c = ControlledObject.instance.controlledCamera;
 		
 	}
+
+	[MessageHandler((ushort)ServerToClientId.playerPickedUp)]
+
+    public static void clientItemPickedUp(Message message)
+    {
+    	Debug.Log("clientItemPickedUp");
+        ushort id = message.GetUShort();
+        ushort collectibleId = message.GetUShort();
+        Collectible c = CollectibleManager.instance.getCollectibleByUTag(collectibleId);
+        if(c != null)
+        {
+            Player p = PlayerManager.instance.getPlayerByUTag(id);
+            if(p != null)
+            {
+                p.AddCollectible(c);
+                c.PickUp(p);
+            }
+        }
+
+    }
 }

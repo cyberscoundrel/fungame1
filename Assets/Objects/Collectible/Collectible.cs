@@ -16,9 +16,11 @@ public class Collectible
 
 	public int baseTick;
 
-	public int uTag;
+	//public int uTag;
+    public ushort uTag;
 
 	public int typeFlag = 0x0;
+    //public short tFlag;
 
 	//public Player holder;
 	public Entity holder;
@@ -27,14 +29,14 @@ public class Collectible
 
 	public bool discardEffect = true;
 
-	public static Dictionary<String, int> collectibleTypeFlags = new Dictionary<String, int>()
+	/*public static Dictionary<String, int> collectibleTypeFlags = new Dictionary<String, int>()
 	{
 		{"Collectible", 0x0},
 		{"Weapon", 0x2},
 		{"Item", 0x4},
 		{"Active", 0x8},
 		{"OnAction", 0x10}
-	};
+	};*/
 
 
 
