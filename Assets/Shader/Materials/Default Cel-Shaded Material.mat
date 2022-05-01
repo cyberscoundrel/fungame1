@@ -112,7 +112,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EnvironmentReflections: 1
-    - _FresnelSize: 0.207
+    - _FresnelSize: 0.091
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
@@ -127,7 +127,7 @@ Material:
     - _ShadowTwoOffset: 0.237
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
-    - _SpecStrength: 0.714
+    - _SpecStrength: 0.178
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0

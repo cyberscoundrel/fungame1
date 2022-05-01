@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.100577645, g: 0.11553746, b: 0.2223939, a: 1}
+  m_IndirectSpecularColor: {r: 0.1630989, g: 0.022319011, b: 0.2645518, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1244,7 +1244,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4374348207417943558, guid: e845f517c55d71c4486de72f9810faff, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 660
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 4374348207417943558, guid: e845f517c55d71c4486de72f9810faff, type: 3}
       propertyPath: m_SizeDelta.y
@@ -1255,6 +1255,42 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4374348207417943558, guid: e845f517c55d71c4486de72f9810faff, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4374348207418434472, guid: e845f517c55d71c4486de72f9810faff, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4374348207418434472, guid: e845f517c55d71c4486de72f9810faff, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4374348207418434472, guid: e845f517c55d71c4486de72f9810faff, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4374348207418434472, guid: e845f517c55d71c4486de72f9810faff, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4374348207418434472, guid: e845f517c55d71c4486de72f9810faff, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4374348207418434472, guid: e845f517c55d71c4486de72f9810faff, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 4374348207418434472, guid: e845f517c55d71c4486de72f9810faff, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4374348207418434472, guid: e845f517c55d71c4486de72f9810faff, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 4374348207418434472, guid: e845f517c55d71c4486de72f9810faff, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
@@ -1292,7 +1328,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4374348207893709057, guid: e845f517c55d71c4486de72f9810faff, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 660
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 4374348207893709057, guid: e845f517c55d71c4486de72f9810faff, type: 3}
       propertyPath: m_SizeDelta.y
@@ -1336,7 +1372,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4374348208623221790, guid: e845f517c55d71c4486de72f9810faff, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 660
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 4374348208623221790, guid: e845f517c55d71c4486de72f9810faff, type: 3}
       propertyPath: m_SizeDelta.y
@@ -1377,6 +1413,10 @@ PrefabInstance:
     - target: {fileID: 4864116685994746859, guid: e845f517c55d71c4486de72f9810faff, type: 3}
       propertyPath: m_RootOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4864116685994746859, guid: e845f517c55d71c4486de72f9810faff, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 465
       objectReference: {fileID: 0}
     - target: {fileID: 7686899729593855045, guid: e845f517c55d71c4486de72f9810faff, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1639,7 +1679,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 898bc97b0b9e0a448bcd916f07a995f6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1833,7 +1873,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 898bc97b0b9e0a448bcd916f07a995f6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1890,10 +1930,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   v: []
-  m: {fileID: 15303, guid: 0000000000000000f000000000000000, type: 0}
+  m: {fileID: 2100000, guid: 898bc97b0b9e0a448bcd916f07a995f6, type: 2}
   prebuiltMeshes: []
   cookedMeshColliders: []
-  materialPool: []
+  materialPool:
+  - {fileID: 2100000, guid: 898bc97b0b9e0a448bcd916f07a995f6, type: 2}
   mrPool: []
   mfPool: []
 --- !u!1 &752858767
@@ -1968,7 +2009,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 898bc97b0b9e0a448bcd916f07a995f6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7809,7 +7850,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 898bc97b0b9e0a448bcd916f07a995f6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8153,7 +8194,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 898bc97b0b9e0a448bcd916f07a995f6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
