@@ -21,11 +21,13 @@ public class ButtonAnimator : MonoBehaviour
     }
 
     public void OnHoverTransformX() {
-        LeanTween.moveX(gameObject.GetComponent<RectTransform>(), gameObject.GetComponent<RectTransform>().anchoredPosition.x - 40f, animationSpeed).setEase(easing);
+        LeanTween.cancel(gameObject);
+        LeanTween.moveX(gameObject.GetComponent<RectTransform>(), gameObject.GetComponent<RectTransform>().anchoredPosition.x - 40f, animationSpeed).setFrom(gameObject.GetComponent<RectTransform>().anchoredPosition.x).setEase(easing);
     }
 
     public void OnUnhoverTransformX()
     {
-        LeanTween.moveX(gameObject.GetComponent<RectTransform>(), gameObject.GetComponent<RectTransform>().anchoredPosition.x + 40f, animationSpeed).setEase(easing);
+        LeanTween.cancel(gameObject);
+        LeanTween.moveX(gameObject.GetComponent<RectTransform>(), gameObject.GetComponent<RectTransform>().anchoredPosition.x + 40f, animationSpeed).setFrom(gameObject.GetComponent<RectTransform>().anchoredPosition.x).setEase(easing);
     }
 }

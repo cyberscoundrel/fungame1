@@ -127,7 +127,9 @@ public class HomeManager : MonoBehaviour
         {
             GameObject roomPanel = GameObject.Find("RoomCodePanel");
             GameObject joinButton = GameObject.Find("JoinButton");
+            GameObject closeButton = GameObject.Find("CloseButton");
             joinButton.GetComponent<Button>().interactable = false;
+            closeButton.GetComponent<Button>().interactable = false;
             LeanTween.moveX(roomPanel.GetComponent<RectTransform>(), roomPanel.GetComponent<RectTransform>().anchoredPosition.x - 40f, transitionSpeed).setEase(easing);
             LeanTween.value(roomPanel, 0, 1, transitionSpeed).setEase(easing).setOnUpdate((float val) =>
             {
@@ -140,13 +142,16 @@ public class HomeManager : MonoBehaviour
                 roomCodeCanvas.blocksRaycasts = true;
                 roomCodeOpen = true;
                 joinButton.GetComponent<Button>().interactable = true;
+                closeButton.GetComponent<Button>().interactable = true;
             });
         }
         else 
         {
             GameObject roomPanel = GameObject.Find("RoomCodePanel");
             GameObject joinButton = GameObject.Find("JoinButton");
+            GameObject closeButton = GameObject.Find("CloseButton");
             joinButton.GetComponent<Button>().interactable = false;
+            closeButton.GetComponent<Button>().interactable = false;
             LeanTween.moveX(roomPanel.GetComponent<RectTransform>(), roomPanel.GetComponent<RectTransform>().anchoredPosition.x + 40f, transitionSpeed).setEase(easing);
             LeanTween.value(roomPanel, 1, 0, transitionSpeed).setEase(easing).setOnUpdate((float val) =>
             {
@@ -159,6 +164,7 @@ public class HomeManager : MonoBehaviour
                 roomCodeCanvas.blocksRaycasts = false;
                 roomCodeOpen = false;
                 joinButton.GetComponent<Button>().interactable = true;
+                closeButton.GetComponent<Button>().interactable = true;
             });
         }
 
