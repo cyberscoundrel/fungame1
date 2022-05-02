@@ -18,6 +18,8 @@ public class RagdollScript : MonoBehaviour
 
 	public bool animate = true;
 
+    public bool ik = true;
+
 	public float speed = 10f;
 
 	public float boyant, fdown;
@@ -49,37 +51,41 @@ public class RagdollScript : MonoBehaviour
 
 
     		head.AddForce((GalaxyManager.getGravityVector(head.gameObject.transform)) * ((Time.fixedDeltaTime * boyant) / Mathf.Pow((Vector3.Distance(head.transform.position, GalaxyManager.gravityCenter.gameObject.transform.position)), 2)));
-    		feetl.AddForce((-GalaxyManager.getGravityVector(head.gameObject.transform)) * ((Time.fixedDeltaTime * fdown) / Mathf.Pow((Vector3.Distance(head.transform.position, GalaxyManager.gravityCenter.gameObject.transform.position)), 2)));
+    		//Debug.DrawRay(head.gameObject.transform.position, GalaxyManager.getGravityVector(head.gameObject.transform) * 5f, Color.cyan);
+            feetl.AddForce((-GalaxyManager.getGravityVector(head.gameObject.transform)) * ((Time.fixedDeltaTime * fdown) / Mathf.Pow((Vector3.Distance(head.transform.position, GalaxyManager.gravityCenter.gameObject.transform.position)), 2)));
     		feetr.AddForce((-GalaxyManager.getGravityVector(head.gameObject.transform)) * ((Time.fixedDeltaTime * fdown) / Mathf.Pow((Vector3.Distance(head.transform.position, GalaxyManager.gravityCenter.gameObject.transform.position)), 2)));
             Vector3 pl = head2.transform.position + (head2.transform.forward * 0.03f) + -(head2.transform.right * 0.02f);
             Vector3 pr = head2.transform.position + (head2.transform.forward * 0.03f) + (head2.transform.right * 0.02f);
             RaycastHit rch;
-            if(Physics.Raycast(head.transform.position, -GalaxyManager.getGravityVector(head), out rch, 1f, LayerMask.GetMask("planet_object")))
+            if(ik)
             {
-            	//Debug.Log("rch hit");
-                IK[2].GetComponent<DitzelGames.FastIK.FastIKFabric>().enabled = true;
-                IK[3].GetComponent<DitzelGames.FastIK.FastIKFabric>().enabled = true;
-                if(Vector3.Distance(rch.point, IK[2].GetComponent<DitzelGames.FastIK.FastIKFabric>().Target.position) > 0.08f)
+                if(Physics.Raycast(head.transform.position, -GalaxyManager.getGravityVector(head), out rch, 1f, LayerMask.GetMask("planet_object")))
                 {
-                	//Debug.Log("step r");
-                    if(Physics.Raycast(pr, -GalaxyManager.getGravityVector(pr), out rch, 1f, LayerMask.GetMask("planet_object")))
+                	//Debug.Log("rch hit");
+                    IK[2].GetComponent<DitzelGames.FastIK.FastIKFabric>().enabled = true;
+                    IK[3].GetComponent<DitzelGames.FastIK.FastIKFabric>().enabled = true;
+                    if(Vector3.Distance(rch.point, IK[2].GetComponent<DitzelGames.FastIK.FastIKFabric>().Target.position) > 0.08f)
                     {
-                        IK[2].GetComponent<DitzelGames.FastIK.FastIKFabric>().Target.position = rch.point;
+                    	//Debug.Log("step r");
+                        if(Physics.Raycast(pr, -GalaxyManager.getGravityVector(pr), out rch, 1f, LayerMask.GetMask("planet_object")))
+                        {
+                            IK[2].GetComponent<DitzelGames.FastIK.FastIKFabric>().Target.position = rch.point;
+                        }
+                    }
+                    else if(Vector3.Distance(rch.point, IK[3].GetComponent<DitzelGames.FastIK.FastIKFabric>().Target.position) > 0.08f)
+                    {
+                    	//Debug.Log("step l");
+                    	if(Physics.Raycast(pl, -GalaxyManager.getGravityVector(pl), out rch, 1f, LayerMask.GetMask("planet_object")))
+                        {
+                            IK[3].GetComponent<DitzelGames.FastIK.FastIKFabric>().Target.position = rch.point;
+                        }
                     }
                 }
-                else if(Vector3.Distance(rch.point, IK[3].GetComponent<DitzelGames.FastIK.FastIKFabric>().Target.position) > 0.08f)
+                else
                 {
-                	//Debug.Log("step l");
-                	if(Physics.Raycast(pl, -GalaxyManager.getGravityVector(pl), out rch, 1f, LayerMask.GetMask("planet_object")))
-                    {
-                        IK[3].GetComponent<DitzelGames.FastIK.FastIKFabric>().Target.position = rch.point;
-                    }
+                    IK[2].GetComponent<DitzelGames.FastIK.FastIKFabric>().enabled = false;
+                    IK[3].GetComponent<DitzelGames.FastIK.FastIKFabric>().enabled = false;
                 }
-            }
-            else
-            {
-                IK[2].GetComponent<DitzelGames.FastIK.FastIKFabric>().enabled = false;
-                IK[3].GetComponent<DitzelGames.FastIK.FastIKFabric>().enabled = false;
             }
 
     		/*Ray r3 = c.ScreenPointToRay(Input.mousePosition);

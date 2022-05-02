@@ -17,7 +17,7 @@ public class Item : Collectible
 
     	gameObject.GetComponent<ItemController>().setManager(this);
 
-    	InitializePhysics();
+    	CollectibleManager.InitializePhysics(this);
 
     	typeFlag = 0x01;
     	

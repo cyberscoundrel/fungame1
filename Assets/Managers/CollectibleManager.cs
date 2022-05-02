@@ -221,6 +221,64 @@ public class CollectibleManager : MonoBehaviour
 
     }
 
+    public static Collectible InitializePhysics(Collectible c)
+    {
+        if(!c.activeInWorld)
+        {
+            Debug.Log("InitializePhysics");
+            Rigidbody[] rigidbodies = c.gameObject.GetComponentsInChildren<Rigidbody>();
+            Rigidbody p = c.gameObject.GetComponent<Rigidbody>();
+            foreach(Rigidbody r in rigidbodies)
+            {
+                GalaxyManager.AddRb(r);
+            }
+            foreach(Transform t in c.gameObject.transform)
+            {
+                Debug.Log("transform in gameObject " + t.gameObject.name + "SetActive true");
+                t.gameObject.SetActive(true);
+                //t.gameObject.enable = true;
+                //t.gameObject.activeSelf = true;
+            }
+            foreach(Transform t in c.gameObject.transform)
+            {
+                Debug.Log("transform in gameObject " + t.gameObject.name + " is " + t.gameObject.activeSelf);
+                //t.gameObject.enable = true;
+                //t.gameObject.activeSelf = true;
+            }
+            if(p != null)
+            {
+                GalaxyManager.AddRb(p);
+            }
+            c.activeInWorld = true;
+        }
+        return c;
+    }
+
+    public static Collectible DeactivatePhysicalInstance(Collectible c)
+    {
+        if(c.activeInWorld)
+        {
+            Debug.Log("DeactivatePhysicalInstance");
+            Rigidbody[] rigidbodies = c.gameObject.GetComponentsInChildren<Rigidbody>();
+            Rigidbody p = c.gameObject.GetComponent<Rigidbody>();
+            foreach(Rigidbody r in rigidbodies)
+            {
+                GalaxyManager.RemoveRb(r);
+            }
+            foreach(Transform t in c.gameObject.transform)
+            {
+                t.gameObject.SetActive(false);
+            }
+            if(p != null)
+            {
+                GalaxyManager.RemoveRb(p);
+
+            }
+            c.activeInWorld = false;
+        }
+        return c;
+    }
+
     /*[MessageHandler((ushort)ServerToClientId.collectiblePickedUp)]
 
     public static void clientItemPickedUp(Message message)

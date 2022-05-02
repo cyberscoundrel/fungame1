@@ -97,7 +97,7 @@ public class LocalPlayerController : PlayerController
 
     }
 
-    public void selectWeapon(int index)
+    public override void selectWeapon(int index)
     {
     	/*if(selectedWeapon != null)
     	{
@@ -111,15 +111,18 @@ public class LocalPlayerController : PlayerController
     		Debug.Log("index less than wep count");
     		if(selectedWeapon != null)
 	    	{
-	    		selectedWeapon.DeactivatePhysicalInstance();
+	    		//selectedWeapon.DeactivatePhysicalInstance();
+                CollectibleManager.DeactivatePhysicalInstance(selectedWeapon);
 
 	    		selectedWeapon = null;
 	    	}
     		selectedWeaponNum = index;
     		if(index >= 0)
     		{
+                Debug.Log("select num " + index);
     			selectedWeapon = playerObject.getWeapon(index);
-    			selectedWeapon.InitializePhysics();
+                CollectibleManager.InitializePhysics(selectedWeapon);
+    			//selectedWeapon.InitializePhysics();
     			selectedWeapon.disableBigCollider();
     			//selectedWeapon.gameObject.transform.Find("bigcollider").gameObject.SetActive(false);
     		}

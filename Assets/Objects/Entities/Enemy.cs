@@ -12,17 +12,19 @@ public class Enemy : Entity
     {
     	collectibles = new List<Collectible>();
 		gameObject = UnityEngine.Object.Instantiate(prefab) as GameObject;
+		//Debug.Log("i was supposed to spawn at " + GalaxyManager.gravityCenter.gameObject.transform.position);
 		Component[] rigidbodies = gameObject.GetComponentsInChildren<Rigidbody>();
 		foreach(Rigidbody r in rigidbodies)
 		{
 			GalaxyManager.AddRb(r);
 		}
-		gameObject.GetComponent<EnemyController>().enemyObject = this;
+		gameObject.GetComponent<EnemyController>().entityObject = this;
 		baseDmg = 10f;
 		baseSpd = 10f;
 		baseTick = 1f;
 		baseRegen = 1f;
 		baseHealth = 100;
+		health = 100;
 		level = baselvl;
     	this.prefab = prefab;
     	//gameObject = UnityEngine.Object.Instantiate(prefab) as GameObject;

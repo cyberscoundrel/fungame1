@@ -76,12 +76,14 @@ public class PlayerManager : MonoBehaviour
 	    			Debug.Log("item item");
 	    			c = g.GetComponent<ItemController>().itemObject.DeactivatePhysicalInstance();
 	    		}*/
-	    		c = g.GetComponent<CollectibleController>().getManager().DeactivatePhysicalInstance();
+	    		
+	    		//c = g.GetComponent<CollectibleController>().getManager().DeactivatePhysicalInstance();
+	    		c = g.GetComponent<CollectibleController>().getManager();
 	    		if(c != null)
 	    		{
 
 	    			player1.AddCollectible(c);
-	    			c.PickUp(player1);
+	    			//c.PickUp(player1);
 	    			if(NetManager.instance == null)
 	    			{
 	    				Message m = Message.Create(MessageSendMode.reliable, (ushort)ClientToServerId.pickup);
@@ -198,7 +200,7 @@ public class PlayerManager : MonoBehaviour
 	{
 		ushort from = message.GetUShort();
 		Debug.Log("from " + from);
-		Player movePlayer = instance.getPlayerByUTag(message.GetUShort());
+		Player movePlayer = instance.getPlayerByUTag(from);
 		if(movePlayer != null)
 		{
 			if(movePlayer.uTag == instance.player1.uTag)
@@ -211,9 +213,12 @@ public class PlayerManager : MonoBehaviour
 			Quaternion newRot = message.GetQuaternion();
 			Debug.Log("newPos " + newPos);
 			Debug.Log("newRot " + newRot);
+			movePlayer.gameObject.GetComponent<PlayerController>().rds.hips.isKinematic = true;
 
 			movePlayer.gameObject.GetComponent<PlayerController>().rds.hips.transform.position = newPos;
 			movePlayer.gameObject.GetComponent<PlayerController>().rds.hips.transform.rotation = newRot;
+
+			movePlayer.gameObject.GetComponent<PlayerController>().rds.hips.isKinematic = false;
 
 			//movePlayer.gameObject.transform.position = message.GetVector3();
 			//movePlayer.gameObject.transform.rotation = message.GetQuaternion();

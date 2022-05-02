@@ -39,6 +39,7 @@ public class LocalPlayer : Player
 			c.PickUp(this);
     		if(c.typeFlag == 0x02)
 			{
+                //gameObject.GetComponent<PlayerController>().selectWeapon(this.AddWeapon(c as Weapon));
 				gameObject.GetComponent<PlayerController>().selectedWeaponNum = this.AddWeapon(c as Weapon);
 			}
 
