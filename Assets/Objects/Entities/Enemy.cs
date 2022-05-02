@@ -8,10 +8,22 @@ public class Enemy : Entity
 
     public GameObject prefab;
 
-    public Enemy(int baselvl, GameObject prefab)
+    public Enemy(int baselvl, GameObject prefab, Vector3 spawnLocation)
     {
     	collectibles = new List<Collectible>();
-		gameObject = UnityEngine.Object.Instantiate(prefab) as GameObject;
+		//ORIGINAL === gameObject = UnityEngine.Object.Instantiate(prefab) as GameObject;
+
+		// TESTING CODE SECTION
+
+		gameObject = Object.Instantiate(prefab) as GameObject;
+
+
+
+		// END TESTING
+
+
+		
+
 		//Debug.Log("i was supposed to spawn at " + GalaxyManager.gravityCenter.gameObject.transform.position);
 		Component[] rigidbodies = gameObject.GetComponentsInChildren<Rigidbody>();
 		foreach(Rigidbody r in rigidbodies)

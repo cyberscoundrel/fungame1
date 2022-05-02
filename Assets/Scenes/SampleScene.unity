@@ -592,7 +592,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabs:
   - {fileID: 659971134650186023, guid: fca46474293234b45a35ff9abbd38f37, type: 3}
-  spawnNum: 0
+  spawnNum: 1
 --- !u!4 &176739313
 Transform:
   m_ObjectHideFlags: 0
