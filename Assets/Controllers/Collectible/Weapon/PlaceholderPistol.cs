@@ -44,12 +44,15 @@ public class PlaceholderPistol : PistolController
 
     public override void onFire()
     {
-    	a["discharge"].speed = 20f;
+
+        a["discharge"].speed = 20f;
     	a.Play("discharge");
         RaycastHit rch;
         if(Physics.Raycast(projectileSource.transform.position, gameObject.transform.forward, out rch))
         {
             Debug.Log("hit a thing " + rch.transform.gameObject.name);
+
+
             EntityController e;
             e = rch.transform.root.gameObject.GetComponent<EntityController>();
             if(e != null)
@@ -59,6 +62,13 @@ public class PlaceholderPistol : PistolController
                 Debug.Log("entity health " + entity.getHealth());
                 entity.setHealth(entity.getHealth() - 10);
                 Debug.Log("entity new health " + entity.getHealth());
+
+                //knockback
+                Rigidbody rb = rch.transform.GetComponent<Rigidbody>();
+                rb.constraints = RigidbodyConstraints.None;
+                rb.AddForce(transform.forward * 300);
+
+
 
             }
         }
