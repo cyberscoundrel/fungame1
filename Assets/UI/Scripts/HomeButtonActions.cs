@@ -17,6 +17,11 @@ public class HomeButtonActions : MonoBehaviour
 
     public void CreateOnclick()
     { 
+        Debug.Log("CreateOnclick");
+        GameObject.Find("NetManager").GetComponent<NetManager>().enabled = true;
+        GameObject.Find("MainMenuUI").SetActive(false);
+        ControlledObject.instance.planetWatch = false;
+        GalaxyManager.enterGame();
     
     }
 
@@ -42,7 +47,8 @@ public class HomeButtonActions : MonoBehaviour
 
     public void RoomPanelSubmitOnclick()
     {
-        GameObject.Find("MainMenuUI").SetActive(false);
+        //GameObject.Find("MainMenuUI").SetActive(false);
+        GameObject.Find("CliManager").SetActive(true);
     }
 
 }

@@ -58,9 +58,10 @@ public class CliManager : MonoBehaviour
     	m.AddString("oober doober");
     	client.Send(m);
         GameObject.Find("MainMenuUI").SetActive(false);
+        GalaxyManager.enterGame();
         //GameObject.Find("GalaxyManager").SetActive(true);
-        GameObject.Find("PlayerManager").SetActive(true);
-        GameObject.Find("EnemyManager").SetActive(true);
-        GameObject.Find("CollectibleManager").SetActive(true);
+        //GameObject.Find("PlayerManager").SetActive(true);
+        //GameObject.Find("EnemyManager").SetActive(true);
+        //GameObject.Find("CollectibleManager").SetActive(true);
     }
 }

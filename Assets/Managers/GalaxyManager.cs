@@ -145,6 +145,17 @@ public class GalaxyManager : MonoBehaviour
         
     }
 
+    public static void enterGame()
+    {
+        //instance.initGalaxyTest(instance.startPlanet.gameObject.transform.position);
+        //instance.initGalaxyTestGrid();
+        instance.initGalaxyTestGrid(instance.startPlanet.gameObject.transform.position);
+        instance.testGenPlanets();
+        //GameObject.Find("PlayerManager").SetActive(true);
+        //GameObject.Find("CollectibleManager").SetActive(true);
+        //ControlledObject.instance.planetWatch = false;
+    }
+
     public GalaxyManager()
     {
 

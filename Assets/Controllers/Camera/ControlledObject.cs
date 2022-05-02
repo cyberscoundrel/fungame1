@@ -144,7 +144,7 @@ public class ControlledObject : MonoBehaviour
             float xmouse = Input.GetAxis("Mouse X"), ymouse = Input.GetAxis("Mouse Y");
             cx = xmouse;
             cy = ymouse;
-            Debug.Log("cx " + cx + "cy " + cy);
+            //Debug.Log("cx " + cx + "cy " + cy);
             //Debug.Log("planetWatch");
 
             controlledCamera.transform.position = controlledObject.transform.position;
