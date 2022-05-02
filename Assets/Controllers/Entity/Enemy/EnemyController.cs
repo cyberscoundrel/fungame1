@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public class EnemyController : EntityController
 {
 
-	public Enemy enemyObject;
+	//public Enemy enemyObject;
 
 	public Player aggro;
+
+	public NewRagdollScript enemyRagdollScript;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +21,15 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+    	if(entityObject.getHealth() < 0)
+    	{
+    		//Debug.Log("enemy dead");
+    		enemyRagdollScript.enabled = false;
+    	}
+    	else
+    	{
+    		enemyRagdollScript.enabled = true;
+    	}
         
     }
 

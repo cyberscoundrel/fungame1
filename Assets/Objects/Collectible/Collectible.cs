@@ -16,9 +16,11 @@ public class Collectible
 
 	public int baseTick;
 
-	public int uTag;
+	//public int uTag;
+    public ushort uTag;
 
 	public int typeFlag = 0x0;
+    //public short tFlag;
 
 	//public Player holder;
 	public Entity holder;
@@ -27,14 +29,16 @@ public class Collectible
 
 	public bool discardEffect = true;
 
-	public static Dictionary<String, int> collectibleTypeFlags = new Dictionary<String, int>()
+    public bool activeInWorld = false;
+
+	/*public static Dictionary<String, int> collectibleTypeFlags = new Dictionary<String, int>()
 	{
 		{"Collectible", 0x0},
 		{"Weapon", 0x2},
 		{"Item", 0x4},
 		{"Active", 0x8},
 		{"OnAction", 0x10}
-	};
+	};*/
 
 
 
@@ -44,46 +48,7 @@ public class Collectible
 		this.prefab = prefab;
 		gameObject = UnityEngine.Object.Instantiate(prefab) as GameObject;
 
-	}
-
-	public Collectible InitializePhysics()
-    {
-    	Rigidbody[] rigidbodies = gameObject.GetComponentsInChildren<Rigidbody>();
-    	Rigidbody p = gameObject.GetComponent<Rigidbody>();
-    	foreach(Rigidbody r in rigidbodies)
-    	{
-    		GalaxyManager.AddRb(r);
-    	}
-    	foreach(Transform t in gameObject.transform)
-    	{
-    		t.gameObject.SetActive(true);
-    	}
-    	if(p != null)
-    	{
-    		GalaxyManager.AddRb(p);
-    	}
-    	return this;
-    }
-
-    public Collectible DeactivatePhysicalInstance()
-    {
-    	Rigidbody[] rigidbodies = gameObject.GetComponentsInChildren<Rigidbody>();
-    	Rigidbody p = gameObject.GetComponent<Rigidbody>();
-    	foreach(Rigidbody r in rigidbodies)
-    	{
-    		GalaxyManager.RemoveRb(r);
-    	}
-    	foreach(Transform t in gameObject.transform)
-    	{
-    		t.gameObject.SetActive(false);
-    	}
-    	if(p != null)
-    	{
-    		GalaxyManager.RemoveRb(p);
-
-    	}
-    	return this;
-    }
+	} 
 
     public void disableBigCollider()
     {
@@ -122,6 +87,12 @@ public class Collectible
 
     public virtual void onPickUp()
     {
+        CollectibleManager.DeactivatePhysicalInstance(this);
+        CollectibleController cc = gameObject.GetComponent<CollectibleController>();
+        if(cc != null)
+        {
+            cc.enabled = true;
+        }
     	Debug.Log("picked up");
 
     }
@@ -139,6 +110,12 @@ public class Collectible
 
     public virtual void onDiscard()
     {
+        CollectibleManager.InitializePhysics(this);
+        CollectibleController cc = gameObject.GetComponent<CollectibleController>();
+        if(cc != null)
+        {
+            cc.enabled = false;
+        }
     	Debug.Log("discarded");
     }
 
@@ -149,6 +126,67 @@ public class Collectible
     		t.gameObject.SetActive(true);
     	}
     }*/
+
+    public Collectible InitializePhysics()
+    {
+        if(!activeInWorld)
+        {
+            Debug.Log("InitializePhysics");
+            Rigidbody[] rigidbodies = gameObject.GetComponentsInChildren<Rigidbody>();
+            Rigidbody p = gameObject.GetComponent<Rigidbody>();
+            foreach(Rigidbody r in rigidbodies)
+            {
+                GalaxyManager.AddRb(r);
+            }
+            foreach(Transform t in gameObject.transform)
+            {
+                Debug.Log("transform in gameObject " + t.gameObject.name + "SetActive true");
+                t.gameObject.SetActive(true);
+                //t.gameObject.enable = true;
+                //t.gameObject.activeSelf = true;
+            }
+            if(p != null)
+            {
+                GalaxyManager.AddRb(p);
+            }
+            activeInWorld = true;
+        }
+        return this;
+    }
+
+    public Collectible DeactivatePhysicalInstance()
+    {
+        if(activeInWorld)
+        {
+            Rigidbody[] rigidbodies = gameObject.GetComponentsInChildren<Rigidbody>();
+            Rigidbody p = gameObject.GetComponent<Rigidbody>();
+            foreach(Rigidbody r in rigidbodies)
+            {
+                GalaxyManager.RemoveRb(r);
+            }
+            foreach(Transform t in gameObject.transform)
+            {
+                t.gameObject.SetActive(false);
+            }
+            if(p != null)
+            {
+                GalaxyManager.RemoveRb(p);
+
+            }
+            activeInWorld = false;
+        }
+        return this;
+    }
+
+    void OnDisable()
+    {
+        Debug.Log("collectible disabled");
+    }
+
+    void OnEnable()
+    {
+        Debug.Log("collectible enabled");
+    }
 
 	public int stack;
 

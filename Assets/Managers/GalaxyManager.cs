@@ -71,7 +71,7 @@ public class GalaxyManager : MonoBehaviour
 
     public float mDist = 1f;
 
-    public float gridFactor = 256f;
+    public float gridFactor = 512f;
 
     //public static int prime = 12289;
 
@@ -89,12 +89,17 @@ public class GalaxyManager : MonoBehaviour
 
     public SHA256 hasher;
 
+    public static int gameLvl = 1;
+
+    public bool showGrid = false;
+
     public GamePlanet startPlanet;
+
     // Start is called before the first frame update
     //void Start()
     void Awake()
     {
-        seed = 69;
+        seed = 69; //nice
         hasher = SHA256.Create();
         generationGridOffset = new Vector3(0f,0f,0f);
         globalGridOffset = new Vector3(0f,0f,0f);
@@ -584,56 +589,58 @@ public class GalaxyManager : MonoBehaviour
     {
         //Gizmos.color = Color.white;
 
-
-        for(int index0 = 0; index0 < 8; ++index0)
+        if(instance != null && instance.showGrid)
         {
-            //generationGrid[index0].Add(new List<List<List<Vector3>>>());
-            //generationGrid[index0] = new Vector3[][][8];
-            for(int index1 = 0; index1 < 8; ++index1)
+            for(int index0 = 0; index0 < 8; ++index0)
             {
-                //generationGrid[index0][index1].Add(new List<List<Vector3>>());
-                //generationGrid[index0][index1] = new Vector3[][8];
-                for(int index2 = 0; index2 < 8; ++index2)
+                //generationGrid[index0].Add(new List<List<List<Vector3>>>());
+                //generationGrid[index0] = new Vector3[][][8];
+                for(int index1 = 0; index1 < 8; ++index1)
                 {
-                    Gizmos.color = Color.green;
-                    Gizmos.DrawWireCube(new Vector3(index0 * gridFactor, index1 * gridFactor, index2 * gridFactor) - globalGridOffset, new Vector3(gridFactor, gridFactor, gridFactor));
-                    Gizmos.color = Color.white;
-                    Gizmos.DrawSphere((gGrid[index0,index1,index2,0].position + gGrid[index0,index1,index2,0].gridOffset) - globalGridOffset, 0.1f);
-                    Gizmos.color = Color.red;
-                    Gizmos.DrawSphere((gGrid[index0,index1,index2,1].position + gGrid[index0,index1,index2,1].gridOffset) - globalGridOffset, 0.1f);
-                    Gizmos.color = Color.cyan;
-                    Gizmos.DrawWireSphere((gGrid[index0,index1,index2,0].getAdjusted() + gGrid[index0,index1,index2,0].gridOffset) - globalGridOffset, 0.1f);
-                    Gizmos.DrawWireSphere((gGrid[index0,index1,index2,1].getAdjusted() + gGrid[index0,index1,index2,1].gridOffset) - globalGridOffset, 0.1f);
-                    Gizmos.color = Color.yellow;
-                    Gizmos.DrawLine((gGrid[index0,index1,index2,0].position + gGrid[index0,index1,index2,0].gridOffset) - globalGridOffset,(gGrid[index0,index1,index2,0].getAdjusted() + gGrid[index0,index1,index2,0].gridOffset) - globalGridOffset);
-                    Gizmos.DrawLine((gGrid[index0,index1,index2,1].position + gGrid[index0,index1,index2,1].gridOffset) - globalGridOffset,(gGrid[index0,index1,index2,1].getAdjusted() + gGrid[index0,index1,index2,1].gridOffset) - globalGridOffset);
-                    Gizmos.color = Color.blue;
-                    Gizmos.DrawWireSphere((gGrid[index0,index1,index2,0].getAdjusted() + gGrid[index0,index1,index2,0].gridOffset) - globalGridOffset, gGrid[index0,index1,index2,0].maxRadius);
-                    Gizmos.DrawWireSphere((gGrid[index0,index1,index2,1].getAdjusted() + gGrid[index0,index1,index2,1].gridOffset) - globalGridOffset, gGrid[index0,index1,index2,1].maxRadius);
+                    //generationGrid[index0][index1].Add(new List<List<Vector3>>());
+                    //generationGrid[index0][index1] = new Vector3[][8];
+                    for(int index2 = 0; index2 < 8; ++index2)
+                    {
+                        Gizmos.color = Color.green;
+                        Gizmos.DrawWireCube(new Vector3(index0 * gridFactor, index1 * gridFactor, index2 * gridFactor) - globalGridOffset, new Vector3(gridFactor, gridFactor, gridFactor));
+                        Gizmos.color = Color.white;
+                        Gizmos.DrawSphere((gGrid[index0,index1,index2,0].position + gGrid[index0,index1,index2,0].gridOffset) - globalGridOffset, 0.1f);
+                        Gizmos.color = Color.red;
+                        Gizmos.DrawSphere((gGrid[index0,index1,index2,1].position + gGrid[index0,index1,index2,1].gridOffset) - globalGridOffset, 0.1f);
+                        Gizmos.color = Color.cyan;
+                        Gizmos.DrawWireSphere((gGrid[index0,index1,index2,0].getAdjusted() + gGrid[index0,index1,index2,0].gridOffset) - globalGridOffset, 0.1f);
+                        Gizmos.DrawWireSphere((gGrid[index0,index1,index2,1].getAdjusted() + gGrid[index0,index1,index2,1].gridOffset) - globalGridOffset, 0.1f);
+                        Gizmos.color = Color.yellow;
+                        Gizmos.DrawLine((gGrid[index0,index1,index2,0].position + gGrid[index0,index1,index2,0].gridOffset) - globalGridOffset,(gGrid[index0,index1,index2,0].getAdjusted() + gGrid[index0,index1,index2,0].gridOffset) - globalGridOffset);
+                        Gizmos.DrawLine((gGrid[index0,index1,index2,1].position + gGrid[index0,index1,index2,1].gridOffset) - globalGridOffset,(gGrid[index0,index1,index2,1].getAdjusted() + gGrid[index0,index1,index2,1].gridOffset) - globalGridOffset);
+                        Gizmos.color = Color.blue;
+                        Gizmos.DrawWireSphere((gGrid[index0,index1,index2,0].getAdjusted() + gGrid[index0,index1,index2,0].gridOffset) - globalGridOffset, gGrid[index0,index1,index2,0].maxRadius);
+                        Gizmos.DrawWireSphere((gGrid[index0,index1,index2,1].getAdjusted() + gGrid[index0,index1,index2,1].gridOffset) - globalGridOffset, gGrid[index0,index1,index2,1].maxRadius);
 
 
 
 
 
-                    //generationGrid[index0][index1][index2] = new Vector3[2];
-                    //generationGrid[index0][index1][index2][0] = new Vector3(Random.Range(0f, 2f), Random.Range(0f, 2f), Random.Range(0f, 2f));
-                    //generationGrid[index0][index1][index2][1] = new Vector3(Random.Range(0f, 2f), Random.Range(0f, 2f), Random.Range(0f, 2f));
-                    //generationGrid[index0][index1][index2].Add(new List<Vector3>());
-                    //List<Vector3
+                        //generationGrid[index0][index1][index2] = new Vector3[2];
+                        //generationGrid[index0][index1][index2][0] = new Vector3(Random.Range(0f, 2f), Random.Range(0f, 2f), Random.Range(0f, 2f));
+                        //generationGrid[index0][index1][index2][1] = new Vector3(Random.Range(0f, 2f), Random.Range(0f, 2f), Random.Range(0f, 2f));
+                        //generationGrid[index0][index1][index2].Add(new List<Vector3>());
+                        //List<Vector3
+                    }
                 }
             }
-        }
-        for(int index0 = 2; index0 < 6; ++index0)
-        {
-            for(int index1 = 2; index1 < 6; ++index1)
+            for(int index0 = 2; index0 < 6; ++index0)
             {
-                for(int index2 = 2; index2 < 6; ++index2)
+                for(int index1 = 2; index1 < 6; ++index1)
                 {
-                    Gizmos.color = Color.magenta;
-                    for(int index4 = 0; index4 < 3; ++index4)
+                    for(int index2 = 2; index2 < 6; ++index2)
                     {
-                        Gizmos.DrawLine((gGrid[index0,index1,index2,0].getAdjusted() + gGrid[index0,index1,index2,0].gridOffset) - globalGridOffset,(gGrid[index0,index1,index2,0].connections[index4].getAdjusted() + gGrid[index0,index1,index2,0].connections[index4].gridOffset) - globalGridOffset);
-                        Gizmos.DrawLine((gGrid[index0,index1,index2,1].getAdjusted() + gGrid[index0,index1,index2,1].gridOffset) - globalGridOffset,(gGrid[index0,index1,index2,1].connections[index4].getAdjusted() + gGrid[index0,index1,index2,1].connections[index4].gridOffset) - globalGridOffset);
+                        Gizmos.color = Color.magenta;
+                        for(int index4 = 0; index4 < 3; ++index4)
+                        {
+                            Gizmos.DrawLine((gGrid[index0,index1,index2,0].getAdjusted() + gGrid[index0,index1,index2,0].gridOffset) - globalGridOffset,(gGrid[index0,index1,index2,0].connections[index4].getAdjusted() + gGrid[index0,index1,index2,0].connections[index4].gridOffset) - globalGridOffset);
+                            Gizmos.DrawLine((gGrid[index0,index1,index2,1].getAdjusted() + gGrid[index0,index1,index2,1].gridOffset) - globalGridOffset,(gGrid[index0,index1,index2,1].connections[index4].getAdjusted() + gGrid[index0,index1,index2,1].connections[index4].gridOffset) - globalGridOffset);
+                        }
                     }
                 }
             }
@@ -650,15 +657,21 @@ public class GalaxyManager : MonoBehaviour
 
                 for(int index2 = 2; index2 < 6; ++index2)
                 {
-                    planetPool.Add(new GamePlanet(0, tsg));
-                    planetPool[planetPool.Count - 1].gameObject.transform.Translate((gGrid[index0,index1,index2,0].getAdjusted() + gGrid[index0,index1,index2,0].gridOffset) - globalGridOffset);
-                    planetPool[planetPool.Count - 1].gameObject.transform.localScale += new Vector3(0.1f, 0.1f, 0.1f) * (gGrid[index0,index1,index2,0].maxRadius * 0.7f);
-                    planetPool[planetPool.Count - 1].gameObject.tag = "planet_object";
-                    planetPool[planetPool.Count - 1].gameObject.layer = LayerMask.NameToLayer("planet_object");
+                    if(gGrid[index0,index1,index2,0].gridOffset != new Vector3(3f * gridFactor,3f * gridFactor,3f * gridFactor))
+                    {
+                        planetPool.Add(new GamePlanet(0, tsg));
+                        planetPool[planetPool.Count - 1].gameObject.transform.Translate((gGrid[index0,index1,index2,0].getAdjusted() + gGrid[index0,index1,index2,0].gridOffset) - globalGridOffset);
+                        planetPool[planetPool.Count - 1].gameObject.transform.localScale += new Vector3(0.1f, 0.1f, 0.1f) * (gGrid[index0,index1,index2,0].maxRadius * 0.7f);
+                        planetPool[planetPool.Count - 1].gameObject.tag = "planet_object";
+                        planetPool[planetPool.Count - 1].gameObject.name = "planet " + gGrid[index0,index1,index2,0].gridOffset;
+
+                        planetPool[planetPool.Count - 1].gameObject.layer = LayerMask.NameToLayer("planet_object");
+                    }
                     planetPool.Add(new GamePlanet(0, tsg));
                     planetPool[planetPool.Count - 1].gameObject.transform.Translate((gGrid[index0,index1,index2,1].getAdjusted() + gGrid[index0,index1,index2,1].gridOffset) - globalGridOffset);
                     planetPool[planetPool.Count - 1].gameObject.transform.localScale += new Vector3(1f, 1f, 1f) * (gGrid[index0,index1,index2,1].maxRadius * 0.7f);
                     planetPool[planetPool.Count - 1].gameObject.tag = "planet_object";
+                    planetPool[planetPool.Count - 1].gameObject.name = "planet " + gGrid[index0,index1,index2,1].gridOffset;
                     planetPool[planetPool.Count - 1].gameObject.layer = LayerMask.NameToLayer("planet_object");
                 }
             }

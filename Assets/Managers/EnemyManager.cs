@@ -24,6 +24,8 @@ public class EnemyManager : MonoBehaviour
     		instance = this;
     	}
 
+    	enemyPool.Add(createNewEnemy<Enemy>(prefabs[0]));
+
         
     }
 

@@ -31,14 +31,18 @@ public class HomeButtonActions : MonoBehaviour
         GameObject.Find("HomeCanvas").GetComponent<HomeManager>().swapMultiWithMain();
     }
 
-    public void RoomPanelCloseOnclick()
-    { 
-    
+    public void RoomPanelCheckboxOnclick() { 
+        
     }
 
-    public void RoomPanelSubmtiOnclick()
-    { 
-    
+    public void RoomPanelCloseOnclick()
+    {
+        GameObject.Find("HomeCanvas").GetComponent<HomeManager>().toggleRoomCodeDialog();
+    }
+
+    public void RoomPanelSubmitOnclick()
+    {
+        GameObject.Find("MainMenuUI").SetActive(false);
     }
 
 }

@@ -40,4 +40,9 @@ public class DebugHealthBar : MonoBehaviour
         GameObject.Find("HealthBar").GetComponent<HealthBarController>().UpdateHealth(1 * max);
     }
 
+    public void setRand() {
+        int max = GameObject.Find("HealthBar").GetComponent<HealthBarController>().GetMaxHealth();
+        GameObject.Find("HealthBar").GetComponent<HealthBarController>().UpdateHealth((int)(Random.Range(0f, 1f) * max));
+    }
+
 }

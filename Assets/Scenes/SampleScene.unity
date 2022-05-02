@@ -177,6 +177,7 @@ MonoBehaviour:
   headGameObject: {fileID: 0}
   holdingAppendages: []
   animate: 0
+  ik: 1
   speed: 10
   boyant: 1082.84
   fdown: 0
@@ -545,6 +546,7 @@ MonoBehaviour:
   - {fileID: 2574085807836186075, guid: 896e47d90a358514e9a8f1103d960238, type: 3}
   weaponPrefabs:
   - {fileID: 7094359011579216144, guid: 8462e11ac9d64dd41a85ddd5dbd7bb2c, type: 3}
+  nextUTag: 0
 --- !u!4 &155604342
 Transform:
   m_ObjectHideFlags: 0
@@ -588,7 +590,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fb0a770f822f6645a9e1483823d7bc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabs: []
+  prefabs:
+  - {fileID: 659971134650186023, guid: fca46474293234b45a35ff9abbd38f37, type: 3}
   spawnNum: 0
 --- !u!4 &176739313
 Transform:
@@ -7390,6 +7393,7 @@ MonoBehaviour:
   mDist: 1
   gridFactor: 256
   generationGridOffset: {x: 0, y: 0, z: 0}
+  showGrid: 0
 --- !u!4 &1448890610
 Transform:
   m_ObjectHideFlags: 0
@@ -7591,7 +7595,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1592153720
 MonoBehaviour:
   m_ObjectHideFlags: 0

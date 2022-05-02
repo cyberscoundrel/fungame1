@@ -63,6 +63,11 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    public virtual void selectWeapon(int index)
+    {
+        
+    }
+
     /*public Vector3 calculateWeaponPoint(int wepDist)
     {
 

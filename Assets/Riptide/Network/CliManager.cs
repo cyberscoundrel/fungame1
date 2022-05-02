@@ -57,6 +57,10 @@ public class CliManager : MonoBehaviour
     	Message m = Message.Create(MessageSendMode.reliable, (ushort)ClientToServerId.name);
     	m.AddString("oober doober");
     	client.Send(m);
-
+        GameObject.Find("MainMenuUI").SetActive(false);
+        //GameObject.Find("GalaxyManager").SetActive(true);
+        GameObject.Find("PlayerManager").SetActive(true);
+        GameObject.Find("EnemyManager").SetActive(true);
+        GameObject.Find("CollectibleManager").SetActive(true);
     }
 }

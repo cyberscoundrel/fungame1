@@ -44,7 +44,7 @@ public class Weapon : Collectible
 	{
 		gameObject.GetComponent<WeaponController>().setManager(this);
     	
-    	InitializePhysics();
+    	CollectibleManager.InitializePhysics(this);
 
     	typeFlag = 0x02;
 		//gameObject = new GameObject();
