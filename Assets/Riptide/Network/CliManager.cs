@@ -58,6 +58,7 @@ public class CliManager : MonoBehaviour
     	m.AddString("oober doober");
     	client.Send(m);
         GameObject.Find("MainMenuUI").SetActive(false);
+        ControlledObject.instance.planetWatch = false;
         GalaxyManager.enterGame();
         //GameObject.Find("GalaxyManager").SetActive(true);
         //GameObject.Find("PlayerManager").SetActive(true);

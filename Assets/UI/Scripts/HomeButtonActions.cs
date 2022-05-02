@@ -48,7 +48,8 @@ public class HomeButtonActions : MonoBehaviour
     public void RoomPanelSubmitOnclick()
     {
         //GameObject.Find("MainMenuUI").SetActive(false);
-        GameObject.Find("CliManager").SetActive(true);
+        //GameObject.Find("CliManager").SetActive(true);
+        GameObject.Find("CliManager").GetComponent<CliManager>().enabled = true;
     }
 
 }
