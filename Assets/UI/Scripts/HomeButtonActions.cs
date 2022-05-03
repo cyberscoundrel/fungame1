@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 
 public class HomeButtonActions : MonoBehaviour
 {
@@ -36,8 +38,15 @@ public class HomeButtonActions : MonoBehaviour
         GameObject.Find("HomeCanvas").GetComponent<HomeManager>().swapMultiWithMain();
     }
 
-    public void RoomPanelCheckboxOnclick() { 
-        
+    public void RoomPanelCheckboxOnclick() {
+        if (this.GetComponent<Toggle>().isOn)
+        {
+            Debug.Log(this.GetComponent<Toggle>().isOn);
+            GameObject.Find("LobbyCodeInputTextArea").transform.Find("Placeholder").GetComponent<TextMeshProUGUI>().SetText("IP Address");
+        }
+        else {
+            GameObject.Find("LobbyCodeInputTextArea").transform.Find("Placeholder").GetComponent<TextMeshProUGUI>().SetText("Room Code");
+        }
     }
 
     public void RoomPanelCloseOnclick()
