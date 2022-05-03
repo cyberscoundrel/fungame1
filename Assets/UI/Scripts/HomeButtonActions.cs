@@ -8,6 +8,12 @@ public class HomeButtonActions : MonoBehaviour
 {
     public void SingleplayerOnclick()
     {
+        Player newPlayer = PlayerManager.instance.createNewPlayer<LocalPlayer>(PlayerManager.instance.localguy);
+        newPlayer.uTag = 0;
+        PlayerManager.instance.setPlayerOne(0);
+        ControlledObject.instance.planetWatch = false;
+        GalaxyManager.enterGame();
+        GameObject.Find("MainMenuUI").SetActive(false);
 
     }
 

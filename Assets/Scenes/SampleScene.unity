@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.1630989, g: 0.022319011, b: 0.2645518, a: 1}
+  m_IndirectSpecularColor: {r: 0.7219759, g: 0.3317111, b: 0.7316689, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1649,7 +1649,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &623612546
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1864,7 +1864,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 740125639}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1940,6 +1940,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 898bc97b0b9e0a448bcd916f07a995f6, type: 2}
   mrPool: []
   mfPool: []
+  environmentPrefabs:
+  - {fileID: 927338753150857796, guid: f7a464f0ed3fc1641a47a5b7af770a7d, type: 3}
+  - {fileID: 3327081288418203268, guid: 437357dbce63baf48b60e39a67e7bbe7, type: 3}
+  instance: {fileID: 0}
 --- !u!1 &752858767
 GameObject:
   m_ObjectHideFlags: 0
@@ -1962,7 +1966,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!54 &752858768
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7807,7 +7811,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1805127531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8094,6 +8098,10 @@ MonoBehaviour:
   movef: 25
   sen: 0.5
   cameraRotation: {x: 0, y: 0, z: 0, w: 0}
+  targetCameraRotation: {x: 0, y: 0, z: 0, w: 0}
+  targetCameraPosition: {x: 0, y: 0, z: 0}
+  currentCameraTransform: {fileID: 0}
+  targetCameraTransform: {fileID: 0}
   initCameraRotation: {x: 0, y: 0, z: 0, w: 0}
   cx: 0
   cy: 0
@@ -8101,6 +8109,8 @@ MonoBehaviour:
   locked: 0
   firstPerson: 0
   planetWatch: 0
+  regularCamera: 0
+  camFactor: 0.06
 --- !u!4 &1894497157
 Transform:
   m_ObjectHideFlags: 0
@@ -8149,7 +8159,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!54 &1982546266
 Rigidbody:
   m_ObjectHideFlags: 0
