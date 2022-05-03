@@ -26,8 +26,13 @@ public class TestSphereGenerator : MonoBehaviour
 	public List<MeshRenderer> mrPool = new List<MeshRenderer>();
 	public List<MeshFilter> mfPool = new List<MeshFilter>();
 
+	public List<GameObject> environmentPrefabs;
+
+	public TestSphereGenerator instance;
+
 	public void Start()
 	{
+		instance = this;
 		//Debug.Log("TestSphereGenerator start");
 		//v = new List<Vector3>();
 		//p = new List<List<int>>();

@@ -93,12 +93,13 @@ public class GalaxyManager : MonoBehaviour
 
     public bool showGrid = false;
 
-    GamePlanet startPlanet;
+    public GamePlanet startPlanet;
+
     // Start is called before the first frame update
     //void Start()
     void Awake()
     {
-        seed = 69;
+        seed = 69; //nice
         hasher = SHA256.Create();
         generationGridOffset = new Vector3(0f,0f,0f);
         globalGridOffset = new Vector3(0f,0f,0f);
@@ -123,8 +124,8 @@ public class GalaxyManager : MonoBehaviour
         //initGalaxyTest(planetPool[0].gameObject.transform.position);
         //initGalaxyTest(startPlanet.gameObject.transform.position);
         //initGalaxyTestGrid();
-        initGalaxyTestGrid(startPlanet.gameObject.transform.position);
-        testGenPlanets();
+        //initGalaxyTestGrid(startPlanet.gameObject.transform.position);
+        //testGenPlanets();
     	//planetPool.Add(new GamePlanet(0));
     	//planetPool.Add(new GamePlanet(0));
     	//planetPool[1].gameObject.transform.Translate(2,2,2);
@@ -142,6 +143,17 @@ public class GalaxyManager : MonoBehaviour
 
         instance = this;
         
+    }
+
+    public static void enterGame()
+    {
+        //instance.initGalaxyTest(instance.startPlanet.gameObject.transform.position);
+        //instance.initGalaxyTestGrid();
+        instance.initGalaxyTestGrid(instance.startPlanet.gameObject.transform.position);
+        instance.testGenPlanets();
+        //GameObject.Find("PlayerManager").SetActive(true);
+        //GameObject.Find("CollectibleManager").SetActive(true);
+        //ControlledObject.instance.planetWatch = false;
     }
 
     public GalaxyManager()
