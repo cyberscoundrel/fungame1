@@ -1,0 +1,351 @@
+[LOG] System::create                           : Header version = 2.01.07. Current version = 2.01.07.
+[LOG] Manager::init                            : maxchannels = 256 studioflags = 00000006 flags 00000000 extradriverdata 0000000000000000.
+[LOG] SystemI::init                            : Initialize version=20107 (113487), maxchannels=256, flags=0x00020000
+[LOG] SystemI::setOutputInternal               : Setting output to 'FMOD WASAPI Output'
+[LOG] OutputWASAPI::init                       : Mix Format (WAVEFORMATEX): wFormatTag=0xFFFE, nChannels=2, nSamplesPerSec=48000, nAvgBytesPerSec=384000, nBlockAlign=8, wBitsPerSample=32, cbSize=22.
+[LOG] OutputWASAPI::init                       : Mix Format (WAVEFORMATEXTENSIBLE): wValidBitsPerSample=32, dwChannelMask=0x00000003, SubFormat=00000003-0000-0010-8000-00AA00389B71.
+[LOG] OutputWASAPI::init                       : Output buffer size: 4096 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
+[LOG] Thread::initThread                       : Init FMOD stream thread. Affinity: 0x8000000000000003, Priority: 0xFFFF7FFB, Stack Size: 98304, Semaphore: No, Sleep Time: 10, Looping: Yes.
+[LOG] Thread::initThread                       : Init FMOD mixer thread. Affinity: 0x8000000000000001, Priority: 0xFFFF7FFA, Stack Size: 81920, Semaphore: No, Sleep Time: 0, Looping: Yes.
+[LOG] AsyncManager::init                       : manager 00000240B1CFD058 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : done
+[LOG] PlaybackSystem::init                     : 
+[LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Affinity: 0x8000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
+[LOG] PlaybackSystem::init                     : done
+[LOG] Thread::initThread                       : Init FMOD Studio bank load thread. Affinity: 0x8000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
+[LOG] Manager::init                            : done.
+[LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
+[LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
+[LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
+[LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
+[LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
+[LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
+[LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
+[LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
+[LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
+[LOG] SystemI::createSound                     : filename = Assets/Plugins/FMOD/SOUNDBANKS/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] Thread::initThread                       : Init FMOD nonblocking thread (0). Affinity: 0x8000000000000003, Priority: 0xFFFF7FFC, Stack Size: 114688, Semaphore: Yes, Sleep Time: 0, Looping: Yes.
+[LOG] SystemI::createSound                     : setdata soundi = 00000240BBFF0898 : node = 00000240ABC79300
+[LOG] SystemI::createSound                     : add node to async list : head = 0000023EEA053AC8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000240BBFF0898
+[LOG] SystemI::createSoundInternal             :     Create name='Assets/Plugins/FMOD/SOUNDBANKS/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 3336288
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 14432
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 00000240ABC79410
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='cosmaurauder_planet1 - Trimmed', format=5, channels=2, frequency=48000, lengthbytes=209920, lengthpcm=907200, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.218384.
+[LOG] Thread::initThread                       :     Init FMOD file thread. Affinity: 0x8000000000000003, Priority: 0xFFFF7FFC, Stack Size: 49152, Semaphore: No, Sleep Time: 10, Looping: Yes.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000240BBFF0898
+[LOG] SystemI::createSound                     : filename = Assets/Plugins/FMOD/SOUNDBANKS/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 00000240BBFF0028 : node = 00000240ABC79800
+[LOG] SystemI::createSound                     : add node to async list : head = 0000023EEA053AC8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000240BBFF0028
+[LOG] SystemI::createSoundInternal             :     Create name='Assets/Plugins/FMOD/SOUNDBANKS/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 3336288
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 14432
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 00000240ABC79910
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 18900
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='cosmaurauder_planet1', format=5, channels=2, frequency=48000, lengthbytes=448416, lengthpcm=1857702, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.353573.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000240BBFF0028
+[LOG] SoundI::release                          : cosmaurauder_planet1 - Trimmed (00000240BBFF0898)
+[LOG] SoundI::release                          :     cosmaurauder_planet1 - Trimmed (00000240B206CD38)
+[LOG] SoundI::release                          :     cosmaurauder_planet1 - Trimmed (00000240BBFF5EA8)
+[LOG] SystemI::createSound                     : filename = Assets/Plugins/FMOD/SOUNDBANKS/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 00000240BBFF2548 : node = 00000240ABC79300
+[LOG] SystemI::createSound                     : add node to async list : head = 0000023EEA053AC8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000240BBFF2548
+[LOG] SystemI::createSoundInternal             :     Create name='Assets/Plugins/FMOD/SOUNDBANKS/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 3336288
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 14432
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 00000240ABC79410
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 18900
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='cosmaurauder_planet1', format=5, channels=2, frequency=48000, lengthbytes=448416, lengthpcm=1857702, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.353573.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000240BBFF2548
+[LOG] SoundI::release                          : cosmaurauder_planet1 (00000240BBFF0028)
+[LOG] SoundI::release                          :     cosmaurauder_planet1 (0000023EF206E8C8)
+[LOG] SoundI::release                          :     cosmaurauder_planet1 (00000240BBFF1618)
+[LOG] SystemI::createSound                     : filename = Assets/Plugins/FMOD/SOUNDBANKS/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 00000240BBFF37D8 : node = 00000240ABC79800
+[LOG] SystemI::createSound                     : add node to async list : head = 0000023EEA053AC8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000240BBFF37D8
+[LOG] SystemI::createSoundInternal             :     Create name='Assets/Plugins/FMOD/SOUNDBANKS/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 3336288
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 14432
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 00000240ABC79910
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 2115
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='cosmaurauder_Drift', format=5, channels=2, frequency=48000, lengthbytes=149280, lengthpcm=552835, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.533178.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000240BBFF37D8
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000240BBFF4048
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000240BBFF4048
+[LOG] SoundI::release                          : cosmaurauder_planet1 (00000240BBFF2548)
+[LOG] SoundI::release                          :     cosmaurauder_planet1 (0000023EF206E248)
+[LOG] SoundI::release                          :     cosmaurauder_planet1 (00000240BBFF4A68)
+[LOG] SystemI::createSound                     : filename = Assets/Plugins/FMOD/SOUNDBANKS/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 00000240BBFF3628 : node = 0000024137BA9AB0
+[LOG] SystemI::createSound                     : add node to async list : head = 0000023EEA053AC8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000240BBFF3628
+[LOG] SystemI::createSoundInternal             :     Create name='Assets/Plugins/FMOD/SOUNDBANKS/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 3336288
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 14432
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000024137BA9BC0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='cosmaurauder_planet2', format=5, channels=2, frequency=48000, lengthbytes=221024, lengthpcm=823690, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.592309.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000240BBFF3628
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000240BBFF32C8
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000240BBFF32C8
+[LOG] SystemI::createSound                     : filename = Assets/Plugins/FMOD/SOUNDBANKS/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 00000240BBFF1978 : node = 00000240ABC79300
+[LOG] SystemI::createSound                     : add node to async list : head = 0000023EEA053AC8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000240BBFF1978
+[LOG] SystemI::createSoundInternal             :     Create name='Assets/Plugins/FMOD/SOUNDBANKS/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 3336288
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 14432
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 00000240ABC79410
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 2115
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='cosmaurauder_Drift', format=5, channels=2, frequency=48000, lengthbytes=149280, lengthpcm=552835, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.533178.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000240BBFF1978
+[LOG] SoundI::release                          : cosmaurauder_Drift (00000240BBFF37D8)
+[LOG] SoundI::release                          :     cosmaurauder_Drift (0000023EF206E588)
+[LOG] SoundI::release                          :     cosmaurauder_Drift (00000240BBFF4048)
+[LOG] SoundI::release                          : cosmaurauder_Drift (00000240BBFF1978)
+[LOG] SoundI::release                          :     cosmaurauder_Drift (00000240B206C518)
+[LOG] SoundI::release                          :     cosmaurauder_Drift (00000240BBFF52D8)
+[LOG] SystemI::createSound                     : filename = Assets/Plugins/FMOD/SOUNDBANKS/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 00000240BBFEFE78 : node = 0000023EEF8FF2B0
+[LOG] SystemI::createSound                     : add node to async list : head = 0000023EEA053AC8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000240BBFEFE78
+[LOG] SystemI::createSoundInternal             :     Create name='Assets/Plugins/FMOD/SOUNDBANKS/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 3336288
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 14432
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000023EEF8FF3C0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 2115
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='cosmaurauder_Drift', format=5, channels=2, frequency=48000, lengthbytes=149280, lengthpcm=552835, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.533178.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000240BBFEFE78
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000240BBFF1618
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000240BBFF1618
+[LOG] SoundI::release                          : cosmaurauder_planet2 (00000240BBFF3628)
+[LOG] SoundI::release                          :     cosmaurauder_planet2 (0000023EF206E248)
+[LOG] SoundI::release                          :     cosmaurauder_planet2 (00000240BBFF32C8)
+[LOG] SystemI::createSound                     : filename = Assets/Plugins/FMOD/SOUNDBANKS/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 00000240BBFF1468 : node = 0000023EEF8FF030
+[LOG] SystemI::createSound                     : add node to async list : head = 0000023EEA053AC8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000240BBFF1468
+[LOG] SystemI::createSoundInternal             :     Create name='Assets/Plugins/FMOD/SOUNDBANKS/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 3336288
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 14432
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000023EEF8FF140
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 2115
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='cosmaurauder_Drift', format=5, channels=2, frequency=48000, lengthbytes=149280, lengthpcm=552835, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.533178.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000240BBFF1468
+[LOG] SoundI::release                          : cosmaurauder_Drift (00000240BBFEFE78)
+[LOG] SoundI::release                          :     cosmaurauder_Drift (00000240B206C6B8)
+[LOG] SoundI::release                          :     cosmaurauder_Drift (00000240BBFF1618)
+[LOG] SystemI::createSound                     : filename = Assets/Plugins/FMOD/SOUNDBANKS/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 00000240BBFF01D8 : node = 0000023EEF8FF530
+[LOG] SystemI::createSound                     : add node to async list : head = 0000023EEA053AC8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000240BBFF01D8
+[LOG] SystemI::createSoundInternal             :     Create name='Assets/Plugins/FMOD/SOUNDBANKS/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 3336288
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 14432
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000023EEF8FF640
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 2115
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='cosmaurauder_Drift', format=5, channels=2, frequency=48000, lengthbytes=149280, lengthpcm=552835, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.533178.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000240BBFF01D8
+[LOG] SoundI::release                          : cosmaurauder_Drift (00000240BBFF1468)
+[LOG] SoundI::release                          :     cosmaurauder_Drift (0000023EF206E8C8)
+[LOG] SoundI::release                          :     cosmaurauder_Drift (00000240BBFF2038)
+[LOG] SystemI::createSound                     : filename = Assets/Plugins/FMOD/SOUNDBANKS/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 00000240BBFF6568 : node = 0000023EEF8FF030
+[LOG] SystemI::createSound                     : add node to async list : head = 0000023EEA053AC8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000240BBFF6568
+[LOG] SystemI::createSoundInternal             :     Create name='Assets/Plugins/FMOD/SOUNDBANKS/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 3336288
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 14432
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000023EEF8FF140
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 8000
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='cosmaurauder_planet3', format=5, channels=2, frequency=48000, lengthbytes=547104, lengthpcm=1918393, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.678286.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000240BBFF6568
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000240BBFF1618
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000240BBFF1618
+[LOG] SoundI::release                          : cosmaurauder_Drift (00000240BBFF01D8)
+[LOG] SoundI::release                          :     cosmaurauder_Drift (0000023EF206E248)
+[LOG] SoundI::release                          :     cosmaurauder_Drift (00000240BBFF4C18)
+[LOG] SystemI::createSound                     : filename = Assets/Plugins/FMOD/SOUNDBANKS/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 00000240BBFF0A48 : node = 0000023EEF8FF170
+[LOG] SystemI::createSound                     : add node to async list : head = 0000023EEA053AC8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000240BBFF0A48
+[LOG] SystemI::createSoundInternal             :     Create name='Assets/Plugins/FMOD/SOUNDBANKS/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 3336288
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 14432
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000023EEF8FF280
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='cosmaurauder_planet3_drift', format=5, channels=2, frequency=48000, lengthbytes=209312, lengthpcm=766346, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.603584.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000240BBFF0A48
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000240BBFF6718
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000240BBFF6718
+[LOG] SoundI::release                          : cosmaurauder_planet3 (00000240BBFF6568)
+[LOG] SoundI::release                          :     cosmaurauder_planet3 (0000023EF206EA68)
+[LOG] SoundI::release                          :     cosmaurauder_planet3 (00000240BBFF1618)
+[LOG] SystemI::createSound                     : filename = Assets/Plugins/FMOD/SOUNDBANKS/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 00000240BBFF5638 : node = 0000023EEF8FF3F0
+[LOG] SystemI::createSound                     : add node to async list : head = 0000023EEA053AC8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000240BBFF5638
+[LOG] SystemI::createSoundInternal             :     Create name='Assets/Plugins/FMOD/SOUNDBANKS/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 3336288
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 14432
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000023EEF8FF500
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 11545
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='planet hopper draft1', format=5, channels=2, frequency=48000, lengthbytes=575392, lengthpcm=2028773, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.586395.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000240BBFF5638
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000240BBFF4708
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000240BBFF4708
+[LOG] SoundI::release                          : cosmaurauder_planet3_drift (00000240BBFF0A48)
+[LOG] SoundI::release                          :     cosmaurauder_planet3_drift (0000023EF206E248)
+[LOG] SoundI::release                          :     cosmaurauder_planet3_drift (00000240BBFF6718)
+[LOG] SystemI::createSound                     : filename = Assets/Plugins/FMOD/SOUNDBANKS/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 00000240BBFF41F8 : node = 00000240ABC79300
+[LOG] SystemI::createSound                     : add node to async list : head = 0000023EEA053AC8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000240BBFF41F8
+[LOG] SystemI::createSoundInternal             :     Create name='Assets/Plugins/FMOD/SOUNDBANKS/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 3336288
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 14432
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 00000240ABC79410
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 2115
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='cosmaurauder_Drift', format=5, channels=2, frequency=48000, lengthbytes=149280, lengthpcm=552835, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.533178.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000240BBFF41F8
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000240BBFF5EA8
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000240BBFF5EA8
+[LOG] SoundI::release                          : planet hopper draft1 (00000240BBFF5638)
+[LOG] SoundI::release                          :     planet hopper draft1 (0000023EF206E588)
+[LOG] SoundI::release                          :     planet hopper draft1 (00000240BBFF4708)
+[LOG] SystemI::createSound                     : filename = Assets/Plugins/FMOD/SOUNDBANKS/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 00000240BBFF1108 : node = 00000240ABC79800
+[LOG] SystemI::createSound                     : add node to async list : head = 0000023EEA053AC8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000240BBFF1108
+[LOG] SystemI::createSoundInternal             :     Create name='Assets/Plugins/FMOD/SOUNDBANKS/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 3336288
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 14432
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 00000240ABC79910
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 18900
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='cosmaurauder_planet1', format=5, channels=2, frequency=48000, lengthbytes=448416, lengthpcm=1857702, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.353573.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000240BBFF1108
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000240BBFF1CD8
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000240BBFF1CD8
+[LOG] SoundI::release                          : cosmaurauder_Drift (00000240BBFF41F8)
+[LOG] SoundI::release                          :     cosmaurauder_Drift (0000023EF206E728)
+[LOG] SoundI::release                          :     cosmaurauder_Drift (00000240BBFF5EA8)
+[LOG] SystemI::createSound                     : filename = Assets/Plugins/FMOD/SOUNDBANKS/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 00000240BBFF4048 : node = 00000240ABC79300
+[LOG] SystemI::createSound                     : add node to async list : head = 0000023EEA053AC8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000240BBFF4048
+[LOG] SystemI::createSoundInternal             :     Create name='Assets/Plugins/FMOD/SOUNDBANKS/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 3336288
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 14432
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 00000240ABC79410
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 2115
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='cosmaurauder_Drift', format=5, channels=2, frequency=48000, lengthbytes=149280, lengthpcm=552835, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.533178.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000240BBFF4048
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000240BBFF5638
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000240BBFF5638
+[LOG] SoundI::release                          : cosmaurauder_planet1 (00000240BBFF1108)
+[LOG] SoundI::release                          :     cosmaurauder_planet1 (0000023EF206E248)
+[LOG] SoundI::release                          :     cosmaurauder_planet1 (00000240BBFF1CD8)
+[LOG] SoundI::release                          : cosmaurauder_Drift (00000240BBFF4048)
+[LOG] SoundI::release                          :     cosmaurauder_Drift (0000023EF206E588)
+[LOG] SoundI::release                          :     cosmaurauder_Drift (00000240BBFF5638)
+[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
+[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
+[LOG] LiveUpdate::release                      : 
+[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
+[LOG] Thread::callback                         : FMOD stream thread finished.
+[LOG] Thread::callback                         : FMOD mixer thread finished.
+[LOG] SystemI::close                           : Closed.
+[LOG] Thread::callback                         : FMOD nonblocking thread (0) finished.
+[LOG] Thread::callback                         : FMOD file thread finished.
