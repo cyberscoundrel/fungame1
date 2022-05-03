@@ -8,8 +8,7 @@ public class NewRagdollScript : MonoBehaviour
 	public Rigidbody up;
 	public Rigidbody downl, downr;
 
-	//public GameObject shit;
-
+	
 	public float upFloat = 0;
 	public float dFloat = 0;
     // Start is called before the first frame update
@@ -27,10 +26,19 @@ public class NewRagdollScript : MonoBehaviour
     void FixedUpdate()
     {
     	up.AddForce(GalaxyManager.getGravityVector(up.transform) * upFloat);
-    	Debug.DrawRay(up.gameObject.transform.position, GalaxyManager.getGravityVector(up.gameObject.transform.position), Color.magenta);
+    	//Debug.DrawRay(up.gameObject.transform.position, GalaxyManager.getGravityVector(up.gameObject.transform.position), Color.magenta);
     	downr.AddForce(-GalaxyManager.getGravityVector(downr.transform) * dFloat);
     	downl.AddForce(-GalaxyManager.getGravityVector(downl.transform) * dFloat);
-    	//shit.transform.position = up.gameObject.transform.position - GalaxyManager.gravityCenter.gameObject.transform.position;
+    	
+
+        if (Input.GetKey("n"))
+        {
+            downl.AddForce(-GalaxyManager.getGravityVector(downl.transform) * dFloat);
+        }
+        if (Input.GetKey("m"))
+        {
+            downr.AddForce(-GalaxyManager.getGravityVector(downr.transform) * dFloat);
+        }
     }
 
     void OnDrawGizmos()
