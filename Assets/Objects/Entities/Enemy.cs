@@ -15,7 +15,7 @@ public class Enemy : Entity
 
 		// TESTING CODE SECTION
 
-		gameObject = Object.Instantiate(prefab) as GameObject;
+		gameObject = Object.Instantiate(prefab, spawnLocation, Quaternion.identity) as GameObject;
 
 
 

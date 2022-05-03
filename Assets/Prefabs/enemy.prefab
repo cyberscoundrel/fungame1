@@ -54,7 +54,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 659971134650186023}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9c2f8a211e81344f91cfa2ef9dbf8f3, type: 3}
   m_Name: 
@@ -226,6 +226,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: fuckerenemybig
       objectReference: {fileID: 0}
+    - target: {fileID: 8743813690021804245, guid: c11e9e29d61a6ff4d922ce4d4c80a9af, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 86cb20973bbbff247a26614b50816cec, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c11e9e29d61a6ff4d922ce4d4c80a9af, type: 3}
 --- !u!4 &3982558444982319533 stripped
