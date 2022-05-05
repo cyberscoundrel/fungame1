@@ -9,12 +9,12 @@ public class RemotePlayerController : PlayerController
 	public GameObject tempParentObject;
     public GameObject targetTransformObject;
 
-    void OnDrawGizmos()
+    /*void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawSphere(tempParentObject.transform.position, 2);
 
-    }
+    }*/
 
 
     // Start is called before the first frame update
@@ -38,8 +38,10 @@ public class RemotePlayerController : PlayerController
 
     void FixedUpdate()
     {
-        rds.hips.transform.position = Vector3.Lerp(rds.hips.transform.position, targetTransformObject.transform.position, 0.3f);
-        rds.hips.transform.rotation = Quaternion.Slerp(rds.hips.transform.rotation, targetTransformObject.transform.rotation, 0.3f);
+        rds.hips.transform.position = Vector3.Lerp(rds.hips.transform.position, targetTransformObject.transform.position, 0.3f * Time.fixedDeltaTime);
+        rds.hips.transform.rotation = Quaternion.Slerp(rds.hips.transform.rotation, targetTransformObject.transform.rotation, 0.3f * Time.fixedDeltaTime);
+        //rds.hips.transform.position = targetTransformObject.transform.position;
+        //rds.hips.transform.rotation = targetTransformObject.transform.rotation;
 
     }
 
@@ -57,9 +59,15 @@ public class RemotePlayerController : PlayerController
 
     }
 
-    public virtual void setTargetTransform(Vector3 newVec, Quaternion newQuat)
+    public override void setTargetTransform(Vector3 newVec, Quaternion newQuat)
     {
         targetTransformObject.transform.position = newVec;
         targetTransformObject.transform.rotation = newQuat;
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(targetTransformObject.transform.position, 0.1f);
     }
 }

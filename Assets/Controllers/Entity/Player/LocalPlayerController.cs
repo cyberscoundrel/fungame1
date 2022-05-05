@@ -49,8 +49,8 @@ public class LocalPlayerController : PlayerController
             //m.AddUShort(player1.uTag);
             m.AddVector3(rds.hips.transform.position);
             m.AddQuaternion(rds.hips.transform.rotation);
-            Debug.Log("sending pos " + rds.hips.transform.position);
-            Debug.Log("sending rot " + rds.hips.transform.rotation);
+            //Debug.Log("sending pos " + rds.hips.transform.position);
+            //Debug.Log("sending rot " + rds.hips.transform.rotation);
             CliManager.client.Send(m);
         }
         else if(NetManager.instance != null)
@@ -59,8 +59,8 @@ public class LocalPlayerController : PlayerController
             m.AddUShort(PlayerManager.instance.player1.uTag);
             m.AddVector3(rds.hips.transform.position);
             m.AddQuaternion(rds.hips.transform.rotation);
-            Debug.Log("sending pos " + rds.hips.transform.position);
-            Debug.Log("sending rot " + rds.hips.transform.rotation);
+            //Debug.Log("sending pos " + rds.hips.transform.position);
+            //Debug.Log("sending rot " + rds.hips.transform.rotation);
             NetManager.instance.server.SendToAll(m);
 
         }

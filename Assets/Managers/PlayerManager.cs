@@ -248,6 +248,10 @@ public class PlayerManager : MonoBehaviour
 			Debug.Log("movePlayer rds" + movePlayer.gameObject.GetComponent<PlayerController>().rds);
 			Vector3 newPos = message.GetVector3();
 			Quaternion newRot = message.GetQuaternion();
+
+			PlayerController rpc = movePlayer.gameObject.GetComponent<PlayerController>();
+
+			rpc.setTargetTransform(newPos, newRot);
 			//movePlayer.gameObject.transform.position = newPos;
 			//movePlayer.gameObject.transform.rotation = newRot;
 
