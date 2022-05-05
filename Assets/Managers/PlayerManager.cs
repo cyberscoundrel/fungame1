@@ -255,8 +255,8 @@ public class PlayerManager : MonoBehaviour
 			//movePlayer.gameObject.transform.position = newPos;
 			//movePlayer.gameObject.transform.rotation = newRot;
 
-			movePlayer.gameObject.GetComponent<PlayerController>().rds.hips.transform.position = newPos;
-			movePlayer.gameObject.GetComponent<PlayerController>().rds.hips.transform.rotation = newRot;
+			//movePlayer.gameObject.GetComponent<PlayerController>().rds.hips.transform.position = newPos;
+			//movePlayer.gameObject.GetComponent<PlayerController>().rds.hips.transform.rotation = newRot;
 			Message m = Message.Create(MessageSendMode.unreliable, (ushort)ServerToClientId.playerMovement);
 			m.AddUShort(clientId);
 			m.AddVector3(newPos);

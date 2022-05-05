@@ -38,8 +38,8 @@ public class RemotePlayerController : PlayerController
 
     void FixedUpdate()
     {
-        rds.hips.transform.position = Vector3.Lerp(rds.hips.transform.position, targetTransformObject.transform.position, 0.3f * Time.fixedDeltaTime);
-        rds.hips.transform.rotation = Quaternion.Slerp(rds.hips.transform.rotation, targetTransformObject.transform.rotation, 0.3f * Time.fixedDeltaTime);
+        rds.hips.transform.position = Vector3.Lerp(rds.hips.transform.position, targetTransformObject.transform.position, 0.3f);
+        rds.hips.transform.rotation = Quaternion.Slerp(rds.hips.transform.rotation, targetTransformObject.transform.rotation, 0.3f);
         //rds.hips.transform.position = targetTransformObject.transform.position;
         //rds.hips.transform.rotation = targetTransformObject.transform.rotation;
 
