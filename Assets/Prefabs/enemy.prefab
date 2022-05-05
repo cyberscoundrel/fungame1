@@ -62,7 +62,7 @@ MonoBehaviour:
   up: {fileID: 8611547062148867553}
   downl: {fileID: 5695146741741167004}
   downr: {fileID: 5233662034598170478}
-  upFloat: 15
+  upFloat: 31.5
   dFloat: 15
 --- !u!1 &4397145443907646623
 GameObject:

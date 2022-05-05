@@ -13,7 +13,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3938449403174794158, guid: 2174c4c4837ffce44a44588b7829fca6, type: 3}
       propertyPath: m_IsKinematic
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3938449403394483978, guid: 2174c4c4837ffce44a44588b7829fca6, type: 3}
       propertyPath: m_RootOrder
@@ -165,6 +165,7 @@ MonoBehaviour:
   selectedWeaponNum: -1
   weaponDistance: 0.1
   tempParentObject: {fileID: 2183045321023380623}
+  targetTransformObject: {fileID: 0}
 --- !u!114 &8355034656673389394
 MonoBehaviour:
   m_ObjectHideFlags: 0

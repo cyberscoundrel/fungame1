@@ -213,12 +213,20 @@ public class PlayerManager : MonoBehaviour
 			Quaternion newRot = message.GetQuaternion();
 			Debug.Log("newPos " + newPos);
 			Debug.Log("newRot " + newRot);
-			movePlayer.gameObject.GetComponent<PlayerController>().rds.hips.isKinematic = true;
 
-			movePlayer.gameObject.GetComponent<PlayerController>().rds.hips.transform.position = newPos;
-			movePlayer.gameObject.GetComponent<PlayerController>().rds.hips.transform.rotation = newRot;
+			PlayerController rpc = movePlayer.gameObject.GetComponent<PlayerController>();
 
-			movePlayer.gameObject.GetComponent<PlayerController>().rds.hips.isKinematic = false;
+			rpc.setTargetTransform(newPos, newRot);
+
+
+
+
+			//movePlayer.gameObject.GetComponent<PlayerController>().rds.hips.isKinematic = true;
+
+			//movePlayer.gameObject.GetComponent<PlayerController>().rds.hips.transform.position = newPos;
+			//movePlayer.gameObject.GetComponent<PlayerController>().rds.hips.transform.rotation = newRot;
+
+			//movePlayer.gameObject.GetComponent<PlayerController>().rds.hips.isKinematic = false;
 
 			//movePlayer.gameObject.transform.position = message.GetVector3();
 			//movePlayer.gameObject.transform.rotation = message.GetQuaternion();

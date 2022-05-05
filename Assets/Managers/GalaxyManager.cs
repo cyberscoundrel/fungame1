@@ -151,9 +151,17 @@ public class GalaxyManager : MonoBehaviour
         //instance.initGalaxyTestGrid();
         instance.initGalaxyTestGrid(instance.startPlanet.gameObject.transform.position);
         instance.testGenPlanets();
+        instance.startPlanet.glObject = instance.gGrid[3,3,3,0];
         //GameObject.Find("PlayerManager").SetActive(true);
         //GameObject.Find("CollectibleManager").SetActive(true);
         //ControlledObject.instance.planetWatch = false;
+    }
+
+    public void nextGravity()
+    {
+        int next = UnityEngine.Random.Range(0,gravityCenter.glObject.connections.Count - 1);
+        GLObject g = gravityCenter.glObject.connections[next];
+
     }
 
     public GalaxyManager()
@@ -168,6 +176,7 @@ public class GalaxyManager : MonoBehaviour
         if(gravityCenter != null)
         {
             gravityCenter.gameObject.name = "planet0";
+            gravityCenter.gameObject.tag = "planet_object";
 
         }
     	if(rb)
@@ -185,6 +194,7 @@ public class GalaxyManager : MonoBehaviour
     	}
     	gravityCenter = planetPool[id];
         gravityCenter.gameObject.name = "gravityCenter";
+        gravityCenter.gameObject.tag = "gravityCenter";
 
 
 
@@ -195,6 +205,7 @@ public class GalaxyManager : MonoBehaviour
         if(gravityCenter != null)
         {
             gravityCenter.gameObject.name = "planet0";
+            gravityCenter.gameObject.tag = "planet_object";
 
         }
         for(int index0 = 0; index0 < rbs.Count; ++index0)
@@ -207,6 +218,7 @@ public class GalaxyManager : MonoBehaviour
         }
         gravityCenter = g;
         gravityCenter.gameObject.name = "gravityCenter";
+        gravityCenter.gameObject.tag = "gravityCenter";
 
     }
 
@@ -677,6 +689,7 @@ public class GalaxyManager : MonoBehaviour
                         planetPool[planetPool.Count - 1].gameObject.name = "planet " + gGrid[index0,index1,index2,0].gridOffset;
 
                         planetPool[planetPool.Count - 1].gameObject.layer = LayerMask.NameToLayer("planet_object");
+                        planetPool[planetPool.Count - 1].glObject = gGrid[index0,index1,index2,0];
                     }
                     planetPool.Add(new GamePlanet(0, tsg));
                     planetPool[planetPool.Count - 1].gameObject.transform.Translate((gGrid[index0,index1,index2,1].getAdjusted() + gGrid[index0,index1,index2,1].gridOffset) - globalGridOffset);
@@ -684,6 +697,7 @@ public class GalaxyManager : MonoBehaviour
                     planetPool[planetPool.Count - 1].gameObject.tag = "planet_object";
                     planetPool[planetPool.Count - 1].gameObject.name = "planet " + gGrid[index0,index1,index2,1].gridOffset;
                     planetPool[planetPool.Count - 1].gameObject.layer = LayerMask.NameToLayer("planet_object");
+                    planetPool[planetPool.Count - 1].glObject = gGrid[index0,index1,index2,1];
                 }
             }
         }

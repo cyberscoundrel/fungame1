@@ -7,6 +7,7 @@ public class RemotePlayerController : PlayerController
 
 	Vector3 tempGunTransform = new Vector3();
 	public GameObject tempParentObject;
+    public GameObject targetTransformObject;
 
     void OnDrawGizmos()
     {
@@ -21,6 +22,9 @@ public class RemotePlayerController : PlayerController
     {
         rds.IK[0].GetComponent<DitzelGames.FastIK.FastIKFabric>().enabled = false;
         rds.IK[1].GetComponent<DitzelGames.FastIK.FastIKFabric>().enabled = false;
+        targetTransformObject = new GameObject();
+        targetTransformObject.transform.position = rds.hips.transform.position;
+        targetTransformObject.transform.rotation = rds.hips.transform.rotation;
 
         
     }
@@ -30,6 +34,13 @@ public class RemotePlayerController : PlayerController
     {
     	//tempParentObject.transform.position = Vector3.MoveTowards(tempParentObject.transform.position, tempParentObject.transform.forward, 1f * Time.deltaTime);
         
+    }
+
+    void FixedUpdate()
+    {
+        rds.hips.transform.position = Vector3.Lerp(rds.hips.transform.position, targetTransformObject.transform.position, 0.3f);
+        rds.hips.transform.rotation = Quaternion.Slerp(rds.hips.transform.rotation, targetTransformObject.transform.rotation, 0.3f);
+
     }
 
     public void setPositionData(Vector3 playerPosition, Vector3 playerVelocity, Quaternion playerRotation, Vector3 gunPosition, Vector3 gunVelocity, Quaternion gunRotation)
@@ -44,5 +55,11 @@ public class RemotePlayerController : PlayerController
     	//tempGunTransform.position = gunPosition;
     	tempGunTransform = gunPosition;
 
+    }
+
+    public virtual void setTargetTransform(Vector3 newVec, Quaternion newQuat)
+    {
+        targetTransformObject.transform.position = newVec;
+        targetTransformObject.transform.rotation = newQuat;
     }
 }

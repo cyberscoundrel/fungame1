@@ -68,6 +68,11 @@ public class PlayerController : MonoBehaviour
         
     }
 
+    public virtual void setTargetTransform(Vector3 newVec, Quaternion newQuat)
+    {
+
+    }
+
     /*public Vector3 calculateWeaponPoint(int wepDist)
     {
 

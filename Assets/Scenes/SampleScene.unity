@@ -8110,7 +8110,7 @@ MonoBehaviour:
   firstPerson: 0
   planetWatch: 0
   regularCamera: 0
-  camFactor: 0.06
+  camFactor: 0.103
 --- !u!4 &1894497157
 Transform:
   m_ObjectHideFlags: 0

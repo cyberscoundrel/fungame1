@@ -16,6 +16,8 @@ public class GamePlanet
     public GameObject gameObject;
 
     public TestSphereGenerator testSphereGenerator;
+
+    public GLObject glObject;
     
     public GamePlanet(long newSeed, TestSphereGenerator sphereGenerator)
     {
