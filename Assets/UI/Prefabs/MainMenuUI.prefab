@@ -3424,6 +3424,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7686899729593855045}
   - component: {fileID: 7686899729593855046}
+  - component: {fileID: 1737707313342691595}
   - component: {fileID: 7686899729593855047}
   m_Layer: 5
   m_Name: LobbyCodeToggle
@@ -3499,8 +3500,32 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
-  m_IsOn: 1
+      m_Calls:
+      - m_Target: {fileID: 1737707313342691595}
+        m_TargetAssemblyTypeName: HomeButtonActions, Assembly-CSharp
+        m_MethodName: RoomPanelCheckboxOnclick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_IsOn: 0
+--- !u!114 &1737707313342691595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7686899729593855044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 584c04529da00e84793a4f1a3efa71f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7686899729593855047
 MonoBehaviour:
   m_ObjectHideFlags: 0
