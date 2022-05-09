@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
 {
-
     public InventoryItem[] inv;
     [SerializeField]
     private int itemCount;
@@ -21,7 +20,7 @@ public class InventoryManager : MonoBehaviour
     {
         inv = new InventoryItem[4];
         //For testing purposes
-        Sprite icon = (Sprite)AssetDatabase.LoadAssetAtPath("Assets/UI/Icons/check-circled-outline-01.png", typeof(Sprite));
+        /*Sprite icon = (Sprite)AssetDatabase.LoadAssetAtPath("Assets/UI/Icons/check-circled-outline-01.png", typeof(Sprite));
         Sprite icon2 = (Sprite)AssetDatabase.LoadAssetAtPath("Assets/LeanTween/Examples/Material/Futoro_PersonSprites.jpg", typeof(Sprite));
         inv[0] = new InventoryItem(icon);
         inv[1] = new InventoryItem(icon2);
@@ -29,7 +28,7 @@ public class InventoryManager : MonoBehaviour
         itemCount++;
         putIntoInventory(new InventoryItem(icon));
         removeFromIndex(0);
-        setSelected(1);
+        setSelected(1);*/
     }
 
     // Update is called once per frame
