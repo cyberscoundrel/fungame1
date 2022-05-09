@@ -20,8 +20,8 @@ public class FollowObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Update Pos");
-        Debug.Log(cam);
+        //Debug.Log("Update Pos");
+        //Debug.Log(cam);
         Vector3 pos = cam.WorldToScreenPoint(followObject.position + offset);
 
         if (transform.position != pos)
