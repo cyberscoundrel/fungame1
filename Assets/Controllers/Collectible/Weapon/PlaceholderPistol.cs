@@ -6,8 +6,14 @@ public class PlaceholderPistol : PistolController
 {
 
 	public Animation a;
+    public int clipSize = 30; //not nec
+    public int reservedAmmo = 270; //not nec
+    //variables that change through out code
+    bool canShoot;
+    int currentAmmo;
+    int ammoInReserve;
 
-	public int count = 0;
+    public int count = 0;
 
     public GameObject projectileSource;
 
@@ -16,8 +22,11 @@ public class PlaceholderPistol : PistolController
     void Start()
     {
     	Debug.Log("pistol controller is here");
+        currentAmmo = clipSize;
+        ammoInReserve = reservedAmmo;
+        canShoot = true;
 
-        
+
     }
 
     // Update is called once per frame
@@ -32,19 +41,39 @@ public class PlaceholderPistol : PistolController
     		onFire();
     		//a.Play("discharge");
     	}*/
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(0)) //&& canShoot
         {
             Debug.Log("play shoot");
             count++;
+            canShoot = false;
+            currentAmmo--;
             onFire();
 
         }
-        
+        else if (Input.GetKeyDown(KeyCode.R) && currentAmmo < clipSize && ammoInReserve > 0) //reload
+        {
+            int amountNeeded = clipSize - currentAmmo; //holds amount we can add to clip, ex: 30 - 27, so we need 3 bullets
+            if (amountNeeded >= ammoInReserve) //is the amount we need is larger than what we have
+            {
+                currentAmmo += ammoInReserve;
+                ammoInReserve -= amountNeeded;
+            }
+            else //amount needed is less then reserve
+            {
+                currentAmmo = clipSize;
+                ammoInReserve -= amountNeeded;
+            }
+
+        }
+
+
+
     }
 
     public override void onFire()
     {
-    	a["discharge"].speed = 20f;
+        canShoot = true;
+        a["discharge"].speed = 20f;
     	a.Play("discharge");
         RaycastHit rch;
         if(Physics.Raycast(projectileSource.transform.position, gameObject.transform.forward, out rch))
@@ -60,7 +89,28 @@ public class PlaceholderPistol : PistolController
                 entity.setHealth(entity.getHealth() - 10);
                 Debug.Log("entity new health " + entity.getHealth());
 
+                //knockback
+                Rigidbody rb = rch.transform.GetComponent<Rigidbody>();
+                rb.constraints = RigidbodyConstraints.None;
+                rb.AddForce(transform.forward * 300);
+
             }
         }
     }
+
+
+    /*
+     *     IEnumerator ShootGun() //for fully automatic weapons
+    {
+        //StartCoroutine(MuzzleFlash());
+        //DetermineRecoil();
+        //animation for shooting
+        //add line renderer
+
+        RayCastForEnemy(); // for enemy
+        yield return new WaitForSeconds(fireRate);
+        canShoot = true;
+    }
+     * 
+     */
 }
