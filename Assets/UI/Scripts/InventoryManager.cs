@@ -19,6 +19,7 @@ public class InventoryManager : MonoBehaviour
     void Start()
     {
         inv = new InventoryItem[4];
+        setSelected(0);
         //For testing purposes
         /*Sprite icon = (Sprite)AssetDatabase.LoadAssetAtPath("Assets/UI/Icons/check-circled-outline-01.png", typeof(Sprite));
         Sprite icon2 = (Sprite)AssetDatabase.LoadAssetAtPath("Assets/LeanTween/Examples/Material/Futoro_PersonSprites.jpg", typeof(Sprite));
@@ -34,7 +35,17 @@ public class InventoryManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetAxisRaw("Mouse ScrollWheel") > 0)
+        {
+            Debug.Log("Mouse Scroll Up");
+            setSelected(selectedIndex - 1);
+            //wheel goes up
+        }
+        else if (Input.GetAxisRaw("Mouse ScrollWheel") < 0)
+        {
+            Debug.Log("Mouse Scroll Down");
+            setSelected(selectedIndex + 1);
+        }
     }
 
     public bool putIntoInventory(InventoryItem item) {
@@ -68,7 +79,21 @@ public class InventoryManager : MonoBehaviour
     }
 
     public void setSelected(int index) {
-        selectedIndex = index;
+
+        if (index >= inv.Length)
+        {
+            selectedIndex = inv.Length - 1;
+        }
+        else if (index <= 0)
+        {
+            selectedIndex = 0;
+        }
+        else {
+            selectedIndex = index;
+        }
+
+        Debug.Log(selectedIndex);
+        
 
         for (int i = 0; i < inv.Length; i++)
         {
