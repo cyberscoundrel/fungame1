@@ -80,13 +80,13 @@ public class InventoryManager : MonoBehaviour
 
     public void setSelected(int index) {
 
-        if (index >= inv.Length)
-        {
-            selectedIndex = inv.Length - 1;
-        }
-        else if (index <= 0)
+        if (index > inv.Length - 1)
         {
             selectedIndex = 0;
+        }
+        else if (index < 0)
+        {
+            selectedIndex = inv.Length - 1;
         }
         else {
             selectedIndex = index;
