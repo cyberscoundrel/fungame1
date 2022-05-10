@@ -68,12 +68,14 @@ public class InventoryManager : MonoBehaviour
     }
 
     public void removeFromIndex(int index) {
-        inv[index] = null;
-        itemCount--;
-        LeanTween.scale(this.transform.Find("Slot" + (index + 1)).transform.Find("Icon").GetComponent<RectTransform>(), new Vector3(0f, 0f, 0f), animationSpeed).setFrom(new Vector3(1f, 1f, 1f)).setEase(easing).setOnComplete(() => {
-            this.transform.Find("Slot" + (index + 1)).transform.Find("Icon").GetComponent<Image>().sprite = null;
-            this.transform.Find("Slot" + (index + 1)).transform.Find("Icon").GetComponent<Image>().color = new Color(0, 0, 0, 0f);
-        });
+        if (inv[index] != null) {
+            inv[index] = null;
+            itemCount--;
+            LeanTween.scale(this.transform.Find("Slot" + (index + 1)).transform.Find("Icon").GetComponent<RectTransform>(), new Vector3(0f, 0f, 0f), animationSpeed).setFrom(new Vector3(1f, 1f, 1f)).setEase(easing).setOnComplete(() => {
+                this.transform.Find("Slot" + (index + 1)).transform.Find("Icon").GetComponent<Image>().sprite = null;
+                this.transform.Find("Slot" + (index + 1)).transform.Find("Icon").GetComponent<Image>().color = new Color(0, 0, 0, 0f);
+            });
+        }
 
         //updateUI();
     }
