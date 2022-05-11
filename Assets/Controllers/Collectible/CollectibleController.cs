@@ -7,6 +7,8 @@ public class CollectibleController : MonoBehaviour
 
 
 	Collectible collectibleObject;
+
+    public static float rarity = 1.0f;
     // Start is called before the first frame update
     void Start()
     {

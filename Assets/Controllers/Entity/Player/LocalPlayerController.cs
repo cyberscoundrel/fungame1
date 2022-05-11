@@ -42,6 +42,28 @@ public class LocalPlayerController : PlayerController
 
     void FixedUpdate()
     {
+        if(CliManager.instance != null)
+        {
+            //Debug.DrawLine(head.transform.position, PlayerManager.instance.playerOneScript.calculateWeaponPoint(), Color.gray);
+            Message m = Message.Create(MessageSendMode.unreliable, (ushort)ClientToServerId.move);
+            //m.AddUShort(player1.uTag);
+            m.AddVector3(rds.hips.transform.position);
+            m.AddQuaternion(rds.hips.transform.rotation);
+            //Debug.Log("sending pos " + rds.hips.transform.position);
+            //Debug.Log("sending rot " + rds.hips.transform.rotation);
+            CliManager.client.Send(m);
+        }
+        else if(NetManager.instance != null)
+        {
+            Message m = Message.Create(MessageSendMode.unreliable, (ushort)ServerToClientId.playerMovement);
+            m.AddUShort(PlayerManager.instance.player1.uTag);
+            m.AddVector3(rds.hips.transform.position);
+            m.AddQuaternion(rds.hips.transform.rotation);
+            //Debug.Log("sending pos " + rds.hips.transform.position);
+            //Debug.Log("sending rot " + rds.hips.transform.rotation);
+            NetManager.instance.server.SendToAll(m);
+
+        }
         /*if(CliManager.instance != null)
         {
             //Debug.DrawLine(head.transform.position, PlayerManager.instance.playerOneScript.calculateWeaponPoint(), Color.gray);

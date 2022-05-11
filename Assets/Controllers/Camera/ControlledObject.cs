@@ -51,6 +51,7 @@ public class ControlledObject : MonoBehaviour
 
     public bool regularCamera = false;
 
+    [Range(0.01f, 0.99f)]
     public float camFactor = 0.01f;
 
 

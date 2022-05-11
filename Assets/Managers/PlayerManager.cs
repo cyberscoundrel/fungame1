@@ -87,16 +87,18 @@ public class PlayerManager : MonoBehaviour
 	    			if(NetManager.instance == null)
 	    			{
 	    				Message m = Message.Create(MessageSendMode.reliable, (ushort)ClientToServerId.pickup);
-	    				m.AddUShort(player1.uTag);
 	    				m.AddUShort(c.uTag);
+	    				//m.AddUShort(player1.uTag);
+	    				//m.AddUShort(c.uTag);
 	    				CliManager.client.Send(m);
 
 	    			}
 	    			else
 	    			{
 	    				Message m = Message.Create(MessageSendMode.reliable, (ushort)ServerToClientId.playerPickedUp);
-	    				m.AddUShort(player1.uTag);
+	    				//m.AddUShort(player1.uTag);
 	    				m.AddUShort(c.uTag);
+	    				m.AddUShort(player1.uTag);
 	    				NetManager.instance.server.SendToAll(m);
 
 	    			}
@@ -213,12 +215,20 @@ public class PlayerManager : MonoBehaviour
 			Quaternion newRot = message.GetQuaternion();
 			Debug.Log("newPos " + newPos);
 			Debug.Log("newRot " + newRot);
-			movePlayer.gameObject.GetComponent<PlayerController>().rds.hips.isKinematic = true;
 
-			movePlayer.gameObject.GetComponent<PlayerController>().rds.hips.transform.position = newPos;
-			movePlayer.gameObject.GetComponent<PlayerController>().rds.hips.transform.rotation = newRot;
+			PlayerController rpc = movePlayer.gameObject.GetComponent<PlayerController>();
 
-			movePlayer.gameObject.GetComponent<PlayerController>().rds.hips.isKinematic = false;
+			rpc.setTargetTransform(newPos, newRot);
+
+
+
+
+			//movePlayer.gameObject.GetComponent<PlayerController>().rds.hips.isKinematic = true;
+
+			//movePlayer.gameObject.GetComponent<PlayerController>().rds.hips.transform.position = newPos;
+			//movePlayer.gameObject.GetComponent<PlayerController>().rds.hips.transform.rotation = newRot;
+
+			//movePlayer.gameObject.GetComponent<PlayerController>().rds.hips.isKinematic = false;
 
 			//movePlayer.gameObject.transform.position = message.GetVector3();
 			//movePlayer.gameObject.transform.rotation = message.GetQuaternion();
@@ -240,11 +250,15 @@ public class PlayerManager : MonoBehaviour
 			Debug.Log("movePlayer rds" + movePlayer.gameObject.GetComponent<PlayerController>().rds);
 			Vector3 newPos = message.GetVector3();
 			Quaternion newRot = message.GetQuaternion();
+
+			PlayerController rpc = movePlayer.gameObject.GetComponent<PlayerController>();
+
+			rpc.setTargetTransform(newPos, newRot);
 			//movePlayer.gameObject.transform.position = newPos;
 			//movePlayer.gameObject.transform.rotation = newRot;
 
-			movePlayer.gameObject.GetComponent<PlayerController>().rds.hips.transform.position = newPos;
-			movePlayer.gameObject.GetComponent<PlayerController>().rds.hips.transform.rotation = newRot;
+			//movePlayer.gameObject.GetComponent<PlayerController>().rds.hips.transform.position = newPos;
+			//movePlayer.gameObject.GetComponent<PlayerController>().rds.hips.transform.rotation = newRot;
 			Message m = Message.Create(MessageSendMode.unreliable, (ushort)ServerToClientId.playerMovement);
 			m.AddUShort(clientId);
 			m.AddVector3(newPos);
