@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
-public class DebugHealthBar : MonoBehaviour
+public class DebugHUD : MonoBehaviour
 {
     // Start is called before the first frame update
     public void setZero() 
@@ -45,4 +46,47 @@ public class DebugHealthBar : MonoBehaviour
         GameObject.Find("HealthBar").GetComponent<HealthBarController>().UpdateHealth((int)(Random.Range(0f, 1f) * max));
     }
 
+    public void selectInvZero() {
+        GameObject.Find("InventoryPanel").GetComponent<InventoryManager>().setSelected(0);
+    }
+
+    public void selectInvOne()
+    {
+        GameObject.Find("InventoryPanel").GetComponent<InventoryManager>().setSelected(1);
+    }
+
+    public void selectInvTwo()
+    {
+        GameObject.Find("InventoryPanel").GetComponent<InventoryManager>().setSelected(2);
+    }
+
+    public void selectInvThree()
+    {
+        GameObject.Find("InventoryPanel").GetComponent<InventoryManager>().setSelected(3);
+    }
+
+    public void putInInv() {
+        Sprite icon = (Sprite)AssetDatabase.LoadAssetAtPath("Assets/LeanTween/Examples/Material/Futoro_PersonSprites.jpg", typeof(Sprite));
+        Debug.Log(GameObject.Find("InventoryPanel").GetComponent<InventoryManager>().putIntoInventory(new InventoryItem(icon)));
+    }
+
+    public void removeInvZero()
+    {
+        GameObject.Find("InventoryPanel").GetComponent<InventoryManager>().removeFromIndex(0);
+    }
+
+    public void removeInvOne()
+    {
+        GameObject.Find("InventoryPanel").GetComponent<InventoryManager>().removeFromIndex(1);
+    }
+
+    public void removeInvTwo()
+    {
+        GameObject.Find("InventoryPanel").GetComponent<InventoryManager>().removeFromIndex(2);
+    }
+
+    public void removeInvThree()
+    {
+        GameObject.Find("InventoryPanel").GetComponent<InventoryManager>().removeFromIndex(3);
+    }
 }
