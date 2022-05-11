@@ -373,7 +373,7 @@ public class PlayerManager : MonoBehaviour
 		
 	}
 
-	[MessageHandler((ushort)ServerToClientId.playerPickedUp)]
+	/*[MessageHandler((ushort)ServerToClientId.playerPickedUp)]
 
     public static void clientItemPickedUp(Message message)
     {
@@ -391,5 +391,5 @@ public class PlayerManager : MonoBehaviour
             }
         }
 
-    }
+    }*/
 }
