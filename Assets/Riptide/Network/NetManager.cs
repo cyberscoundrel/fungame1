@@ -29,6 +29,7 @@ public enum ServerToClientId : ushort
 	collectibleMovement = 28,
 	changePlanet = 1001,
 	enemySpawned = 1003,
+	enemyAggro = 1005,
 	
 }
 

@@ -9,6 +9,8 @@ public class EnemyController : EntityController
 
 	public Player aggro;
 
+    public bool isAggro;
+
 	public NewRagdollScript enemyRagdollScript;
 
     // Start is called before the first frame update

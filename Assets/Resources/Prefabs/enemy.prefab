@@ -63,6 +63,7 @@ MonoBehaviour:
   up: {fileID: 8611547062148867553}
   downl: {fileID: 5695146741741167004}
   downr: {fileID: 5233662034598170478}
+  hips: {fileID: 2216047116820080055}
   upFloat: 31.5
   dFloat: 15
 --- !u!114 &3999162022733491186
