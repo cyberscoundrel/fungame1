@@ -50,7 +50,7 @@ public class PlaceholderPistol : PistolController
         if(Physics.Raycast(projectileSource.transform.position, gameObject.transform.forward, out rch))
         {
             Debug.Log("hit a thing " + rch.transform.gameObject.name);
-            EntityController e;
+            /*EntityController e;
             e = rch.transform.root.gameObject.GetComponent<EntityController>();
             if(e != null)
             {
@@ -60,6 +60,14 @@ public class PlaceholderPistol : PistolController
                 entity.setHealth(entity.getHealth() - 10);
                 Debug.Log("entity new health " + entity.getHealth());
 
+            }*/
+
+            EnemyController e;
+            e = rch.transform.root.gameObject.GetComponent<EnemyController>();
+            if(e != null)
+            {
+                Debug.Log("hit enemy");
+                EnemyManager.DamageEnemy(getManager().holder.uTag, e.entityObject.uTag, 10);
             }
         }
     }

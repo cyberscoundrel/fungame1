@@ -34,13 +34,16 @@ public class Weapon : Collectible
 
 	public Vector3 physicalOffset;
 
+	public override String prefabDir { get {return "Prefabs/weapons";}}
 
 
 
 
 
 
-	public Weapon(int baselvl, GameObject prefab) : base(baselvl, prefab)
+
+	//public Weapon(int baselvl, GameObject prefab) : base(baselvl, prefab)
+	public Weapon(int baselvl, uint prefab) : base(baselvl, prefab)
 	{
 		gameObject.GetComponent<WeaponController>().setManager(this);
     	
@@ -54,6 +57,16 @@ public class Weapon : Collectible
 		}*/
 
 	}
+
+	public static new Collectible generateCollectible(int baselvl, uint prefab)
+    {
+    	return new Weapon(baselvl, prefab);
+    }
+
+	//void Start()
+    //{
+    	//Collectible.funcMap.Add(2,this.generateCollectible);
+    //}
 
 	/*public static Weapon generateWeapon(int seed)
 	{

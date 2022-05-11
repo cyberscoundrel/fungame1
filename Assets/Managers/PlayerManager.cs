@@ -87,16 +87,18 @@ public class PlayerManager : MonoBehaviour
 	    			if(NetManager.instance == null)
 	    			{
 	    				Message m = Message.Create(MessageSendMode.reliable, (ushort)ClientToServerId.pickup);
-	    				m.AddUShort(player1.uTag);
 	    				m.AddUShort(c.uTag);
+	    				//m.AddUShort(player1.uTag);
+	    				//m.AddUShort(c.uTag);
 	    				CliManager.client.Send(m);
 
 	    			}
 	    			else
 	    			{
 	    				Message m = Message.Create(MessageSendMode.reliable, (ushort)ServerToClientId.playerPickedUp);
-	    				m.AddUShort(player1.uTag);
+	    				//m.AddUShort(player1.uTag);
 	    				m.AddUShort(c.uTag);
+	    				m.AddUShort(player1.uTag);
 	    				NetManager.instance.server.SendToAll(m);
 
 	    			}

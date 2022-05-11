@@ -38,6 +38,8 @@ public class GLObject
         return position + adjustment;
     }
 
+    public GamePlanet planet;
+
 
 }
 

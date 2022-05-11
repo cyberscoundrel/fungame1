@@ -3,12 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//public class Collectible : MonoBehaviour
 public class Collectible
 {
 
 	public GameObject gameObject;
 
+    //public GameObject[] prefabs;
+
 	public GameObject prefab;
+    //public int prefab;
+
+    //public String prefabDir;
 
 	public int rbIndex;
 
@@ -18,6 +24,8 @@ public class Collectible
 
 	//public int uTag;
     public ushort uTag;
+
+    public uint seed;
 
 	public int typeFlag = 0x0;
     //public short tFlag;
@@ -31,6 +39,10 @@ public class Collectible
 
     public bool activeInWorld = false;
 
+    public virtual String prefabDir { get {return "Prefabs";}}
+
+    //public static Dictionary<int, Func<int, GameObject, Collectible>> funcMap;
+
 	/*public static Dictionary<String, int> collectibleTypeFlags = new Dictionary<String, int>()
 	{
 		{"Collectible", 0x0},
@@ -40,13 +52,37 @@ public class Collectible
 		{"OnAction", 0x10}
 	};*/
 
+    //protected static Collectible generateCollectible(int baselvl, GameObject prefab)
+    protected static Collectible generateCollectible(int baselvl, uint prefab)
+    {
+        return new Collectible(baselvl, prefab);
+    }
+
+    //void Awake()
+    //{
+        //funcMap = new Dictionary<int, Func<int, GameObject, Collectible>>();
+
+    //}
 
 
-	protected Collectible(int baselvl, GameObject prefab)
+
+	//protected Collectible(int baselvl, GameObject prefab)
+    protected Collectible(int baselvl, uint prefab)
 	{
 		this.baselvl = baselvl;
-		this.prefab = prefab;
-		gameObject = UnityEngine.Object.Instantiate(prefab) as GameObject;
+		//this.prefab = prefab;
+        /*if(prefabs == null)
+        {
+            prefabs = (GameObject[])Resources.LoadAll(getPrefabDir());
+        }*/
+		//gameObject = UnityEngine.Object.Instantiate(prefabs[prefab]) as GameObject;
+        //UnityEngine.Object[] gl = Resources.LoadAll(this.prefabDir);
+        GameObject[] gl1 = (Resources.LoadAll<GameObject>(this.prefabDir));
+        //Debug.Log("Resources load all " + gl.Length + " " + this.prefabDir);
+        Debug.Log("Resources load all " + gl1.Length + " " + this.prefabDir + " index " + (prefab % gl1.Length));
+        this.prefab = gl1[prefab % gl1.Length];
+
+        gameObject = UnityEngine.Object.Instantiate(this.prefab) as GameObject;
 
 	} 
 
@@ -191,5 +227,10 @@ public class Collectible
 	public int stack;
 
 	public float mult;
+
+    ~Collectible()
+    {
+        GameObject.Destroy(gameObject, 0f);
+    }
 
 }
