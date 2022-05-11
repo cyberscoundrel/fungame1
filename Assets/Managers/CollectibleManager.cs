@@ -119,7 +119,7 @@ public class CollectibleManager : MonoBehaviour
             Debug.Log("collectibleType item");
             ushort newUTag = unchecked((ushort)instance.nextUTag);
             instance.nextUTag++;
-            GenerateObject(1, GalaxyManager.instance.seed, newUTag, (ushort)1);
+            GenerateObject(1, (GalaxyManager.instance.seed + newUTag), newUTag, (ushort)1);
 
     	}
     	else
