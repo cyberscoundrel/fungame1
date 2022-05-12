@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class PlaceholderPistol : PistolController
 {
@@ -13,10 +15,19 @@ public class PlaceholderPistol : PistolController
     int currentAmmo;
     int ammoInReserve;
 
+    // Start is called before the first frame update
+    public LineRenderer laserLine; //awake function?
+    public float laserDuration = .05f;
+    public Transform laserorigin;
+
     public int count = 0;
 
     public GameObject projectileSource;
 
+    void Awake()
+    {
+        laserLine = GetComponent<LineRenderer>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -25,8 +36,6 @@ public class PlaceholderPistol : PistolController
         currentAmmo = clipSize;
         ammoInReserve = reservedAmmo;
         canShoot = true;
-
-
     }
 
     // Update is called once per frame
@@ -41,13 +50,16 @@ public class PlaceholderPistol : PistolController
     		onFire();
     		//a.Play("discharge");
     	}*/
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(0) && canShoot && currentAmmo > 0)
         {
             Debug.Log("play shoot");
             count++;
-            canShoot = false;
+            //canShoot = false;//for fully automatic
             currentAmmo--;
+            GameObject.Find("AmmunitionText").GetComponent<AmmoController>().UpdateAmmoTexts(currentAmmo, ammoInReserve);
+            //UpdateAmmoText();
             onFire();
+            StartCoroutine(ShootLaser());//if shootlaster goes here, we need to set position to the gun
 
         }
         else if (Input.GetKeyDown(KeyCode.R) && currentAmmo < clipSize && ammoInReserve > 0) //reload
@@ -63,6 +75,8 @@ public class PlaceholderPistol : PistolController
                 currentAmmo = clipSize;
                 ammoInReserve -= amountNeeded;
             }
+            GameObject.Find("AmmunitionText").GetComponent<AmmoController>().UpdateAmmoTexts(currentAmmo, ammoInReserve);
+            //UpdateAmmoText();
 
         }
 
@@ -73,7 +87,9 @@ public class PlaceholderPistol : PistolController
     	a["discharge"].speed = 20f;
     	a.Play("discharge");
         RaycastHit rch;
-        if(Physics.Raycast(projectileSource.transform.position, gameObject.transform.forward, out rch))
+        laserLine.SetPosition(0, laserorigin.position);
+        laserLine.SetPosition(1, transform.forward * 5000);
+        if (Physics.Raycast(projectileSource.transform.position, gameObject.transform.forward, out rch))
         {
             Debug.Log("hit a thing " + rch.transform.gameObject.name);
             /*EntityController e;
@@ -103,6 +119,25 @@ public class PlaceholderPistol : PistolController
             }
         }
     }
+
+    IEnumerator ShootLaser()
+    {
+        laserLine.enabled = true;
+        yield return new WaitForSeconds(laserDuration);
+        laserLine.enabled = false;
+
+    }
+
+    /*
+    private void UpdateAmmoText()
+    {
+        ammo_text = GameObject.Find("AmmoText").GetComponent<Text>();
+        //ammo_text = GameObject.Find("AmmunitionText").GetComponent<Text>();
+        //GameObject.Find("AmmoText").GetComponent<Text>() = $"{currentAmmo}/{ammoInReserve}";
+        ammo_text.text = $"{currentAmmo}/{ammoInReserve}";
+
+    }
+    */
 
     /*
  *     IEnumerator ShootGun() //for fully automatic weapons
