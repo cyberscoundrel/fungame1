@@ -13,10 +13,19 @@ public class PlaceholderPistol : PistolController
     int currentAmmo;
     int ammoInReserve;
 
+    // Start is called before the first frame update
+    public LineRenderer laserLine; //awake function?
+    public float laserDuration = .05f;
+    public Transform laserorigin;
+
     public int count = 0;
 
     public GameObject projectileSource;
 
+    void Awake()
+    {
+        laserLine = GetComponent<LineRenderer>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -41,13 +50,14 @@ public class PlaceholderPistol : PistolController
     		onFire();
     		//a.Play("discharge");
     	}*/
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(0) && canShoot && currentAmmo > 0)
         {
             Debug.Log("play shoot");
             count++;
-            canShoot = false;
+            //canShoot = false;//for fully automatic
             currentAmmo--;
             onFire();
+            StartCoroutine(ShootLaser());//if shootlaster goes here, we need to set position to the gun
 
         }
         else if (Input.GetKeyDown(KeyCode.R) && currentAmmo < clipSize && ammoInReserve > 0) //reload
@@ -73,7 +83,9 @@ public class PlaceholderPistol : PistolController
     	a["discharge"].speed = 20f;
     	a.Play("discharge");
         RaycastHit rch;
-        if(Physics.Raycast(projectileSource.transform.position, gameObject.transform.forward, out rch))
+        laserLine.SetPosition(0, laserorigin.position); //setposition 1 to
+        laserLine.SetPosition(1, transform.forward * 5000); //setposition 1 to
+        if (Physics.Raycast(projectileSource.transform.position, gameObject.transform.forward, out rch))
         {
             Debug.Log("hit a thing " + rch.transform.gameObject.name);
             /*EntityController e;
@@ -102,6 +114,14 @@ public class PlaceholderPistol : PistolController
                 rb.AddForce(transform.forward * 300);
             }
         }
+    }
+
+    IEnumerator ShootLaser()
+    {
+        laserLine.enabled = true;
+        yield return new WaitForSeconds(laserDuration);
+        laserLine.enabled = false;
+
     }
 
     /*
