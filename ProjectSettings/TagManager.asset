@@ -9,6 +9,7 @@ TagManager:
   - collectible
   - item
   - weapon
+  - gravityCenter
   layers:
   - Default
   - TransparentFX
