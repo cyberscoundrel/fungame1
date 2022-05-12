@@ -96,9 +96,9 @@ public class PlayerManager : MonoBehaviour
 	    			else
 	    			{
 	    				Message m = Message.Create(MessageSendMode.reliable, (ushort)ServerToClientId.playerPickedUp);
-	    				//m.AddUShort(player1.uTag);
-	    				m.AddUShort(c.uTag);
 	    				m.AddUShort(player1.uTag);
+	    				m.AddUShort(c.uTag);
+	    				//m.AddUShort(player1.uTag);
 	    				NetManager.instance.server.SendToAll(m);
 
 	    			}
@@ -201,20 +201,20 @@ public class PlayerManager : MonoBehaviour
 	public static void clientPlayerMove(Message message)
 	{
 		ushort from = message.GetUShort();
-		Debug.Log("from " + from);
+		//Debug.Log("from " + from);
 		Player movePlayer = instance.getPlayerByUTag(from);
 		if(movePlayer != null)
 		{
 			if(movePlayer.uTag == instance.player1.uTag)
 			{
-				Debug.Log("thats us");
+				//Debug.Log("thats us");
 				return;
 			}
-			Debug.Log("move from " + movePlayer.uTag);
+			//Debug.Log("move from " + movePlayer.uTag);
 			Vector3 newPos = message.GetVector3();
 			Quaternion newRot = message.GetQuaternion();
-			Debug.Log("newPos " + newPos);
-			Debug.Log("newRot " + newRot);
+			//Debug.Log("newPos " + newPos);
+			//Debug.Log("newRot " + newRot);
 
 			PlayerController rpc = movePlayer.gameObject.GetComponent<PlayerController>();
 
@@ -239,15 +239,15 @@ public class PlayerManager : MonoBehaviour
 
 	public static void serverPlayerMove(ushort clientId, Message message)
 	{
-		Debug.Log("clientId " + clientId);
+		//Debug.Log("clientId " + clientId);
 		Player movePlayer = instance.getPlayerByUTag(clientId);
 		if(movePlayer != null)
 		{
 
-			Debug.Log("movePlayer " + movePlayer);
-			Debug.Log("movePlayer id " + movePlayer.uTag);
-			Debug.Log("movePlayer controller " + movePlayer.gameObject.GetComponent<PlayerController>());
-			Debug.Log("movePlayer rds" + movePlayer.gameObject.GetComponent<PlayerController>().rds);
+			//Debug.Log("movePlayer " + movePlayer);
+			//Debug.Log("movePlayer id " + movePlayer.uTag);
+			//Debug.Log("movePlayer controller " + movePlayer.gameObject.GetComponent<PlayerController>());
+			//Debug.Log("movePlayer rds" + movePlayer.gameObject.GetComponent<PlayerController>().rds);
 			Vector3 newPos = message.GetVector3();
 			Quaternion newRot = message.GetQuaternion();
 

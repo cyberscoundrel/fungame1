@@ -205,6 +205,10 @@ public class CollectibleManager : MonoBehaviour
             m.AddUShort(c.uTag);
             NetManager.instance.server.SendToAll(m);
         }
+        else if(NetManager.instance == null && CliManager.client == null)
+        {
+            c.gameObject.transform.position = GalaxyManager.gravityCenter.gameObject.transform.position + (UnityEngine.Random.onUnitSphere * GalaxyManager.gravityCenter.glObject.maxRadius);
+        }
         EnqueueObject(c);
         return c;
 
@@ -382,11 +386,12 @@ public class CollectibleManager : MonoBehaviour
 
     public static void clientCollectiblePickedUp(Message message)
     {
+        ushort playerUtag = message.GetUShort();
         ushort utag = message.GetUShort();
         Collectible c = instance.getCollectibleByUTag(utag);
         if(c != null)
         {
-            ushort playerUtag = message.GetUShort();
+            //ushort playerUtag = message.GetUShort();
             Player p = PlayerManager.instance.getPlayerByUTag(playerUtag);
             if(p != null)
             {
