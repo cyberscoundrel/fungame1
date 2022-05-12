@@ -174,6 +174,8 @@ public class EnemyManager : MonoBehaviour
 			Message m = Message.Create(MessageSendMode.reliable, (ushort)ServerToClientId.enemySpawned);
 			m.AddUShort(e.uTag);
 			m.AddVector3(e.gameObject.GetComponent<NewRagdollScript>().hips.transform.position);
+
+			NetManager.instance.server.SendToAll(m);
 			//m.AddQuaternion(e.gameObject.transform.rotation);
 		}
 		//enemyPool.Add(e);
@@ -191,7 +193,7 @@ public class EnemyManager : MonoBehaviour
 		newEnemy.uTag = eUTag;
 		newEnemy.gameObject.GetComponent<NewRagdollScript>().hips.isKinematic = true;
 		newEnemy.gameObject.GetComponent<NewRagdollScript>().hips.transform.position = message.GetVector3();
-		newEnemy.gameObject.GetComponent<NewRagdollScript>().hips.isKinematic = true;
+		newEnemy.gameObject.GetComponent<NewRagdollScript>().hips.isKinematic = false;
 		//newEnemy.gameObject.transform.rotation = message.GetQuaternion();
 
 		//Player newPlayer = instance.createNewPlayer<RemotePlayer>(remoteguy)
