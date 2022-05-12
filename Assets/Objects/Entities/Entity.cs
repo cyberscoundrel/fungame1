@@ -97,4 +97,9 @@ public class Entity
     {
         return health;
     }
+
+    ~Entity()
+    {
+        GameObject.Destroy(gameObject, 0f);
+    }
 }
