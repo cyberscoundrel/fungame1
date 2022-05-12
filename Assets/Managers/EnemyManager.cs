@@ -140,11 +140,13 @@ public class EnemyManager : MonoBehaviour
 
     public static void DamageEnemy(Enemy e, int damage)
     {
+		Debug.Log("DAMAGE:" + damage);
+		int health = e.getHealth() - damage;
+		e.setHealth(health);
+		e.gameObject.GetComponent<InstantiateHealthbar>().healthbarInstance.GetComponent<HealthBarController>().UpdateHealth(health);
 
-    	e.setHealth(e.getHealth() - damage);
-
-    	//e.healh -= damage;
-    }
+		//e.healh -= damage;
+	}
 
     public E createNewEnemy<E>(GameObject prefab) where E : Enemy
 	{
