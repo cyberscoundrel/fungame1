@@ -797,7 +797,7 @@ public class GalaxyManager : MonoBehaviour
     {
         if(Input.GetKeyDown("space"))
         {
-            if(NetManager.instance != null || (NetManager.instance == null && CliManager.client == null))
+            if(NetManager.instance != null || (NetManager.instance == null && CliManager.client == null && !ControlledObject.instance.moviecam))
             {
                 GLObject closestGravityCenter = gravityCenter.glObject.connections[0];
                 foreach(GLObject gl in gravityCenter.glObject.connections)
