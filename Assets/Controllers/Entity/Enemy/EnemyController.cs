@@ -23,11 +23,14 @@ public class EnemyController : EntityController
     // Update is called once per frame
     void Update()
     {
-    	if(entityObject.getHealth() < 0)
+    	if(entityObject.getHealth() <= 0)
     	{
     		//Debug.Log("enemy dead");
     		enemyRagdollScript.enabled = false;
-    	}
+            //this.gameObject.GetComponent<InstantiateHealthbar>().healthbarInstance.GetComponent<HealthBarController>().DestroyHealthBar();
+            Destroy(gameObject.GetComponent<InstantiateHealthbar>().healthbarInstance);
+
+        }
     	else
     	{
     		enemyRagdollScript.enabled = true;

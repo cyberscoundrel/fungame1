@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f890188bfcf9cf4ba1e239e79f9ce5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAggro: 0
   enemyRagdollScript: {fileID: 8873215891745757786}
 --- !u!114 &8873215891745757786
 MonoBehaviour:
@@ -64,8 +65,10 @@ MonoBehaviour:
   downl: {fileID: 5695146741741167004}
   downr: {fileID: 5233662034598170478}
   hips: {fileID: 2216047116820080055}
+  ec: {fileID: 0}
   upFloat: 31.5
   dFloat: 15
+  moveFloat: 10
 --- !u!114 &3999162022733491186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80,6 +83,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthbarUI: {fileID: 5596691943609574531, guid: 9d4a8a36174dde24a8e7b3ec8eceacc9, type: 3}
   followTransform: {fileID: 8036004217642802320}
+  entity: {fileID: 659971134650186023}
 --- !u!1 &4397145443907646623
 GameObject:
   m_ObjectHideFlags: 0

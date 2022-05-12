@@ -14,7 +14,7 @@ public class HomeButtonActions : MonoBehaviour
         ControlledObject.instance.planetWatch = false;
         GalaxyManager.enterGame();
         GameObject.Find("MainMenuUI").SetActive(false);
-
+        GameObject.Find("HUDCanvas").GetComponent<ShowHideHUD>().showHUD();
     }
 
     public void OnlineOnclick()

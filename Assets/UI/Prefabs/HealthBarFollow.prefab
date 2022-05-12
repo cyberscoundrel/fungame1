@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5596691943609574528}
   - component: {fileID: 5596691943609574529}
   - component: {fileID: 2723589982021170539}
+  - component: {fileID: 5549929055277698304}
   m_Layer: 5
   m_Name: HealthBarFollow
   m_TagString: Untagged
@@ -111,6 +112,8 @@ MonoBehaviour:
   flashSpeed: 0.4
   damageFlashColor: {r: 0.9622642, g: 0.3457046, b: 0, a: 1}
   healFlashColor: {r: 0, g: 0.4543964, b: 0.9528302, a: 1}
+  destroyEasing: 6
+  destroySpeed: 0.2
 --- !u!114 &2723589982021170539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,6 +128,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   followObject: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+--- !u!225 &5549929055277698304
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5596691943609574531}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &5596691944851614248
 GameObject:
   m_ObjectHideFlags: 0
