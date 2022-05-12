@@ -92,6 +92,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   limbs: []
+  ammo_text: {fileID: 0}
   a: {fileID: 8805507705110252461}
   clipSize: 30
   reservedAmmo: 270

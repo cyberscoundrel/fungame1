@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class PlaceholderPistol : PistolController
 {
@@ -34,8 +36,6 @@ public class PlaceholderPistol : PistolController
         currentAmmo = clipSize;
         ammoInReserve = reservedAmmo;
         canShoot = true;
-
-
     }
 
     // Update is called once per frame
@@ -56,6 +56,8 @@ public class PlaceholderPistol : PistolController
             count++;
             //canShoot = false;//for fully automatic
             currentAmmo--;
+            GameObject.Find("AmmunitionText").GetComponent<AmmoController>().UpdateAmmoTexts(currentAmmo, ammoInReserve);
+            //UpdateAmmoText();
             onFire();
             StartCoroutine(ShootLaser());//if shootlaster goes here, we need to set position to the gun
 
@@ -73,6 +75,8 @@ public class PlaceholderPistol : PistolController
                 currentAmmo = clipSize;
                 ammoInReserve -= amountNeeded;
             }
+            GameObject.Find("AmmunitionText").GetComponent<AmmoController>().UpdateAmmoTexts(currentAmmo, ammoInReserve);
+            //UpdateAmmoText();
 
         }
 
@@ -83,8 +87,8 @@ public class PlaceholderPistol : PistolController
     	a["discharge"].speed = 20f;
     	a.Play("discharge");
         RaycastHit rch;
-        laserLine.SetPosition(0, laserorigin.position); //setposition 1 to
-        laserLine.SetPosition(1, transform.forward * 5000); //setposition 1 to
+        laserLine.SetPosition(0, laserorigin.position);
+        laserLine.SetPosition(1, transform.forward * 5000);
         if (Physics.Raycast(projectileSource.transform.position, gameObject.transform.forward, out rch))
         {
             Debug.Log("hit a thing " + rch.transform.gameObject.name);
@@ -123,6 +127,17 @@ public class PlaceholderPistol : PistolController
         laserLine.enabled = false;
 
     }
+
+    /*
+    private void UpdateAmmoText()
+    {
+        ammo_text = GameObject.Find("AmmoText").GetComponent<Text>();
+        //ammo_text = GameObject.Find("AmmunitionText").GetComponent<Text>();
+        //GameObject.Find("AmmoText").GetComponent<Text>() = $"{currentAmmo}/{ammoInReserve}";
+        ammo_text.text = $"{currentAmmo}/{ammoInReserve}";
+
+    }
+    */
 
     /*
  *     IEnumerator ShootGun() //for fully automatic weapons
