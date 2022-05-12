@@ -290,7 +290,7 @@ public class ControlledObject : MonoBehaviour
 
                         foreach(RaycastHit h in hit)
                         {
-                            if(h.collider.gameObject.tag == "planet_object")
+                            if(h.collider.gameObject.tag == "planet_object" || h.collider.gameObject.tag == "gravityCenter")
                             {
                                 //Debug.Log(h.collider.gameObject.tag);
                                 //Debug.Log(h.collider.gameObject.name);
