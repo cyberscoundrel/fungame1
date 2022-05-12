@@ -30,6 +30,7 @@ public enum ServerToClientId : ushort
 	changePlanet = 1001,
 	enemySpawned = 1003,
 	enemyAggro = 1005,
+	enemyKilled = 1007,
 	
 }
 
@@ -46,6 +47,7 @@ public enum ClientToServerId : ushort
 	//TODO independent physics
 	collectibleMove = 99,
 	enemyMove = 211,
+	killEnemy = 311,
 
 }
 

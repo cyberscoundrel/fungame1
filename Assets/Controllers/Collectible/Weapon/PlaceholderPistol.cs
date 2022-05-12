@@ -97,9 +97,9 @@ public class PlaceholderPistol : PistolController
                 EnemyManager.DamageEnemy(getManager().holder.uTag, e.entityObject.uTag, 10);
 
                 //knockback
-                Rigidbody rb = rch.transform.GetComponent<Rigidbody>();
-                rb.constraints = RigidbodyConstraints.None;
-                rb.AddForce(transform.forward * 300);
+                //Rigidbody rb = rch.transform.GetComponent<Rigidbody>();
+                //rb.constraints = RigidbodyConstraints.None;
+                //rb.AddForce(transform.forward * 300);
             }
         }
     }
