@@ -9,6 +9,8 @@ public class ControlledObject : MonoBehaviour
 
     public GameObject controlledObject;
 
+    public GameObject movieCamObject;
+
     public static ControlledObject instance;
 
     public Camera controlledCamera;
@@ -54,6 +56,10 @@ public class ControlledObject : MonoBehaviour
     [Range(0.01f, 0.99f)]
     public float camFactor = 0.01f;
 
+    public bool moviecam = false;
+
+    public GameObject hudcan;
+
 
 
 
@@ -67,6 +73,7 @@ public class ControlledObject : MonoBehaviour
     	instance = this;
         currentCameraTransform = new GameObject();
         targetCameraTransform = new GameObject();
+        movieCamObject = new GameObject();
         //initCameraRotation = null;
 
 
@@ -118,6 +125,28 @@ public class ControlledObject : MonoBehaviour
                 }
 	        }
 
+            if(Input.GetKeyDown("l"))
+            {
+                moviecam = !moviecam;
+                if(hudcan == null)
+                {
+                    hudcan = GameObject.Find("HUDCanvas");
+                }
+                if(moviecam)
+                {
+                    camFactor = 0.01f;
+                    hudcan.SetActive(false);
+                    //GameObject.Find("HUDCanvas").SetActive(false);
+                }
+                else
+                {
+                    camFactor = 0.4f;
+                    hudcan.SetActive(true);
+                    //GameObject.Find("HUDCanvas").SetActive(true);
+                }
+
+            }
+
 
 
 
@@ -125,6 +154,47 @@ public class ControlledObject : MonoBehaviour
     	}
 
         
+    }
+
+    void FixedUpdate()
+    {
+        if(moviecam)
+        {
+            Vector3 u = GalaxyManager.getGravityVector(controlledObject.transform).normalized;
+            Vector3 f = controlledCamera.transform.forward;
+            Vector3 r = Vector3.Cross(u,f);
+
+            if(Input.GetKey("space"))
+            {
+                movieCamObject.transform.position += u * 0.1f;
+
+            }
+            if(Input.GetKey("w"))
+            {
+                movieCamObject.transform.position += f * 0.1f;
+
+            }
+            if(Input.GetKey("s"))
+            {
+                movieCamObject.transform.position -= f * 0.1f;
+
+            }
+            if(Input.GetKey(KeyCode.LeftControl))
+            {
+                movieCamObject.transform.position -= u * 0.1f;
+
+            }
+            if(Input.GetKey("a"))
+            {
+                movieCamObject.transform.position -= r * 0.1f;
+
+            }
+            if(Input.GetKey("d"))
+            {
+                movieCamObject.transform.position += r * 0.1f;
+
+            }
+        }
     }
 
     void LateUpdate()
@@ -244,6 +314,31 @@ public class ControlledObject : MonoBehaviour
 
 
     	}
+        else if(moviecam)
+        {
+            float xmouse = Input.GetAxis("Mouse X"), ymouse = Input.GetAxis("Mouse Y");
+            cx = xmouse;
+            cy += ymouse;
+
+
+            cy = Mathf.Clamp(cy, -45f, 85f);
+
+            currentCameraTransform.transform.position = movieCamObject.transform.position;
+            Quaternion newq = Quaternion.FromToRotation(controlledCamera.transform.up.normalized, GalaxyManager.getGravityVector(controlledObject.transform).normalized);
+            Quaternion old = controlledCamera.transform.rotation;
+            currentCameraTransform.transform.rotation = Quaternion.FromToRotation(currentCameraTransform.transform.up.normalized, GalaxyManager.getGravityVector(controlledObject.transform).normalized) * currentCameraTransform.transform.rotation;
+            currentCameraTransform.transform.rotation *= Quaternion.Euler(cy, cx, 0);
+            currentCameraTransform.transform.position += Vector3.Scale(GalaxyManager.getGravityVector(controlledObject.transform).normalized, new Vector3(0.2f,0.2f,0.2f));
+            currentCameraTransform.transform.position += Vector3.Scale(-currentCameraTransform.transform.right, new Vector3(0.1f,0.1f,0.1f));
+
+            targetCameraTransform.transform.position = Vector3.Lerp(targetCameraTransform.transform.position, currentCameraTransform.transform.position, camFactor);
+            targetCameraTransform.transform.rotation = Quaternion.Slerp(targetCameraTransform.transform.rotation, currentCameraTransform.transform.rotation, camFactor);
+            controlledCamera.transform.position = targetCameraTransform.transform.position;
+            controlledCamera.transform.rotation = targetCameraTransform.transform.rotation;
+
+
+
+        }
         else
         {
             if(controlledObject != null)
@@ -290,7 +385,7 @@ public class ControlledObject : MonoBehaviour
 
                         foreach(RaycastHit h in hit)
                         {
-                            if(h.collider.gameObject.tag == "planet_object")
+                            if(h.collider.gameObject.tag == "planet_object" || h.collider.gameObject.tag == "gravityCenter")
                             {
                                 //Debug.Log(h.collider.gameObject.tag);
                                 //Debug.Log(h.collider.gameObject.name);
@@ -321,6 +416,8 @@ public class ControlledObject : MonoBehaviour
                 targetCameraTransform.transform.rotation = Quaternion.Slerp(targetCameraTransform.transform.rotation, currentCameraTransform.transform.rotation, camFactor);
                 controlledCamera.transform.position = targetCameraTransform.transform.position;
                 controlledCamera.transform.rotation = targetCameraTransform.transform.rotation;
+
+                movieCamObject.transform.position = targetCameraTransform.transform.position;
                 //controlledCamera.transform.position = currentCameraTransform.transform.position;
                 //controlledCamera.transform.rotation = currentCameraTransform.transform.rotation;
 

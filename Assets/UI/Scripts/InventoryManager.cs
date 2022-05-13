@@ -37,13 +37,13 @@ public class InventoryManager : MonoBehaviour
     {
         if (Input.GetAxisRaw("Mouse ScrollWheel") > 0)
         {
-            Debug.Log("Mouse Scroll Up");
+            //Debug.Log("Mouse Scroll Up");
             setSelected(selectedIndex - 1);
             //wheel goes up
         }
         else if (Input.GetAxisRaw("Mouse ScrollWheel") < 0)
         {
-            Debug.Log("Mouse Scroll Down");
+            //Debug.Log("Mouse Scroll Down");
             setSelected(selectedIndex + 1);
         }
     }
@@ -51,10 +51,10 @@ public class InventoryManager : MonoBehaviour
     public bool putIntoInventory(InventoryItem item) {
         for (int i = 0; i < inv.Length; i++)
         {
-            Debug.Log(i + ": " + inv[i]);
+            //Debug.Log(i + ": " + inv[i]);
             if (inv[i] == null) 
             {
-                Debug.Log("NULL FOUND");
+                //Debug.Log("NULL FOUND");
                 inv[i] = item;
                 itemCount++;
                 this.transform.Find("Slot" + (i + 1)).transform.Find("Icon").GetComponent<Image>().sprite = inv[i].getIcon();
@@ -94,7 +94,7 @@ public class InventoryManager : MonoBehaviour
             selectedIndex = index;
         }
 
-        Debug.Log(selectedIndex);
+        //Debug.Log(selectedIndex);
         
 
         for (int i = 0; i < inv.Length; i++)

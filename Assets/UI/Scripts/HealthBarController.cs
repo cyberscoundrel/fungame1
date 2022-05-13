@@ -14,6 +14,8 @@ public class HealthBarController : MonoBehaviour
     public float flashSpeed;
     public Color damageFlashColor;
     public Color healFlashColor;
+    public LeanTweenType destroyEasing;
+    public float destroySpeed;
 
     public void UpdateHealth(int health) 
     {
@@ -46,20 +48,44 @@ public class HealthBarController : MonoBehaviour
         return maxHealth;
     }
 
+    public void SetCurrentHealth(int health)
+    {
+        currentHealth = health;
+        gameObject.GetComponent<Slider>().value = (float)(currentHealth / maxHealth);
+    }
+
+    public int GetCurrentHealth()
+    {
+        return currentHealth;
+    }
+
     public void FlashDamage() 
     {
-        GameObject barfill = GameObject.Find("BarFill");
+        //GameObject barfill = GameObject.Find("BarFill");
         //barfill.GetComponent<Image>().color = flashColor;
+        GameObject barfill = this.gameObject.transform.Find("BarFill").gameObject;
         LeanTween.value(barfill, damageFlashColor, Color.white, flashSpeed).setEase(flashEasing).setOnUpdate( (Color val) => {
             barfill.GetComponent<Image>().color = val;
         });
     }
 
     public void FlashHeal() {
-        GameObject barfill = GameObject.Find("BarFill");
+        //GameObject barfill = GameObject.Find("BarFill");
         //barfill.GetComponent<Image>().color = flashColor;
+        GameObject barfill = this.gameObject.transform.Find("BarFill").gameObject;
         LeanTween.value(barfill, healFlashColor, Color.white, flashSpeed).setEase(flashEasing).setOnUpdate((Color val) => {
             barfill.GetComponent<Image>().color = val;
+        });
+    }
+
+    public void DestroyHealthBar()
+    {
+        LeanTween.value(this.gameObject, 1, 0, destroySpeed).setEase(destroyEasing).setOnUpdate((float val) =>
+        {
+            this.gameObject.GetComponent<CanvasGroup>().alpha = val;
+
+        }).setOnComplete(() => {
+            Destroy(this);
         });
     }
 }

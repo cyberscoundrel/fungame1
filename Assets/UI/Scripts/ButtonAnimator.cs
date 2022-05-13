@@ -10,13 +10,13 @@ public class ButtonAnimator : MonoBehaviour
 
     public void OnHoverScaleUp()
     {
-        Debug.Log("Hover");
+        //Debug.Log("Hover");
         LeanTween.scale(gameObject, new Vector3(1.5f, 1.5f, 1.5f), animationSpeed).setEase(easing);
     }
 
     public void OnUnhoverScaleDown()
     {
-        Debug.Log("UnHover");
+        //Debug.Log("UnHover");
         LeanTween.scale(gameObject, new Vector3(1f, 1f, 1f), animationSpeed).setEase(easing);
     }
 

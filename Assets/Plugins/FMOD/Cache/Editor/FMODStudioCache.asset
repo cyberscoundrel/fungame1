@@ -1,72 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8222142714796447996
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/COS_Music_Planet2
-  m_EditorClassIdentifier: 
-  Path: event:/Music/COS_Music_Planet2
-  guid: a45f67aa8a66244cba3f1abe9ec31b40
-  Banks:
-  - {fileID: -4032370179505635304}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 17160
---- !u!114 &-7218581305407821788
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/COS_Musicmanager/Drift
-  m_EditorClassIdentifier: 
-  Name: Drift
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 1613073043
-    data2: 2665126339
-  Exists: 0
---- !u!114 &-7022240361710936302
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/COS_Music_Planet1
-  m_EditorClassIdentifier: 
-  Path: event:/Music/COS_Music_Planet1
-  guid: 94a4e53fd038fb479b5167f817adf6ef
-  Banks:
-  - {fileID: -4032370179505635304}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 19330
---- !u!114 &-4074443369849458043
+--- !u!114 &-8755673464106077696
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -86,77 +20,7 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
---- !u!114 &-4032370179505635304
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/Plugins/FMOD/SOUNDBANKS/Desktop/Master.bank
-  Name: Master
-  StudioPath: bank:/Master
-  lastModified: 637878277255760956
-  LoadResult: 0
-  FileSizes: []
-  Exists: 1
---- !u!114 &-1851392381196856989
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/COS_Musicmanager/Drift
-  m_EditorClassIdentifier: 
-  Name: Drift
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 0
-    data2: 0
-  Exists: 1
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
-  m_Name: FMODStudioCache
-  m_EditorClassIdentifier: 
-  EditorBanks:
-  - {fileID: 599310219344100476}
-  - {fileID: -4032370179505635304}
-  EditorEvents:
-  - {fileID: 4970253838743841772}
-  - {fileID: 8978583455369054849}
-  - {fileID: 3867600949679227945}
-  - {fileID: 6116776781612884603}
-  - {fileID: -7022240361710936302}
-  - {fileID: 663306138589304612}
-  - {fileID: -8222142714796447996}
-  - {fileID: 1359183353080300469}
-  EditorParameters: []
-  MasterBanks:
-  - {fileID: -4032370179505635304}
-  StringsBanks:
-  - {fileID: 599310219344100476}
-  stringsBankWriteTime: 637878277255781521
-  cacheVersion: 6
---- !u!114 &599310219344100476
+--- !u!114 &-6884736515984974624
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -171,13 +35,13 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/SOUNDBANKS/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637878277255781521
+  lastModified: 637879192840117754
   LoadResult: 0
   FileSizes:
   - Name: 
     Value: 1106
   Exists: 1
---- !u!114 &663306138589304612
+--- !u!114 &-6724096925234994780
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -186,44 +50,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/COS_Music_Planet3
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
   m_EditorClassIdentifier: 
-  Path: event:/Music/COS_Music_Planet3
-  guid: 9d0791c8556bc44d9b02fd679b9bb22e
-  Banks:
-  - {fileID: -4032370179505635304}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 31966
---- !u!114 &1359183353080300469
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/COS_Drift1
-  m_EditorClassIdentifier: 
-  Path: event:/Music/COS_Drift1
-  guid: a83cf921e33d79408c187dcf3e253424
-  Banks:
-  - {fileID: -4032370179505635304}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 9395
---- !u!114 &3867600949679227945
+  Path: Assets/Plugins/FMOD/SOUNDBANKS/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 637879192840097746
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-4301918439732084304
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -238,16 +75,16 @@ MonoBehaviour:
   Path: event:/Music/COS_Musicmanager
   guid: 2f81621475e48f48b8a24edee2f30535
   Banks:
-  - {fileID: -4032370179505635304}
+  - {fileID: -6724096925234994780}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: -1851392381196856989}
+  - {fileID: -8755673464106077696}
   MinDistance: 0
   MaxDistance: 0
   Length: 87900
---- !u!114 &4970253838743841772
+--- !u!114 &-1241889897374197931
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -257,20 +94,51 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/COS_Music_Planet4
+  m_Name: event:/Music/COS_Music_Planet2
   m_EditorClassIdentifier: 
-  Path: event:/Music/COS_Music_Planet4
-  guid: 175fc5742b62d6459ba6b1bc22ccbef1
+  Path: event:/Music/COS_Music_Planet2
+  guid: a45f67aa8a66244cba3f1abe9ec31b40
   Banks:
-  - {fileID: -4032370179505635304}
+  - {fileID: -6724096925234994780}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
   Parameters: []
   MinDistance: 0
   MaxDistance: 0
-  Length: 30721
---- !u!114 &6116776781612884603
+  Length: 17160
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
+  m_Name: FMODStudioCache
+  m_EditorClassIdentifier: 
+  EditorBanks:
+  - {fileID: -6884736515984974624}
+  - {fileID: -6724096925234994780}
+  EditorEvents:
+  - {fileID: 8482191866461429246}
+  - {fileID: 3004635552330970853}
+  - {fileID: -4301918439732084304}
+  - {fileID: 1217300618187901015}
+  - {fileID: 4462523202548631269}
+  - {fileID: 3461385946650406311}
+  - {fileID: -1241889897374197931}
+  - {fileID: 8284997616265963214}
+  EditorParameters: []
+  MasterBanks:
+  - {fileID: -6724096925234994780}
+  StringsBanks:
+  - {fileID: -6884736515984974624}
+  stringsBankWriteTime: 637879192840117754
+  cacheVersion: 6
+--- !u!114 &1217300618187901015
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -285,7 +153,7 @@ MonoBehaviour:
   Path: event:/Music/COS_Drift2
   guid: 5397e5ea01a59f44af1ff99e701c0d17
   Banks:
-  - {fileID: -4032370179505635304}
+  - {fileID: -6724096925234994780}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -293,7 +161,7 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 15963
---- !u!114 &8978583455369054849
+--- !u!114 &3004635552330970853
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -308,7 +176,7 @@ MonoBehaviour:
   Path: event:/Music/COS_Music_Menu
   guid: 17cb530f50e04a4aa5936e8a15ae45a7
   Banks:
-  - {fileID: -4032370179505635304}
+  - {fileID: -6724096925234994780}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -316,3 +184,95 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 85200
+--- !u!114 &3461385946650406311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/COS_Music_Planet3
+  m_EditorClassIdentifier: 
+  Path: event:/Music/COS_Music_Planet3
+  guid: 9d0791c8556bc44d9b02fd679b9bb22e
+  Banks:
+  - {fileID: -6724096925234994780}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 31966
+--- !u!114 &4462523202548631269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/COS_Music_Planet1
+  m_EditorClassIdentifier: 
+  Path: event:/Music/COS_Music_Planet1
+  guid: 94a4e53fd038fb479b5167f817adf6ef
+  Banks:
+  - {fileID: -6724096925234994780}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 19330
+--- !u!114 &8284997616265963214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/COS_Drift1
+  m_EditorClassIdentifier: 
+  Path: event:/Music/COS_Drift1
+  guid: a83cf921e33d79408c187dcf3e253424
+  Banks:
+  - {fileID: -6724096925234994780}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 9395
+--- !u!114 &8482191866461429246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/COS_Music_Planet4
+  m_EditorClassIdentifier: 
+  Path: event:/Music/COS_Music_Planet4
+  guid: 175fc5742b62d6459ba6b1bc22ccbef1
+  Banks:
+  - {fileID: -6724096925234994780}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 30721

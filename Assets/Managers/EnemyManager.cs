@@ -61,10 +61,11 @@ public class EnemyManager : MonoBehaviour
     public static void DamageEnemy(ushort pUTag, ushort eUTag, int damage)
     {
     	DamageEnemy(eUTag, damage);
+    	Enemy e = instance.getEnemyByUTag(eUTag);
     	if(NetManager.instance != null)
     	{
 
-    		Enemy e = instance.getEnemyByUTag(eUTag);
+    		//Enemy e = instance.getEnemyByUTag(eUTag);
 
     		e.gameObject.GetComponent<EnemyController>().aggro = PlayerManager.instance.player1;
 			e.gameObject.GetComponent<EnemyController>().isAggro = true;
@@ -73,11 +74,12 @@ public class EnemyManager : MonoBehaviour
     		m.AddUShort(eUTag);
     		m.AddInt(damage);
     		NetManager.instance.server.SendToAll(m);
+
     	}
     	else if(CliManager.client != null)
     	{
     		Message m = Message.Create(MessageSendMode.unreliable, (ushort)ClientToServerId.hitEnemy);
-    		m.AddUShort(PlayerManager.instance.player1.uTag);
+    		//m.AddUShort(PlayerManager.instance.player1.uTag);
     		m.AddUShort(eUTag);
     		m.AddInt(damage);
     		CliManager.client.Send(m);
@@ -85,10 +87,32 @@ public class EnemyManager : MonoBehaviour
     	}
     	else if(CliManager.client == null && NetManager.instance == null)
     	{
-    		Enemy e = instance.getEnemyByUTag(eUTag);
+    		//Enemy e = instance.getEnemyByUTag(eUTag);
 
     		e.gameObject.GetComponent<EnemyController>().aggro = PlayerManager.instance.player1;
 			e.gameObject.GetComponent<EnemyController>().isAggro = true;
+    	}
+    	if(e.getHealth() <= 0)
+    	{
+    		instance.spawnNum--;
+    		if(NetManager.instance != null)
+    		{
+    			Message m = Message.Create(MessageSendMode.reliable, ((ushort)ServerToClientId.enemyKilled));
+    			m.AddUShort(pUTag);
+    			m.AddUShort(eUTag);
+    			m.AddInt(damage);
+    			NetManager.instance.server.SendToAll(m);
+
+    		}
+    		else if(CliManager.client != null)
+    		{
+    			Message m = Message.Create(MessageSendMode.unreliable, (ushort)ClientToServerId.killEnemy);
+	    		//m.AddUShort(PlayerManager.instance.player1.uTag);
+	    		m.AddUShort(eUTag);
+	    		m.AddInt(damage);
+	    		CliManager.client.Send(m);
+
+    		}
     	}
     }
 
@@ -97,7 +121,8 @@ public class EnemyManager : MonoBehaviour
     public static void serverDamageEnemy(ushort clientId, Message message)
     {
     	Message m = Message.Create(MessageSendMode.unreliable, (ushort)ServerToClientId.enemyHit);
-    	ushort pUTag = message.GetUShort();
+    	//ushort pUTag = message.GetUShort();
+    	ushort pUTag = clientId;
     	ushort eUTag = message.GetUShort();
     	int damage = message.GetInt();
     	DamageEnemy(eUTag, damage);
@@ -138,13 +163,46 @@ public class EnemyManager : MonoBehaviour
     	DamageEnemy(eUTag, damage);
     }
 
+    [MessageHandler((ushort)ClientToServerId.killEnemy)]
+
+    public static void serverKillEnemy(ushort clientId, Message message)
+    {
+    	Message m = Message.Create(MessageSendMode.unreliable, (ushort)ServerToClientId.enemyKilled);
+    	//ushort pUTag = message.GetUShort();
+    	ushort pUTag = clientId;
+    	ushort eUTag = message.GetUShort();
+    	int damage = message.GetInt();
+    	Enemy e = instance.getEnemyByUTag(eUTag);
+    	DamageEnemy(e, e.getHealth() * e.getHealth());
+    	m.AddUShort(pUTag);
+		m.AddUShort(eUTag);
+		m.AddInt(damage);
+
+		NetManager.instance.server.SendToAll(m);
+
+
+    } 
+
+    [MessageHandler((ushort)ServerToClientId.enemyKilled)]
+
+    public static void clientKillEnemy(Message message)
+    {
+    	ushort pUTag = message.GetUShort();
+    	ushort eUTag = message.GetUShort();
+    	int damage = message.GetInt();
+    	Enemy e = instance.getEnemyByUTag(eUTag);
+    	DamageEnemy(e, e.getHealth() * e.getHealth());
+    }
+
     public static void DamageEnemy(Enemy e, int damage)
     {
+		Debug.Log("DAMAGE:" + damage);
+		int health = e.getHealth() - damage;
+		e.setHealth(health);
+		e.gameObject.GetComponent<InstantiateHealthbar>().healthbarInstance.GetComponent<HealthBarController>().UpdateHealth(health);
 
-    	e.setHealth(e.getHealth() - damage);
-
-    	//e.healh -= damage;
-    }
+		//e.healh -= damage;
+	}
 
     public E createNewEnemy<E>(GameObject prefab) where E : Enemy
 	{
@@ -174,8 +232,11 @@ public class EnemyManager : MonoBehaviour
 			Message m = Message.Create(MessageSendMode.reliable, (ushort)ServerToClientId.enemySpawned);
 			m.AddUShort(e.uTag);
 			m.AddVector3(e.gameObject.GetComponent<NewRagdollScript>().hips.transform.position);
+
+			NetManager.instance.server.SendToAll(m);
 			//m.AddQuaternion(e.gameObject.transform.rotation);
 		}
+		instance.spawnNum++;
 		//enemyPool.Add(e);
 	}
 
@@ -191,7 +252,7 @@ public class EnemyManager : MonoBehaviour
 		newEnemy.uTag = eUTag;
 		newEnemy.gameObject.GetComponent<NewRagdollScript>().hips.isKinematic = true;
 		newEnemy.gameObject.GetComponent<NewRagdollScript>().hips.transform.position = message.GetVector3();
-		newEnemy.gameObject.GetComponent<NewRagdollScript>().hips.isKinematic = true;
+		newEnemy.gameObject.GetComponent<NewRagdollScript>().hips.isKinematic = false;
 		//newEnemy.gameObject.transform.rotation = message.GetQuaternion();
 
 		//Player newPlayer = instance.createNewPlayer<RemotePlayer>(remoteguy)

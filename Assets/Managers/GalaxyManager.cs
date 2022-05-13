@@ -1,3 +1,5 @@
+using RiptideNetworking;
+using RiptideNetworking.Utils;
 using System;
 using System.Security.Cryptography;
 using System.Collections;
@@ -26,11 +28,14 @@ public class GLObject
 
     public bool collapsed;
 
+    public int[] indices;
+
     public GLObject(Vector3 newPosition)
     {
         position = newPosition;
         maxRadius = 0f;
         connections = new List<GLObject>();
+        //indices = new int[4];
     }
 
     public Vector3 getAdjusted()
@@ -154,6 +159,8 @@ public class GalaxyManager : MonoBehaviour
         instance.initGalaxyTestGrid(instance.startPlanet.gameObject.transform.position);
         instance.testGenPlanets();
         instance.startPlanet.glObject = instance.gGrid[3,3,3,0];
+        instance.gGrid[3,3,3,0].planet = instance.startPlanet;
+
         //GameObject.Find("PlayerManager").SetActive(true);
         //GameObject.Find("CollectibleManager").SetActive(true);
         //ControlledObject.instance.planetWatch = false;
@@ -222,6 +229,30 @@ public class GalaxyManager : MonoBehaviour
         gravityCenter.gameObject.name = "gravityCenter";
         gravityCenter.gameObject.tag = "gravityCenter";
 
+        if(NetManager.instance != null)
+        {
+            Message m = Message.Create(MessageSendMode.reliable, (ushort)ServerToClientId.changePlanet);
+            m.AddInt(gravityCenter.glObject.indices[0]);
+            m.AddInt(gravityCenter.glObject.indices[1]);
+            m.AddInt(gravityCenter.glObject.indices[2]);
+            m.AddInt(gravityCenter.glObject.indices[3]);
+            NetManager.instance.server.SendToAll(m);
+        }
+
+    }
+
+    [MessageHandler((ushort)ServerToClientId.changePlanet)]
+
+    public static void clientSetGravityCenter(Message message)
+    {
+        int[] newIndeces = new int[]
+        {
+            message.GetInt(),
+            message.GetInt(),
+            message.GetInt(),
+            message.GetInt()
+        };
+        instance.setGravityCenter(instance.gGrid[newIndeces[0],newIndeces[1],newIndeces[2],newIndeces[3]].planet);
     }
 
     public void processGravity()
@@ -334,6 +365,20 @@ public class GalaxyManager : MonoBehaviour
                     gGrid[index0,index1,index2,1] = new GLObject(new Vector3((pseudoRandX1 * gridFactor), (pseudoRandY1 * gridFactor), (pseudoRandZ1 * gridFactor)));
                     gGrid[index0,index1,index2,0].gridOffset = new Vector3(index0 * gridFactor, index1 * gridFactor, index2 * gridFactor);
                     gGrid[index0,index1,index2,1].gridOffset = new Vector3(index0 * gridFactor, index1 * gridFactor, index2 * gridFactor);
+                    gGrid[index0,index1,index2,1].indices = new int[4]
+                    {
+                        index0,
+                        index1,
+                        index2,
+                        1
+                    };
+                    gGrid[index0,index1,index2,0].indices = new int[4]
+                    {
+                        index0,
+                        index1,
+                        index2,
+                        0
+                    };
                     //generationGrid[index0][index1][index2].Add(new List<Vector3>());
                     //List<Vector3
                 }
@@ -692,6 +737,7 @@ public class GalaxyManager : MonoBehaviour
 
                         planetPool[planetPool.Count - 1].gameObject.layer = LayerMask.NameToLayer("planet_object");
                         planetPool[planetPool.Count - 1].glObject = gGrid[index0,index1,index2,0];
+                        gGrid[index0,index1,index2,0].planet = planetPool[planetPool.Count - 1];
                     }
                     planetPool.Add(new GamePlanet(0, tsg));
                     planetPool[planetPool.Count - 1].gameObject.transform.Translate((gGrid[index0,index1,index2,1].getAdjusted() + gGrid[index0,index1,index2,1].gridOffset) - globalGridOffset);
@@ -700,6 +746,7 @@ public class GalaxyManager : MonoBehaviour
                     planetPool[planetPool.Count - 1].gameObject.name = "planet " + gGrid[index0,index1,index2,1].gridOffset;
                     planetPool[planetPool.Count - 1].gameObject.layer = LayerMask.NameToLayer("planet_object");
                     planetPool[planetPool.Count - 1].glObject = gGrid[index0,index1,index2,1];
+                    gGrid[index0,index1,index2,1].planet = planetPool[planetPool.Count - 1];
                 }
             }
         }
@@ -750,9 +797,26 @@ public class GalaxyManager : MonoBehaviour
     {
         if(Input.GetKeyDown("space"))
         {
-        	//Debug.Log("gravityCenter");
-        	setGravityCenter(UnityEngine.Random.Range(0, planetPool.Count));
-        	//setGravityCenter(1);
+            if(NetManager.instance != null || (NetManager.instance == null && CliManager.client == null && !ControlledObject.instance.moviecam))
+            {
+                GLObject closestGravityCenter = gravityCenter.glObject.connections[0];
+                foreach(GLObject gl in gravityCenter.glObject.connections)
+                {
+                    if(Vector3.Distance(PlayerManager.instance.player1.gameObject.transform.position, gl.getAdjusted()) < Vector3.Distance(PlayerManager.instance.player1.gameObject.transform.position, closestGravityCenter.getAdjusted()))
+                    {
+                        if(gl.planet != null)
+                        {
+                            closestGravityCenter = gl;
+                        }
+                    }
+
+                }
+
+            	//Debug.Log("gravityCenter");
+            	//setGravityCenter(UnityEngine.Random.Range(0, planetPool.Count));
+                setGravityCenter(closestGravityCenter.planet);
+            	//setGravityCenter(1);
+            }
         }
     }
 
